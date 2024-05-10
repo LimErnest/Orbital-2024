@@ -14,7 +14,11 @@ export const metadata: Metadata = {
 export default function AuthenticationPage() {
   return (
     <>
-      <div className="container relative hidden h-[2000px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="container relative hidden h-[2000px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-[65%,35%] lg:px-0">
+      <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{backgroundImage: 'url(https://www.hackingchinese.com/wp-content/uploads/2015/04/mahjong-game.jpg)', zIndex: -1,}}
+          />
         <Link
           href="https://www.google.com/"
           className={cn(
@@ -24,8 +28,7 @@ export default function AuthenticationPage() {
         >
           Login
         </Link>
-        <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
-          <div className="absolute inset-0 bg-zinc-900" />
+        <div className="relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r">
           <div className="relative z-20 flex items-center text-lg font-medium">
           <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -44,14 +47,14 @@ export default function AuthenticationPage() {
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
-                &ldquo;Learning games has never been easier!.&rdquo;
+                &ldquo;Learning games has never been easier!&rdquo;
               </p>
               <footer className="text-sm">Ernest Lim</footer>
             </blockquote>
           </div>
         </div>
         <div className="lg:p-8">
-          <div className="h-[500px] mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-gray-300 p-4 rounded-md">
+          <div className="h-[500px] mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-gray-300 border- p-4 rounded-md bg-white">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
                 Create an account
