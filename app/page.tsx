@@ -31,7 +31,7 @@ export default function AuthenticationPage() {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="red"
+              stroke="white"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -51,7 +51,7 @@ export default function AuthenticationPage() {
           </div>
         </div>
         <div className="lg:p-8">
-          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+          <div className="h-[500px] mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-gray-300 p-4 rounded-md">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
                 Create an account
