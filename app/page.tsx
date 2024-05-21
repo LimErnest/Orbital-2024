@@ -20,7 +20,7 @@ export default function AuthenticationPage() {
           className='absolute inset-0 bg-cover bg-center'
           style={{
             backgroundImage:
-              'url(https://www.hackingchinese.com/wp-content/uploads/2015/04/mahjong-game.jpg)',
+              'url(/img/background.jpg)',
             zIndex: -1
           }}
         />

@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-import { UserAuthForm } from '@/components/ui/sign-in-form'
+import { SignInForm } from '@/components/ui/sign-in-form'
 
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function AuthenticationPage() {
           className='absolute inset-0 bg-cover bg-center'
           style={{
             backgroundImage:
-              'url(https://www.hackingchinese.com/wp-content/uploads/2015/04/mahjong-game.jpg)',
+              'url(/img/background.jpg)',
             zIndex: -1
           }}
         />
@@ -55,7 +55,7 @@ export default function AuthenticationPage() {
                 Enter your email and password below
               </p>
             </div>
-            <UserAuthForm/>
+            <SignInForm/>
             <p className='px-8 text-center text-sm text-muted-foreground'>
               By clicking continue, you agree to our{' '}
               <Link

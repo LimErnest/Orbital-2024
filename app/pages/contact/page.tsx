@@ -13,13 +13,16 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { url } from 'inspector'
+import { URL } from 'next/dist/compiled/@edge-runtime/primitives/url'
+import { urlToHttpOptions } from 'url'
 
 export const metadata: Metadata = {
   title: 'Authentication',
   description: 'Authentication forms built using the components.'
 }
 
-export default function ConatacPage() {
+export default function ContactPage() {
   return (
     <>
       <div className='container relative hidden h-[2000px] flex-col items-center justify-center rounded-md border border-gray-300 md:grid lg:max-w-none lg:px-0'>
@@ -27,7 +30,7 @@ export default function ConatacPage() {
           className='absolute inset-0 bg-cover bg-center'
           style={{
             backgroundImage:
-              'url(https://www.hackingchinese.com/wp-content/uploads/2015/04/mahjong-game.jpg)',
+              'url(/img/background.jpg)',
             zIndex: -1
           }}
         />
@@ -57,7 +60,7 @@ export default function ConatacPage() {
             <div>
               <CardHeader>
                 <CardTitle className='text-lg'>Ernest Lim</CardTitle>
-                <CardDescription>big boss</CardDescription>
+                <CardDescription>small fry</CardDescription>
               </CardHeader>
               <CardContent>
                 <div>
@@ -88,7 +91,7 @@ export default function ConatacPage() {
             <div>
               <CardHeader>
                 <CardTitle className='text-lg'>Otto Tan</CardTitle>
-                <CardDescription>slave</CardDescription>
+                <CardDescription>big boss</CardDescription>
               </CardHeader>
               <CardContent>
                 <div>
