@@ -13,9 +13,7 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { url } from 'inspector'
-import { URL } from 'next/dist/compiled/@edge-runtime/primitives/url'
-import { urlToHttpOptions } from 'url'
+import { Navbar } from '@/components/ui/navbar'
 
 export const metadata: Metadata = {
   title: 'Authentication',
@@ -34,27 +32,7 @@ export default function ContactPage() {
             zIndex: -1
           }}
         />
-        <div className='fixed top-0 w-full rounded-b-lg bg-white py-2 shadow-xl'>
-          <div className='flex h-[2.75rem] items-center justify-between px-10'>
-            <div className='px-0 text-center text-lg font-medium text-black'>
-              <Link href='/'>Guidance</Link>
-            </div>
-            <div className='flex space-x-4'>
-              <Link
-                href='/pages/contact'
-                className={cn(buttonVariants({ variant: 'outline' }))}
-              >
-                Contact Us
-              </Link>
-              <Link
-                href='/pages/login'
-                className={cn(buttonVariants({ variant: 'outline' }))}
-              >
-                Login
-              </Link>
-            </div>
-          </div>
-        </div>
+        <Navbar/>
         <div className='flex flex-wrap justify-between'>
           <Card className='m-2 flex w-[350px]'>
             <div>

@@ -23,22 +23,45 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const [password, setPassword] = React.useState<string>("")
-  const [confirmPassword, setConfirmPassword] = React.useState<string>("")
-  const [isDialogOpen, setIsDialogOpen] = React.useState<boolean>(false)
+  const [password, setPassword] = React.useState<string>('')
+  const [confirmPassword, setConfirmPassword] = React.useState<string>('')
+  const [isInvalidDialogOpen, setIsInvalidDialogOpen] =
+    React.useState<boolean>(false)
+  const [errorType, setErrorType] = React.useState<string>('')
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
+    const isValid = checkPassword()
     
-    if (password !== confirmPassword) {
-      setIsDialogOpen(true)
-      return
+    if (isValid) {
+      setIsLoading(true)
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 3000)
     }
-    
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+  }
+
+  function checkPassword() {
+    let error = ''
+    if (password !== confirmPassword) {
+      error = 'mismatch'
+    } else if (password.length < 8) {
+      error = 'length'
+    } else if (!/\d/.test(password) && !/[!@#$%^&*]/.test(password)) {
+      error = 'both'
+    } else if (!/\d/.test(password)) {
+      error = 'number'
+    } else if (!/[!@#$%^&*]/.test(password)) {
+      error = 'special'
+    }
+
+    if (error) {
+      setErrorType(error)
+      setIsInvalidDialogOpen(true)
+      return false
+    }
+
+    return true
   }
 
   return (
@@ -71,12 +94,16 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoCorrect='off'
               disabled={isLoading}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               required
             />
             <Label className='sr-only' htmlFor='password'>
               Confirm Password
             </Label>
+            <div className='p-3 text-sm'>
+              Password must be at least 8 characters long, including 1 number
+              and 1 special character.
+            </div>
             <Input
               id='password'
               placeholder='Confirm Password'
@@ -86,7 +113,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoCorrect='off'
               disabled={isLoading}
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={e => setConfirmPassword(e.target.value)}
               required
             />
           </div>
@@ -99,12 +126,26 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         </div>
       </form>
 
-      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <AlertDialog
+        open={isInvalidDialogOpen}
+        onOpenChange={setIsInvalidDialogOpen}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Passwords do not match.</AlertDialogTitle>
+            <AlertDialogTitle>
+              Passwords do not meet requiments.
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              Please ensure that the passwords you entered match before continuing.
+              {errorType === 'mismatch' &&
+                'Please ensure that the passwords you entered match before continuing.'}
+              {errorType === 'length' &&
+                'Password must be at least 8 characters long.'}
+              {errorType === 'number' &&
+                'Password must include at least 1 number.'}
+              {errorType === 'special' &&
+                'Password must include at least 1 special character.'}
+              {errorType === 'both' &&
+                'Password must include at least 1 number and 1 special character.'}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
