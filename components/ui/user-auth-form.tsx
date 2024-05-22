@@ -51,7 +51,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       error = 'both'
     } else if (!/\d/.test(password)) {
       error = 'number'
-    } else if (!/[!@#$%^&*]/.test(password)) {
+    } else if (!/[?!@#$%^&*]/.test(password)) {
       error = 'special'
     }
 

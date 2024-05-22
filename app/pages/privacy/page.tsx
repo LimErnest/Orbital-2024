@@ -8,7 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Navbar } from '@/components/ui/navbar'
 
 export const metadata: Metadata = {
-  title: 'Authentication',
+  title: 'Guidance',
   description: 'Authentication forms built using the components.'
 }
 

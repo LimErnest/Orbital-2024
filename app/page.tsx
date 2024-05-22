@@ -8,7 +8,7 @@ import { UserAuthForm } from '@/components/ui/user-auth-form'
 import { Navbar } from '@/components/ui/navbar'
 
 export const metadata: Metadata = {
-  title: 'Authentication',
+  title: 'Guidance',
   description: 'Authentication forms built using the components.'
 }
 
