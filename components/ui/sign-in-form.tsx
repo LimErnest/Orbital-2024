@@ -38,6 +38,7 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
               autoComplete="email"
               autoCorrect="off"
               disabled={isLoading}
+              required
             />
             <Label className="sr-only" htmlFor="password">
               Password
@@ -50,6 +51,7 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
               autoComplete="password"
               autoCorrect="off"
               disabled={isLoading}
+              required
             />
           </div>
           <Button disabled={isLoading}>

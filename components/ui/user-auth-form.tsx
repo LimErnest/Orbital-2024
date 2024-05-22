@@ -57,6 +57,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoComplete='email'
               autoCorrect='off'
               disabled={isLoading}
+              required
             />
             <Label className='sr-only' htmlFor='password'>
               Password
@@ -71,6 +72,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               disabled={isLoading}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <Label className='sr-only' htmlFor='password'>
               Confirm Password
@@ -85,6 +87,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               disabled={isLoading}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              required
             />
           </div>
           <Button disabled={isLoading}>
