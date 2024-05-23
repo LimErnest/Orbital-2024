@@ -43,15 +43,17 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   function checkPassword() {
     let error = ''
+    const specialCharRegex = /[!@#$%^&*()-_=+\[{]};:'",<.>\/?\\|]/;
+
     if (password !== confirmPassword) {
       error = 'mismatch'
     } else if (password.length < 8) {
       error = 'length'
-    } else if (!/\d/.test(password) && !/[!@#$%^&*]/.test(password)) {
+    } else if (!/\d/.test(password) && !specialCharRegex.test(password)) {
       error = 'both'
     } else if (!/\d/.test(password)) {
       error = 'number'
-    } else if (!/[?!@#$%^&*]/.test(password)) {
+    } else if (!specialCharRegex.test(password)) {
       error = 'special'
     }
 

@@ -1,4 +1,3 @@
-
 import * as React from 'react'
 import { cn } from '@/lib/utils'
 
@@ -12,7 +11,8 @@ const SnapPage: React.FC<SnapPageProps> = ({ children, className, ...props }) =>
         scrollSnapType: 'y mandatory',
         scrollBehavior: 'smooth',
         overflowY: 'scroll',
-        height: '100vh'
+        height: '100vh',
+        width: '100vw',
       }}
       {...props}
     >
@@ -31,6 +31,7 @@ const SnapPageSection: React.FC<SnapPageSectionProps> = ({ children, className, 
         scrollSnapAlign: 'start',
         scrollSnapStop: 'always',
         height: '100vh',
+        width: '100vw',
         ...style
       }}
       {...props}
