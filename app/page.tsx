@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-import { UserAuthForm } from '@/components/ui/user-auth-form'
 import { Navbar } from '@/components/ui/navbar'
 import { Button } from '@/components/ui/button'
 
@@ -22,7 +21,7 @@ export default function LandingPage() {
           overflowY:'auto',
           overflowX: 'hidden'
         }}>
-        <Navbar/>
+        <Navbar className='fixed top-0 left-0 w-full z-10'/>
         <div className='flex items-center justify-center lg:p-8'>
           <div className ='segment-container'
             style={{ 
