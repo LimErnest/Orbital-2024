@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import { Navbar } from '@/components/ui/navbar'
 import { Button } from '@/components/ui/button'
+import { SnapPage, SnapPageSection } from '@/components/ui/snap-page'
 
 export const metadata: Metadata = {
   title: 'Guidance',
@@ -15,111 +16,57 @@ export const metadata: Metadata = {
 export default function LandingPage() {
   return (
     <>
-      <div 
-        className='container relative hidden h-[4000px] flex-col items-center justify-center rounded-md border border-gray-300 md:grid lg:max-w-none lg:px-0'
-        style = {{
-          overflowY:'auto',
-          overflowX: 'hidden'
-        }}>
-        <Navbar className='fixed top-0 left-0 w-full z-10'/>
-        <div className='flex items-center justify-center lg:p-8'>
-          <div className ='segment-container'
-            style={{ 
-              textAlign: 'center' 
-            }}>
-            <div
-              style= {{
-                fontSize: '200px' 
-              }}>
-              <b>Guidance</b>
-            </div>
-            <Button style = {{
-              backgroundColor: 'white',
-              color: 'black',
-              padding: '5px 10px',
-              textAlign:'center',
-              marginTop: '20px'
-            }} >
-              <div className='flex flex-col space-y-2 text-center'>
-                <Link
-                  href='/pages/signup'
-                  className='text-2xl font-semibold tracking-tight'
-                >
-                  Create an account
-                </Link>
-              </div>
-            </Button>
-          </div>
-        </div>
-        
+      <Navbar className='fixed left-0 top-0 w-full' style={{ zIndex: '1' }} />
+      <SnapPage>
+        <SnapPageSection>
+          <b>
+            What is <br />
+            Guidance?
+          </b>
+          <p style={{ marginLeft: 'auto', fontSize: '14px' }}>
+            Guidance is a games-learning platform for people to explore
+            different games and have concise guides on those games that they
+            wish to learn. Our platform will provide all the information that a
+            person would need to learn the game. We would also gamify learning
+            by providing daily quizzes that give experience points and a test to
+            allow users to test their knowledge about the things they had
+            learned and collect badges.
+          </p>
+        </SnapPageSection>
 
-        <div  
-          style = {{
+        <SnapPageSection
+          className='custom-section'
+          style={{
             backgroundImage: 'url(/img/background.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            width: '100vw',
-            height:'600px',
-            position:'relative',
-            left: '0',
-            padding: '2px 20px'
+            position: 'relative'
           }}
         >
           <b>Games Available</b>
-        </div>
+        </SnapPageSection>
 
-        <div
-          style = {{
-            position: 'relative',
-            padding: '2px 20px',
-            textAlign: 'left',
-            left: '0',
-            fontSize: '50px',
-            flexDirection: 'column',
-            display: 'flex',
-            marginTop: '0',
-            marginBottom: '0',
-          }}
-        >
-          <b>What is <br/> 
-             Guidance?</b>
-          <p
-            style = {{
-              marginLeft:'auto',
-              fontSize:'14px'
-
-            }}>
-            Guidance is a games-learning platform for people to explore different games 
-            and have concise guides on those games that they wish to learn. 
-            Our platform will provide all the information that a person would need to learn the game. 
-            We would also gamify learning by providing daily quizzes that give experience points 
-            and a test to allow users to test their knowledge about the things they had learned and collect badges. 
-
-          </p>  
-
-        </div>
-
-        <div style={{ borderTop: '1px solid #ccc', margin: '20px 0' }}></div>
-
-        <div
-          style ={{
-            position: 'relative',
-            padding: '2px 20px',
-            textAlign: 'left',
-            left: '0',
-            fontSize: '50px',
-            flexDirection: 'column',
-            display: 'flex',
-            marginTop: '0',
-            marginBottom: '0'
-          }}
-        >
-          <b>Features</b>
-          <p>
-            ejiejifwefijeijfwejfwijfwjfwejewojwijfij
+        <SnapPageSection>
+          <b>
+            What is <br />
+            Guidance?
+          </b>
+          <p style={{ marginLeft: 'auto', fontSize: '14px' }}>
+            Guidance is a games-learning platform for people to explore
+            different games and have concise guides on those games that they
+            wish to learn. Our platform will provide all the information that a
+            person would need to learn the game. We would also gamify learning
+            by providing daily quizzes that give experience points and a test to
+            allow users to test their knowledge about the things they had
+            learned and collect badges.
           </p>
-        </div>
-      </div>
+        </SnapPageSection>
+
+        <SnapPageSection>
+          <b>Features</b>
+          <p>ejiejifwefijeijfwejfwijfwjfwejewojwijfij</p>
+        </SnapPageSection>
+      </SnapPage>
     </>
   )
 }

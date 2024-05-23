@@ -13,7 +13,7 @@ export function Navbar({ className, ...props }: NavbarProps) {
       className={cn('fixed top-0 w-full bg-white py-2 shadow-xl rounded-b-lg', className)}
       {...props}
     >
-      <div className='flex h-[2.75rem] items-center justify-between px-10'>
+      <div className='flex h-[4vh] items-center justify-between px-10'>
         <div className='text-lg px-0 text-center font-medium text-black'>
           <Link href='/'>Guidance</Link>
         </div>
