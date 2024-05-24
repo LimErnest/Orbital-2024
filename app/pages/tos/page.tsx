@@ -20,7 +20,7 @@ export default function TOSPage() {
           className='absolute inset-0 bg-cover bg-center'
           style={{
             backgroundImage:
-              'url(/img/background.jpg)',
+              'url(/img/nicebackground1.gif)',
             zIndex: -1
           }}
         />

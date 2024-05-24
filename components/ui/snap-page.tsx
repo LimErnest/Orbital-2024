@@ -11,6 +11,7 @@ const SnapPage: React.FC<SnapPageProps> = ({ children, className, ...props }) =>
         scrollSnapType: 'y mandatory',
         scrollBehavior: 'smooth',
         overflowY: 'scroll',
+        overflowX: 'hidden',
         height: '100vh',
         width: '100vw',
       }}

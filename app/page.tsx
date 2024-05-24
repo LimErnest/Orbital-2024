@@ -16,12 +16,12 @@ export const metadata: Metadata = {
 export default function LandingPage() {
   return (
     <>
-      <Navbar className='fixed left-0 top-0 w-full' style={{ zIndex: '1' }} />
+      <Navbar className='fixed left-0 top-0 w-full' style={{ zIndex: '1', height:'60px' }} />
       <SnapPage>
         <SnapPageSection className='flex flex-col items-start justify-center px-20 py-20 text-left text-black'>
           <div className='flex w-full items-center justify-between'>
             <div className='mr-20 flex flex-col'>
-              <h1 className='mb-4 text-5xl font-bold'>Guidance</h1>
+              <h1 className='mb-4 text-6xl font-bold'>Guidance</h1>
               <p className='mb-4 text-8xl font-bold'>Learning made easy</p>
               <ul className='mb-8 text-4xl'>
                 <li>Guides for all games</li>
@@ -39,46 +39,76 @@ export default function LandingPage() {
                 </Button>
               </Link>
             </div>
-            <div className='flex-shrink-0'>
+            <div className='flex-shrink-1'>
               <Image
-                src='/img/knight.jpg'
+                src='/img/knights.jpg'
                 alt='Knight'
                 width={250}
                 height={250}
                 className='-translate-x-10 -translate-y-20 transform'
               />
               <Image
-                src='/img/mahjong.jpg'
+                src='/img/mahjongs.jpg'
                 alt='Mahjong'
                 width={275}
                 height={275}
-                className='-translate-x-80 -translate-y-20 transform'
               />
             </div>
           </div>
         </SnapPageSection>
 
         <SnapPageSection>
-          <b>Games Available</b>
+            <div 
+              className='h-full relative bg-cover bg-center'
+              style = {{ 
+                backgroundImage:'url(/img/background.jpg)', 
+                zIndex: -1,
+                paddingTop:'70px',
+                paddingLeft:'8px', 
+              }}>
+            <b
+              style={{
+                color:'white',  
+                fontSize: '50px'
+              }}>Games Available</b>
+            </div> 
         </SnapPageSection>
 
         <SnapPageSection>
-          <b>
-            What is <br />
-            Guidance?
-          </b>
-          <p style={{ marginLeft: 'auto', fontSize: '14px' }}>
-            Guidance is a games-learning platform for people to explore
-            different games and have concise guides on those games that they
-            wish to learn. Our platform will provide all the information that a
-            person would need to learn the game. We would also gamify learning
-            by providing daily quizzes that give experience points and a test to
-            allow users to test their knowledge about the things they had
-            learned and collect badges.
-          </p>
+          <div
+            className='h-full flex items-center p-8 bg-cover bg-center'
+            style={{
+              backgroundImage:'url(/img/nicebackground1.gif)', 
+              zIndex: -1,
+            }}>
+            <div
+            style={{
+              paddingLeft:'14px',
+              fontSize: '120px',
+              marginRight: '15%'
+            }}>
+              <b>What is <br/> Guidance?</b>
+            </div>
+
+            <div>
+              <p style={{ fontSize: '20px' }}>
+              Guidance is a games-learning platform for people to explore
+              different games and have concise guides on those games that they
+              wish to learn. Our platform will provide all the information that a
+              person would need to learn the game. We would also gamify learning
+              by providing daily quizzes that give experience points and a test to
+              allow users to test their knowledge about the things they had
+              learned and collect badges.
+              </p>
+            </div>
+          </div>
         </SnapPageSection>
 
-        <SnapPageSection>
+        <SnapPageSection
+          style={{
+            paddingTop:'70px',
+            paddingLeft:'8px'
+          }}>
           <b>Features</b>
           <p>ejiejifwefijeijfwejfwijfwjfwejewojwijfij</p>
         </SnapPageSection>
