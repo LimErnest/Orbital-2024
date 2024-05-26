@@ -18,12 +18,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase/firebase'
+import router, { useRouter } from "next/router";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [password, setPassword] = React.useState<string>('')
+  const [email, setEmail] = React.useState<string>('')
   const [confirmPassword, setConfirmPassword] = React.useState<string>('')
   const [isInvalidDialogOpen, setIsInvalidDialogOpen] =
     React.useState<boolean>(false)
@@ -32,18 +36,22 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     const isValid = checkPassword()
-    
+
     if (isValid) {
       setIsLoading(true)
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 3000)
+      try {
+        await createUserWithEmailAndPassword(auth, email, password)
+      } catch (error) {
+        setErrorType('email')
+        setIsInvalidDialogOpen(true)
+      }
+      setIsLoading(false)
     }
   }
 
   function checkPassword() {
     let error = ''
-    const specialCharRegex = /[!@#$%^&*()-_=+\[{]};:'",<.>\/?\\|]/;
+    const specialCharRegex = /[!@#$%^&*()_+-=]/
 
     if (password !== confirmPassword) {
       error = 'mismatch'
@@ -82,6 +90,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoComplete='email'
               autoCorrect='off'
               disabled={isLoading}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               required
             />
             <Label className='sr-only' htmlFor='password'>
@@ -135,7 +145,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Passwords do not meet requiments.
+              {errorType === 'email'
+                ? 'Email does not meet requirements'
+                : 'Password does not meet requirements'}
             </AlertDialogTitle>
             <AlertDialogDescription>
               {errorType === 'mismatch' &&
@@ -148,6 +160,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 'Password must include at least 1 special character.'}
               {errorType === 'both' &&
                 'Password must include at least 1 number and 1 special character.'}
+              {errorType === 'email' &&
+                'Email already exists. Please sign in or use a different email.'}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
