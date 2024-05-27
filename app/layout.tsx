@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { AuthContextProvider } from './context/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -9,17 +10,13 @@ export const metadata: Metadata = {
   description: 'Created by Otto and Ernest',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({children,}: { children: React.ReactNode}) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className='h-screen flex flex-col justify-center items-center'>
-        {children}
-        </main>
+        <AuthContextProvider>
+          {children}
+        </AuthContextProvider>
       </body>
     </html>
   )

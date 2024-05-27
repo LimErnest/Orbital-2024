@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <div className='container relative hidden h-[2000px] h-screen flex-col items-center justify-center rounded-md border border-gray-300 md:grid lg:max-w-none lg:px-0'>
+      <div className='container relative hidden h-screen h-screen flex flex-col items-center justify-center rounded-md border border-gray-300 md:grid lg:max-w-none lg:px-0'>
         <div
           className='absolute inset-0 bg-cover bg-center'
           style={{
