@@ -18,9 +18,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../firebase/firebase'
-import router, { useRouter } from "next/router";
+import { useAuth } from '../../app/context/AuthContext'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -29,9 +27,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [password, setPassword] = React.useState<string>('')
   const [email, setEmail] = React.useState<string>('')
   const [confirmPassword, setConfirmPassword] = React.useState<string>('')
-  const [isInvalidDialogOpen, setIsInvalidDialogOpen] =
-    React.useState<boolean>(false)
+  const [isInvalidDialogOpen, setIsInvalidDialogOpen] = React.useState<boolean>(false)
   const [errorType, setErrorType] = React.useState<string>('')
+  const { user, signUp } = useAuth()
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
@@ -40,8 +38,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     if (isValid) {
       setIsLoading(true)
       try {
-        await createUserWithEmailAndPassword(auth, email, password)
-        console.log("successful signup")
+        await signUp(email, password)
+        console.log(user)
       } catch (error: any) {
         if (error.code == 'auth/email-already-in-use'){
           setErrorType('email')
@@ -121,7 +119,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               and 1 special character.
             </div>
             <Input
-              id='password'
+              id='Confirm password'
               placeholder='Confirm Password'
               type='password'
               autoCapitalize='none'

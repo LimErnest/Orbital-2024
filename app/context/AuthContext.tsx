@@ -1,26 +1,59 @@
-"use client"
+'use client'
 
-import React, { useContext, createContext, useState, useEffect } from 'react';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from '../../firebase/firebase';
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
+} from 'firebase/auth'
+import { auth } from '../../firebase/firebase'
 
-export const AuthContext = createContext({ user: null });
-
-export function AuthContextProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null); 
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {setUser(currentUser);});
-    return () => unsubscribe();
-  }, [user]);
-
-  return (
-    <AuthContext.Provider value={{ user }}>
-      {children}
-    </AuthContext.Provider>
-  );
+interface UserType {
+  email: string | null
+  uid: string | null
 }
 
-export const UserAuth = () => {
-  return useContext(AuthContext);
+const AuthContext = createContext({})
+
+export const useAuth = () => useContext<any>(AuthContext)
+
+export const AuthContextProvider = ({
+  children
+}: {
+  children: React.ReactNode
+}) => {
+  const [user, setUser] = useState<UserType>({ email: null, uid: null })
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      if (user) {
+        setUser({
+          email: user.email,
+          uid: user.uid
+        })
+      } else {
+        setUser({ email: null, uid: null })
+      }
+    })
+    return () => unsubscribe()
+  }, [])
+
+  const signUp = (email: string, password: string) => {
+    return createUserWithEmailAndPassword(auth, email, password)
+  }
+
+  const logIn = (email: string, password: string) => {
+    return signInWithEmailAndPassword(auth, email, password)
+  }
+
+  const logOut = async () => {
+    setUser({ email: null, uid: null })
+    return await signOut(auth)
+  }
+
+  return (
+    <AuthContext.Provider value={{ user, signUp, logIn, logOut }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
