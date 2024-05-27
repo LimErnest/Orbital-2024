@@ -60,13 +60,13 @@ export default function LandingPage() {
                 </Button>
               </Link>
             </div>
-            <div className='flex-shrink-1'>
+            <div className='flex-shrink-0 lg:translate-y-5 lg:translate-x-5'>
               <Image
-                src='/img/knights.jpg'
+                src='/img/icon.jpg'
                 alt='Knight'
-                width={400}
-                height={400}
-                style={{ transform: 'translateX(-40%)' }}
+                width={500}
+                height={500}
+                style={{ transform: 'translateX(-30%)' }}
               />
             </div>
           </div>
@@ -165,7 +165,7 @@ export default function LandingPage() {
 
         <SnapPageSection>
           <div
-            className='flex h-full items-center p-8'
+            className='flex items-center justify-center flex-col lg:flex-row h-full p-4'
             style={{
               backgroundImage: 'url(/img/nicebackground1.gif)',
               backgroundSize: 'cover',
@@ -175,20 +175,14 @@ export default function LandingPage() {
               zIndex: -1
             }}
           >
-            <div
-              style={{
-                paddingLeft: '14px',
-                fontSize: '120px',
-                marginRight: '15%'
-              }}
-            >
-              <b>
+            <div className='transform -translate-y-20 lg:translate-y-0 relative flex pl-3 md:pl-5 lg:pl-6 xl:pl-14'>
+              <b className="text-7xl md:text-9xl lg:text-8xl xl:text-9xl">
                 What is <br /> Guidance?
               </b>
             </div>
 
-            <div>
-              <p style={{ fontSize: '20px' }}>
+            <div className='transform -translate-y-20 lg:translate-y-0 relative flex p-3 md:p-5 lg:p-6 xl:p-14'>
+              <p className="text-base md:text-lg lg:text-xl xl:text-2xl">
                 Guidance is a games-learning platform for people to explore
                 different games and have concise guides on those games that they
                 wish to learn. Our platform will provide all the information
@@ -201,18 +195,30 @@ export default function LandingPage() {
           </div>
         </SnapPageSection>
 
-        <SnapPageSection
-          style={{
-            backgroundImage: 'url(/img/nicebackground1.gif)',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
-            backgroundPosition: 'center',
-            zIndex: -1
-          }}
-        >
-          <b>Features</b>
-          <p>ejiejifwefijeijfwejfwijfwjfwejewojwijfij</p>
+        <SnapPageSection>
+          <div 
+            className='flex items-center flex-col justify-center h-full p-4'
+            style={{
+              backgroundImage: 'url(/img/nicebackground1.gif)',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundAttachment: 'fixed',
+              backgroundPosition: 'center',
+              zIndex: -1
+            }}
+          >
+            <div>
+              <b className ='text-8xl'>
+                Features
+              </b>
+            </div>
+
+            <div>
+              <b className='text-8xl'>
+                Coming Soon...
+              </b>
+            </div>
+          </div>
         </SnapPageSection>
       </SnapPage>
     </>
