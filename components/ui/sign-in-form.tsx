@@ -7,19 +7,55 @@ import { Icons } from "@/components/ui/icon"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog'
+
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase/firebase'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function SignInForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
+  const [password, setPassword] = React.useState<string>('')
+  const [email, setEmail] = React.useState<string>('')
+
+  const [isInvalidDialogOpen, setIsInvalidDialogOpen] =
+    React.useState<boolean>(false)
+
+    const [errorType, setErrorType] = React.useState<string>('')
+
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     setIsLoading(true)
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    try {
+      setIsLoading(true);
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("successful login")
+    } catch (error: any) {
+      if (error.code == 'auth/invalid-login-credentials') {
+        setErrorType('wrong credentials')
+        setIsInvalidDialogOpen(true)
+      } else if (error.code == 'auth/too-many-requests') {
+        setErrorType('too many request')
+        setIsInvalidDialogOpen(true)
+      } else {
+        console.log(error.message)
+      }
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -38,6 +74,8 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
               autoComplete="email"
               autoCorrect="off"
               disabled={isLoading}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               required
             />
             <Label className="sr-only" htmlFor="password">
@@ -51,6 +89,8 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
               autoComplete="password"
               autoCorrect="off"
               disabled={isLoading}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
               required
             />
           </div>
@@ -62,6 +102,30 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
           </Button>
         </div>
       </form>
+
+      <AlertDialog
+        open={isInvalidDialogOpen}
+        onOpenChange={setIsInvalidDialogOpen}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {errorType == 'wrong credentials'
+                ? 'Invalid email or password'
+                : 'Too many wrong attempts'}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+            {errorType == 'wrong credentials'
+                ? 'Please ensure that the email or password you have entered is correct.'
+                : 'There are too many wrong attempts please try again later'} 
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction>Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
     </div>
   )
 }

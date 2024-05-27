@@ -41,17 +41,21 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       setIsLoading(true)
       try {
         await createUserWithEmailAndPassword(auth, email, password)
-      } catch (error) {
-        setErrorType('email')
-        setIsInvalidDialogOpen(true)
+        console.log("successful signup")
+      } catch (error: any) {
+        if (error.code == 'auth/email-already-in-use'){
+          setErrorType('email')
+          setIsInvalidDialogOpen(true)
+        } 
+      } finally {
+        setIsLoading(false)
       }
-      setIsLoading(false)
     }
   }
 
   function checkPassword() {
     let error = ''
-    const specialCharRegex = /[!@#$%^&*()_+-=]/
+    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>_\-+=\[\]\\\/]/
 
     if (password !== confirmPassword) {
       error = 'mismatch'
