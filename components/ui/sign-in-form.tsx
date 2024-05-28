@@ -39,6 +39,7 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
       setIsLoading(true)
       await logIn(email, password)
       console.log(user)
+      window.location.href = '/pages/dashboard'
     } catch (error: any) {
       if (error.code == 'auth/invalid-login-credentials') {
         setErrorType('wrong credentials')

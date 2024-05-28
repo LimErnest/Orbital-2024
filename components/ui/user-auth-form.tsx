@@ -30,6 +30,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isInvalidDialogOpen, setIsInvalidDialogOpen] = React.useState<boolean>(false)
   const [errorType, setErrorType] = React.useState<string>('')
   const { user, signUp } = useAuth()
+  
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
@@ -40,6 +41,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       try {
         await signUp(email, password)
         console.log(user)
+        window.location.href = '/pages/dashboard'
       } catch (error: any) {
         if (error.code == 'auth/email-already-in-use'){
           setErrorType('email')
