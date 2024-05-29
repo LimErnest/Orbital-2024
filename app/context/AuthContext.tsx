@@ -7,11 +7,13 @@ import {
   signInWithEmailAndPassword,
   signOut
 } from 'firebase/auth'
-import { auth } from '../../firebase/firebase'
+import { auth, db } from '../../firebase/firebase'
+import { doc, getDoc } from 'firebase/firestore'
 
 interface UserType {
   email: string | null
   uid: string | null
+  username: string | null
 }
 
 const AuthContext = createContext({})
@@ -23,16 +25,31 @@ export const AuthContextProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [user, setUser] = useState<UserType>({ email: null, uid: null })
+  const [user, setUser] = useState<UserType>({
+    email: null,
+    uid: null,
+    username: null
+  })
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
+    const unsubscribe = onAuthStateChanged(auth, async user => {
       if (user) {
-        setUser({
-          email: user.email,
-          uid: user.uid
-        })
+        const docRef = doc(db, 'users', user.uid)
+        const docSnap = await getDoc(docRef)
+        if (docSnap.exists()) {
+          setUser({
+            email: user.email,
+            uid: user.uid,
+            username: docSnap.data().username
+          })
+        } else {
+          setUser({
+            email: user.email,
+            uid: user.uid,
+            username: ''
+          })
+        }
       } else {
-        setUser({ email: null, uid: null })
+        setUser({ email: null, uid: null, username: '' })
       }
     })
     return () => unsubscribe()
@@ -47,12 +64,12 @@ export const AuthContextProvider = ({
   }
 
   const logOut = async () => {
-    setUser({ email: null, uid: null })
+    setUser({ email: null, uid: null, username: null })
     return await signOut(auth)
   }
 
   return (
-    <AuthContext.Provider value={{ user, signUp, logIn, logOut }}>
+    <AuthContext.Provider value={{ user, signUp, logIn, logOut}}>
       {children}
     </AuthContext.Provider>
   )

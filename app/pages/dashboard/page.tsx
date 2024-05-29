@@ -100,7 +100,6 @@ export default function LandingPage() {
                 Poker
               </Link>
             </div>
-            
           </SidebarSection>
         </Sidebar>
       </div>
