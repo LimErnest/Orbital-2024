@@ -177,11 +177,11 @@ export default function LandingPage() {
           >
             <div className='transform -translate-y-20 lg:translate-y-0 relative flex pl-3 md:pl-5 lg:pl-6 xl:pl-14'>
               <b className="text-7xl md:text-9xl lg:text-8xl xl:text-9xl">
-                What is <br /> Guidance?
+                What is <br/> Guidance?
               </b>
             </div>
 
-            <div className='transform -translate-y-20 lg:translate-y-0 relative flex p-3 md:p-5 lg:p-6 xl:p-14'>
+            <div className='transform -translate-y-20 lg:translate-y-0 relative flex flex-col p-3 md:p-5 lg:p-6 xl:p-14'>
               <p className="text-base md:text-lg lg:text-xl xl:text-2xl">
                 Guidance is a games-learning platform for people to explore
                 different games and have concise guides on those games that they
@@ -191,6 +191,20 @@ export default function LandingPage() {
                 and a test to allow users to test their knowledge about the
                 things they had learned and collect badges.
               </p>
+              <Link 
+                href='/img/poster.jpg'
+                target='_blank'
+                className='py-4'
+              >
+                <Button
+                  className={cn(
+                    buttonVariants({ size: 'xl' }),
+                    'px-8 py-4 text-xl'
+                  )}
+                >
+                  Learn More
+                </Button>
+              </Link>  
             </div>
           </div>
         </SnapPageSection>

@@ -28,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
     >
       <div className='flex flex-col border-b border-gray-300'>
         <Link
-          className='text-rg px-4 py-2 font-semibold text-black'
+          className='text-3xl px-4 py-2 font-semibold text-black'
           href='/pages/dashboard'
         >
           Guidance
@@ -44,30 +44,47 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
         </div>
       </div>
       {children}
-      <div className='border-t border-gray-300'>
-        <Link
-          href='/pages/poker'
-          className={cn(
-            buttonVariants({
-              variant: 'ghost',
-              className: 'w-full rounded-sm hover:bg-blue-300'
-            })
-          )}
-        >
-          Settings
-        </Link>
-        <Button
-          onClick={handleLogout}
-          className={cn(
-            buttonVariants({
-              variant: 'ghost',
-              className:
-                'w-full rounded-sm bg-white text-red-600 hover:bg-red-300'
-            })
-          )}
-        >
-          Log Out
-        </Button>
+      <div className='border-t border-gray-300 px-2 pb-2'>
+        <div>
+          <Link
+            href='/pages/poker'
+            className={cn(
+              buttonVariants({
+                variant: 'ghost',
+                className: 'flex justify-start rounded-sm hover:bg-blue-300'
+              })
+            )}
+          >
+            <Image
+            src='/img/settings_icon.jpg'
+            alt='Settings'
+            width={20}
+            height={5}
+            className='mr-2'
+            />
+            Settings
+          </Link>
+        </div>
+        <div>
+          <Button
+            onClick={handleLogout}
+            className={cn(
+              buttonVariants({
+                variant: 'ghost',
+                className: 'flex justify-start w-full rounded-sm bg-white text-red-600 hover:bg-red-300 shadow-none'
+              })
+            )}
+          >
+          <Image
+            src='/img/power_icon.jpg'
+            alt='Settings'
+            width={20}
+            height={5}
+            className='mr-2' 
+          />
+            Log Out
+          </Button>
+        </div>    
       </div>
     </div>
   )

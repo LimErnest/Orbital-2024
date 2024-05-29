@@ -16,51 +16,91 @@ export default function LandingPage() {
     <>
       <div className='flex flex-col'>
         <Sidebar>
-          <SidebarSection>
-            <Link
-              href='/pages/dashboard'
-              className={cn(
-                buttonVariants({
-                  variant: 'ghost',
-                  className: 'w-full rounded-sm bg-blue-300 hover:bg-blue-300'
-                })
-              )}
-            >
-              Home
-            </Link>
-            <Link
-              href='/pages/chess'
-              className={cn(
-                buttonVariants({
-                  variant: 'ghost',
-                  className: 'w-full rounded-sm hover:bg-blue-300'
-                })
-              )}
-            >
-              Chess
-            </Link>
-            <Link
-              href='/pages/mahjong'
-              className={cn(
-                buttonVariants({
-                  variant: 'ghost',
-                  className: 'w-full rounded-sm hover:bg-blue-300'
-                })
-              )}
-            >
-              Mahjong
-            </Link>
-            <Link
-              href='/pages/poker'
-              className={cn(
-                buttonVariants({
-                  variant: 'ghost',
-                  className: 'w-full rounded-sm hover:bg-blue-300'
-                })
-              )}
-            >
-              Poker
-            </Link>
+          <SidebarSection className = 'py-2 px-2'>
+            <div>
+              <Link
+                href='/pages/dashboard'
+                className={cn(
+                  buttonVariants({
+                    variant: 'ghost',
+                    className: 'flex justify-start rounded-sm bg-blue-300 hover:bg-blue-300'
+                  })
+                )}
+              >
+                <Image
+                  src='/img/home_icon.jpg'
+                  alt='Home'
+                  width={30}
+                  height={10}
+                  className='mr-2'
+                />
+                Home
+              </Link>
+            </div>
+            
+            <div>
+              <Link
+                href='/pages/chess'
+                className={cn(
+                  buttonVariants({
+                    variant: 'ghost',
+                    className: 'flex justify-start w-full rounded-sm hover:bg-blue-300'
+                  })
+                )}
+              >
+                <Image
+                  src='/img/pawn_icon.jpg'
+                  alt='Chess'
+                  width={30}
+                  height={10}
+                  className='mr-2'
+                />
+                Chess
+              </Link>
+            </div>
+            
+            <div>
+              <Link
+                href='/pages/mahjong'
+                className={cn(
+                  buttonVariants({
+                    variant: 'ghost',
+                    className: 'flex justify-start rounded-sm hover:bg-blue-300'
+                  })
+                )}
+              >
+                <Image
+                  src='/img/mahjong_icon.jpg'
+                  alt='Mahjong'
+                  width={30}
+                  height={10}
+                  className='mr-2'
+                />
+                Mahjong
+              </Link>
+            </div>
+            
+            <div>
+              <Link
+                href='/pages/poker'
+                className={cn(
+                  buttonVariants({
+                    variant: 'ghost',
+                    className: 'flex justify-start rounded-sm hover:bg-blue-300'
+                  })
+                )}
+              >
+                <Image
+                  src='/img/poker_icon.jpg'
+                  alt='Poker'
+                  width={30}
+                  height={10}
+                  className='mr-2'
+                />
+                Poker
+              </Link>
+            </div>
+            
           </SidebarSection>
         </Sidebar>
       </div>
