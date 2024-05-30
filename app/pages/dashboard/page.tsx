@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 export default function LandingPage() {
   return (
     <>
-      <div className='flex flex-col'>
-        <Sidebar>
+      <div>
+        <Sidebar className= 'flex flex-col bg-gray-100'>
           <SidebarSection className = 'py-2 px-2'>
             <div>
               <Link

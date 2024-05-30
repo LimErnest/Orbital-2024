@@ -113,7 +113,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
               buttonVariants({
                 variant: 'ghost',
                 className:
-                  'flex w-full justify-start rounded-sm bg-white text-red-600 shadow-none hover:bg-red-300'
+                  'flex w-full justify-start rounded-sm bg-gray-100 text-red-600 shadow-none hover:bg-red-300'
               })
             )}
           >
