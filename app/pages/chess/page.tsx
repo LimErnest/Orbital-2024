@@ -10,9 +10,9 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-import { Card, CardContent } from "@/components/ui/card"
+  CarouselPrevious
+} from '@/components/ui/carousel'
+import { Card, CardContent } from '@/components/ui/card'
 
 import {
   Pagination,
@@ -21,9 +21,8 @@ import {
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
-
+  PaginationPrevious
+} from '@/components/ui/pagination'
 
 export const metadata: Metadata = {
   title: 'Guidance',
@@ -33,10 +32,10 @@ export const metadata: Metadata = {
 export default function GuidePage() {
   return (
     <>
-      <div className='flex flex-row'>
-        <Sidebar className='bg-gray-100'>
-          <SidebarSection className='py-2 px-2'>
-            <div>
+      <div className='flex'>
+        <div className='h-full w-full max-w-[13rem] shrink-0'>
+          <Sidebar className='bg-gray-100'>
+            <SidebarSection className='px-2 py-2'>
               <Link
                 href='/pages/dashboard'
                 className={cn(
@@ -55,15 +54,14 @@ export default function GuidePage() {
                 />
                 Home
               </Link>
-            </div>
 
-            <div>
               <Link
                 href='/pages/chess'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
-                    className: 'flex justify-start w-full rounded-sm bg-blue-300 hover:bg-blue-300'
+                    className:
+                      'flex w-full justify-start rounded-sm bg-blue-300 hover:bg-blue-300'
                   })
                 )}
               >
@@ -76,9 +74,7 @@ export default function GuidePage() {
                 />
                 Guide
               </Link>
-            </div>
 
-            <div>
               <Link
                 href='/pages/daily_quiz'
                 className={cn(
@@ -97,9 +93,7 @@ export default function GuidePage() {
                 />
                 Daily Quiz
               </Link>
-            </div>
 
-            <div>
               <Link
                 href='/pages/leaderboard'
                 className={cn(
@@ -118,9 +112,7 @@ export default function GuidePage() {
                 />
                 Leaderboard
               </Link>
-            </div>
 
-            <div>
               <Link
                 href='/pages/final_quest'
                 className={cn(
@@ -139,48 +131,47 @@ export default function GuidePage() {
                 />
                 Final Quest
               </Link>
-            </div>
-          </SidebarSection>
-        </Sidebar>
+            </SidebarSection>
+          </Sidebar>
+        </div>
+        <div className='flex h-screen flex-1 flex-grow flex-col'>
+          <Pagination className='py-6'>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious href='#' />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href='#'>1</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href='#' isActive>
+                  2
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href='#'>3</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext href='#' />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
 
-        <div className='h-screen flex flex-col items-center flex-1 py-4'>
-          <div className=''>
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious href="#" />
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#" isActive>2</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationEllipsis />
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationNext href="#" />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </div>
-
-          <div className='flex py-4'>
-            <Carousel className="items-center">
+          <div className='flex flex-grow items-center justify-center px-20 pb-12'>
+            <Carousel className='items-center w-[50rem] h-[50rem]'>
               <CarouselContent>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <CarouselItem key={index}>
-                    <div className="p-1">
-                      <Card className="w-400 h-400">
-                        <CardContent className="flex aspect-square items-center justify-center p-6">
-                          <span className="text-4xl font-semibold">{index + 1}</span>
-                        </CardContent>
-                      </Card>
-                    </div>
+                    <Card className='border-black'>
+                      <CardContent className='flex aspect-square items-center justify-center p-6'>
+                        <span className='text-4xl font-semibold'>
+                          {index + 1}
+                        </span>
+                      </CardContent>
+                    </Card>
                   </CarouselItem>
                 ))}
               </CarouselContent>
