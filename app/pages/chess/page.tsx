@@ -5,26 +5,10 @@ import { cn } from '@/lib/utils'
 import { Sidebar, SidebarSection } from '@/components/ui/sidebar'
 import { buttonVariants } from '@/components/ui/button'
 import { CheckUser } from '@/components/ui/checkuser'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from '@/components/ui/carousel'
-import { Card, CardContent } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
-} from '@/components/ui/pagination'
 
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+
 
 
 export const metadata: Metadata = {
@@ -138,117 +122,90 @@ export default function GuidePage() {
           </Sidebar>
         </div>
 
-        <div className='flex h-screen flex-1 flex-grow flex-col'>
-          <Pagination className='py-6'>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href='#' />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href='#'>1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href='#' isActive>
-                  2
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href='#'>3</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href='#' />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+        <div>
+          <Tabs defaultValue="chapter1" className="flex h-screen">
+            <TabsList className='flex flex-col w-[100px] h-screen justify-start'>
+              <TabsTrigger value="chapter1">Chapter 1:</TabsTrigger>
+              <TabsTrigger value="chapter2">Chapter 2:</TabsTrigger>
+              <TabsTrigger value="chapter3">Chapter 3:</TabsTrigger>
+              <TabsTrigger value="chapter4">Chapter 4:</TabsTrigger>
+              <TabsTrigger value="chapter5">Chapter 5:</TabsTrigger>
+              <TabsTrigger value="chapter6">Chapter 6:</TabsTrigger>
+            </TabsList>
 
-          <div className='flex flex-grow items-center justify-center px-5 pb-2'>
-            <Carousel className='items-center w-[90rem] h-[50rem]'>
-              <CarouselContent>
-                <CarouselItem>
-                  <ScrollArea className='w-full h-[50rem]'>
-                    <span className='text-4xl font-semibold'>
-                      Chapter: 1 <br />
-                      I'm super shy, super shy <br />
-                      But wait a minute while I make you mine, make you mine <br />
-                      떨리는 지금도 you're on my mind all the time <br />
-                      I wanna tell you, but I'm super shy, super shy <br />
-                      I'm super shy, super shy <br />
-                      But wait a minute while I make you mine, make you mine <br />
-                      떨리는 지금도 you're on my mind all the time <br />
-                      I wanna tell you, but I'm super shy, super shy <br />
-                      And I wanna go out with you, where you wanna go? (Huh?) <br />
-                      Find a lil' spot, just sit and talk <br />
-                      Looking pretty, follow me, 우리 둘이 나란히 <br />
-                      보이지? 내 눈이 갑자기 빛나지 when you say I'm your dream <br />
-                      You don't even know my name, do you? <br />
-                      You don't even know my name, do you? <br />
-                      누구보다도 <br />
-                      I'm super shy, super shy <br />
-                      But wait a minute while I make you mine, make you mine <br />
-                      떨리는 지금도 you're on my mind all the time <br />
-                      I wanna tell you, but I'm super shy, super shy <br />
-                      I'm super shy, super shy <br />
-                      But wait a minute while I make you mine, make you mine <br />
-                      떨리는 지금도 you're on my mind all the time <br />
-                      I wanna tell you, but I'm super shy, super shy <br />
-                      나 원래 말도 잘하고 그런데 왜 이런지? <br />
-                      I don't like that <br />
-                      Something odd about you, yeah, you're special and you know it <br />
-                      You're the top, babe <br />
-                      I'm super shy, super shy <br />
-                      But wait a minute while I make you mine, make you mine <br />
-                      떨리는 지금도 you're on my mind all the time <br />
-                      I wanna tell you, but I'm super shy, super shy <br />
-                      I'm super shy, super shy <br />
-                      But wait a minute while I make you mine, make you mine <br />
-                      떨리는 지금도 you're on my mind all the time <br />
-                      I wanna tell you, but I'm super shy, super shy <br />
-                      You don't even know my name, do you? <br />
-                      You don't even know my name, do you? <br />
-                      누구보다도 <br />
-                      You don't even know my name (super shy, super shy) <br />
-                      Do you? (Make you mine, make you mine) <br />
-                      You don't even know my name (you're on my mind all the time, I wanna tell you) <br />
-                      Do you? (But I'm super shy, I'm super shy) <br />
-                    </span>
-                    <ScrollBar orientation="vertical" />
-                  </ScrollArea>
+            <TabsContent value="chapter1"
+              className='px-2'>
+              Chapter 1.... <br />
+              I'm super shy, super shy <br />
+              But wait a minute while I make you mine, make you mine <br />
+              떨리는 지금도 you're on my mind all the time <br />
+              I wanna tell you, but I'm super shy, super shy <br />
+              I'm super shy, super shy <br />
+              But wait a minute while I make you mine, make you mine <br />
+              떨리는 지금도 you're on my mind all the time <br />
+              I wanna tell you, but I'm super shy, super shy <br />
+              And I wanna go out with you, where you wanna go? (Huh?) <br />
+              Find a lil' spot, just sit and talk <br />
+              Looking pretty, follow me, 우리 둘이 나란히 <br />
+              보이지? 내 눈이 갑자기 빛나지 when you say I'm your dream <br />
+              You don't even know my name, do you? <br />
+              You don't even know my name, do you? <br />
+              누구보다도 <br />
+              I'm super shy, super shy <br />
+              But wait a minute while I make you mine, make you mine <br />
+              떨리는 지금도 you're on my mind all the time <br />
+              I wanna tell you, but I'm super shy, super shy <br />
+              I'm super shy, super shy <br />
+              But wait a minute while I make you mine, make you mine <br />
+              떨리는 지금도 you're on my mind all the time <br />
+              I wanna tell you, but I'm super shy, super shy <br />
+              나 원래 말도 잘하고 그런데 왜 이런지? <br />
+              I don't like that <br />
+              Something odd about you, yeah, you're special and you know it <br />
+              You're the top, babe <br />
+              I'm super shy, super shy <br />
+              But wait a minute while I make you mine, make you mine <br />
+              떨리는 지금도 you're on my mind all the time <br />
+              I wanna tell you, but I'm super shy, super shy <br />
+              I'm super shy, super shy <br />
+              But wait a minute while I make you mine, make you mine <br />
+              떨리는 지금도 you're on my mind all the time <br />
+              I wanna tell you, but I'm super shy, super shy <br />
+              You don't even know my name, do you? <br />
+              You don't even know my name, do you? <br />
+              누구보다도 <br />
+              You don't even know my name (super shy, super shy) <br />
+              Do you? (Make you mine, make you mine) <br />
+              You don't even know my name (you're on my mind all the time, I wanna tell you) <br />
+              Do you? (But I'm super shy, I'm super shy) <br />
+            </TabsContent>
 
-                </CarouselItem>
-                <CarouselItem>
-                  <ScrollArea className='w-full h-[50rem]'>
-                    <span className='text-4xl font-semibold'>
-                      Chapter: 2 <br />
-                      I'm super shy, super shy <br />
-                      But wait a minute while I make you mine, make you mine <br />
+            <TabsContent value="chapter2"
+              className='px-2'>
+              Chapter 2 ...
+            </TabsContent>
+            
+            <TabsContent value="chapter3"
+              className='px-2'>
+              Chapter 3 ...
+            </TabsContent>
 
-                    </span>
-                    <ScrollBar orientation="vertical" />
-                  </ScrollArea>
-                </CarouselItem>
+            <TabsContent value="chapter4"
+              className='px-2'>
+              Chapter 4 ...
+            </TabsContent>
+            <TabsContent value="chapter5"
+              className='px-2'>
+              Chapter 5 ...
+            </TabsContent>
+            <TabsContent value="chapter6"
+              className='px-2'>
+              Chapter 6 ...
+            </TabsContent>
+          </Tabs>
 
-                <CarouselItem>
-                  <ScrollArea className='w-full h-[50rem]'>
-                    <span className='text-4xl font-semibold'>
-                      Chapter: 3 <br />
-                      I'm super shy, super shy <br />
-                      But wait a minute while I make you mine, make you mine <br />
-
-                    </span>
-                    <ScrollBar orientation="vertical" />
-                  </ScrollArea>
-                </CarouselItem>
-
-              </CarouselContent>
-              
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
-          </div>
         </div>
+        
       </div>
     </>
   )
