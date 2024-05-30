@@ -7,6 +7,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { CheckUser } from '@/components/ui/checkuser'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ScrollArea, ScrollBar } from '@/components/ui/guide-scroll-area'
+import { Chapter1 } from '@/components/ui/chessguide/chapter1'
 
 export const metadata: Metadata = {
   title: 'Guidance',
@@ -124,8 +125,10 @@ export default function GuidePage() {
             defaultValue='chapter1'
             className='flex flex h-full w-full shrink-0 flex-row rounded-lg border border-gray-300 bg-white'
           >
-            <TabsList className='flex h-full w-1/6 flex-shrink flex-col justify-start overflow-auto border-r border-gray-300 py-3 px-3'>
-              <TabsTrigger value='chapter1'>Chapter 1: Introduction</TabsTrigger>
+            <TabsList className='flex h-full w-1/6 flex-shrink flex-col justify-start overflow-auto border-r border-gray-300 px-3 py-3'>
+              <TabsTrigger value='chapter1'>
+                Chapter 1: Introduction
+              </TabsTrigger>
               <TabsTrigger value='chapter2'>Chapter 2: Pawns</TabsTrigger>
               <TabsTrigger value='chapter3'>Chapter 3: Knights</TabsTrigger>
               <TabsTrigger value='chapter4'>Chapter 4: Bishops</TabsTrigger>
@@ -144,54 +147,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <span className='text-4xl font-semibold'>
-                  Chapter: 1 <br />
-                  I'm super shy, super shy <br />
-                  But wait a minute while I make you mine, make you mine <br />
-                  떨리는 지금도 you're on my mind all the time <br />
-                  I wanna tell you, but I'm super shy, super shy <br />
-                  I'm super shy, super shy <br />
-                  But wait a minute while I make you mine, make you mine <br />
-                  떨리는 지금도 you're on my mind all the time <br />
-                  I wanna tell you, but I'm super shy, super shy <br />
-                  And I wanna go out with you, where you wanna go? (Huh?) <br />
-                  Find a lil' spot, just sit and talk <br />
-                  Looking pretty, follow me, 우리 둘이 나란히 <br />
-                  보이지? 내 눈이 갑자기 빛나지 when you say I'm your dream{' '}
-                  <br />
-                  You don't even know my name, do you? <br />
-                  You don't even know my name, do you? <br />
-                  누구보다도 <br />
-                  I'm super shy, super shy <br />
-                  But wait a minute while I make you mine, make you mine <br />
-                  떨리는 지금도 you're on my mind all the time <br />
-                  I wanna tell you, but I'm super shy, super shy <br />
-                  I'm super shy, super shy <br />
-                  But wait a minute while I make you mine, make you mine <br />
-                  떨리는 지금도 you're on my mind all the time <br />
-                  I wanna tell you, but I'm super shy, super shy <br />
-                  나 원래 말도 잘하고 그런데 왜 이런지? <br />
-                  I don't like that <br />
-                  Something odd about you, yeah, you're special and you know it{' '}
-                  <br />
-                  You're the top, babe <br />
-                  I'm super shy, super shy <br />
-                  But wait a minute while I make you mine, make you mine <br />
-                  떨리는 지금도 you're on my mind all the time <br />
-                  I wanna tell you, but I'm super shy, super shy <br />
-                  I'm super shy, super shy <br />
-                  But wait a minute while I make you mine, make you mine <br />
-                  떨리는 지금도 you're on my mind all the time <br />
-                  I wanna tell you, but I'm super shy, super shy <br />
-                  You don't even know my name, do you? <br />
-                  You don't even know my name, do you? <br />
-                  누구보다도 <br />
-                  You don't even know my name (super shy, super shy) <br />
-                  Do you? (Make you mine, make you mine) <br />
-                  You don't even know my name (you're on my mind all the time, I
-                  wanna tell you) <br />
-                  Do you? (But I'm super shy, I'm super shy) <br />
-                </span>
+                <Chapter1 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
@@ -205,18 +161,94 @@ export default function GuidePage() {
               </ScrollArea>
             </TabsContent>
 
-            <TabsContent value='chapter3' className='px-2'>
-              Chapter 3 ...
+            <TabsContent
+              value='chapter3'
+              className='w-5/6 flex-shrink flex-grow p-4'
+            >
+              <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <ScrollBar orientation='vertical' />
+              </ScrollArea>
             </TabsContent>
 
-            <TabsContent value='chapter4' className='px-2'>
-              Chapter 4 ...
+            <TabsContent
+              value='chapter4'
+              className='w-5/6 flex-shrink flex-grow p-4'
+            >
+              <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <ScrollBar orientation='vertical' />
+              </ScrollArea>
             </TabsContent>
-            <TabsContent value='chapter5' className='px-2'>
-              Chapter 5 ...
+
+            <TabsContent
+              value='chapter5'
+              className='w-5/6 flex-shrink flex-grow p-4'
+            >
+              <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <ScrollBar orientation='vertical' />
+              </ScrollArea>
             </TabsContent>
-            <TabsContent value='chapter6' className='px-2'>
-              Chapter 6 ...
+
+            <TabsContent
+              value='chapter6'
+              className='w-5/6 flex-shrink flex-grow p-4'
+            >
+              <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <ScrollBar orientation='vertical' />
+              </ScrollArea>
+            </TabsContent>
+
+            <TabsContent
+              value='chapter7'
+              className='w-5/6 flex-shrink flex-grow p-4'
+            >
+              <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <ScrollBar orientation='vertical' />
+              </ScrollArea>
+            </TabsContent>
+
+            <TabsContent
+              value='chapter8'
+              className='w-5/6 flex-shrink flex-grow p-4'
+            >
+              <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <ScrollBar orientation='vertical' />
+              </ScrollArea>
+            </TabsContent>
+
+            <TabsContent
+              value='chapter9'
+              className='w-5/6 flex-shrink flex-grow p-4'
+            >
+              <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <ScrollBar orientation='vertical' />
+              </ScrollArea>
+            </TabsContent>
+
+            <TabsContent
+              value='chapter10'
+              className='w-5/6 flex-shrink flex-grow p-4'
+            >
+              <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <ScrollBar orientation='vertical' />
+              </ScrollArea>
+            </TabsContent>
+
+            <TabsContent
+              value='chapter11'
+              className='w-5/6 flex-shrink flex-grow p-4'
+            >
+              <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <ScrollBar orientation='vertical' />
+              </ScrollArea>
+            </TabsContent>
+
+            <TabsContent
+              value='chapter12'
+              className='w-5/6 flex-shrink flex-grow p-4'
+            >
+              <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <ScrollBar orientation='vertical' />
+              </ScrollArea>
             </TabsContent>
           </Tabs>
         </div>
