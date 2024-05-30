@@ -64,7 +64,7 @@ export const AuthContextProvider = ({
   }
 
   const logOut = async () => {
-    setUser({ email: null, uid: null, username: null })
+    setUser({ email: null, uid: null, username: '' })
     return await signOut(auth)
   }
 

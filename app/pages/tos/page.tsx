@@ -25,7 +25,7 @@ export default function TOSPage() {
           }}
         />
         <Navbar/>
-        <ScrollArea className='h-[600px] w-[600px] rounded-md border bg-white p-6'>
+        <ScrollArea className='h-[600px] w-[600px] rounded-md bg-white p-6'>
           <h1 className='mb-4 text-4xl font-bold text-center'>Terms and Conditions</h1>
           <ul className='list-decimal space-y-2 pl-5'>
             <li>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</li>

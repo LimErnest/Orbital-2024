@@ -40,7 +40,7 @@ export default function LandingPage() {
             
             <div>
               <Link
-                href='/pages/chess'
+                href='/pages/chess-guide'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',

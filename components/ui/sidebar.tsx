@@ -50,7 +50,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
 
   useEffect(() => {
     const fetchUsername = async () => {
-      if (user.username !== '') {
+      if (user && user.username !== '') {
         setUsername(user.username)
       } else {
         setUpdateUsername(true)
@@ -85,48 +85,45 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
         </div>
       </div>
       {children}
-      <div className='border-t border-gray-300 px-2 pb-2'>
-        <div>
-          <Link
-            href='/pages/poker'
-            className={cn(
-              buttonVariants({
-                variant: 'ghost',
-                className: 'flex justify-start rounded-sm hover:bg-blue-300'
-              })
-            )}
-          >
-            <Image
-              src='/img/settings_icon.jpg'
-              alt='Settings'
-              width={20}
-              height={5}
-              className='mr-2'
-            />
-            Settings
-          </Link>
-        </div>
-        <div>
-          <Button
-            onClick={handleLogout}
-            className={cn(
-              buttonVariants({
-                variant: 'ghost',
-                className:
-                  'flex w-full justify-start rounded-sm bg-gray-100 text-red-600 shadow-none hover:bg-red-300'
-              })
-            )}
-          >
-            <Image
-              src='/img/power_icon.jpg'
-              alt='Settings'
-              width={20}
-              height={5}
-              className='mr-2'
-            />
-            Log Out
-          </Button>
-        </div>
+      <div className='border-t border-gray-300 px-2 py-2'>
+        <Link
+          href='/pages/poker'
+          className={cn(
+            buttonVariants({
+              variant: 'ghost',
+              className: 'flex justify-start rounded-sm hover:bg-blue-300'
+            })
+          )}
+        >
+          <Image
+            src='/img/settings_icon.jpg'
+            alt='Settings'
+            width={20}
+            height={5}
+            className='mr-2'
+          />
+          Settings
+        </Link>
+
+        <Button
+          onClick={handleLogout}
+          className={cn(
+            buttonVariants({
+              variant: 'ghost',
+              className:
+                'flex w-full justify-start rounded-sm bg-gray-100 text-red-600 shadow-none hover:bg-red-300'
+            })
+          )}
+        >
+          <Image
+            src='/img/power_icon.jpg'
+            alt='Settings'
+            width={20}
+            height={5}
+            className='mr-2'
+          />
+          Log Out
+        </Button>
       </div>
 
       <AlertDialog open={updateUsername} onOpenChange={setUpdateUsername}>
