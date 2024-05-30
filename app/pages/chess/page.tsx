@@ -24,6 +24,9 @@ import {
   PaginationPrevious
 } from '@/components/ui/pagination'
 
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+
+
 export const metadata: Metadata = {
   title: 'Guidance',
   description: 'Authentication forms built using the components.'
@@ -134,6 +137,7 @@ export default function GuidePage() {
             </SidebarSection>
           </Sidebar>
         </div>
+
         <div className='flex h-screen flex-1 flex-grow flex-col'>
           <Pagination className='py-6'>
             <PaginationContent>
@@ -160,21 +164,86 @@ export default function GuidePage() {
             </PaginationContent>
           </Pagination>
 
-          <div className='flex flex-grow items-center justify-center px-20 pb-12'>
-            <Carousel className='items-center w-[50rem] h-[50rem]'>
+          <div className='flex flex-grow items-center justify-center px-5 pb-2'>
+            <Carousel className='items-center w-[90rem] h-[50rem]'>
               <CarouselContent>
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={index}>
-                    <Card className='border-black'>
-                      <CardContent className='flex aspect-square items-center justify-center p-6'>
-                        <span className='text-4xl font-semibold'>
-                          {index + 1}
-                        </span>
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                ))}
+                <CarouselItem>
+                  <ScrollArea className='w-full h-[50rem]'>
+                    <span className='text-4xl font-semibold'>
+                      Chapter: 1 <br />
+                      I'm super shy, super shy <br />
+                      But wait a minute while I make you mine, make you mine <br />
+                      떨리는 지금도 you're on my mind all the time <br />
+                      I wanna tell you, but I'm super shy, super shy <br />
+                      I'm super shy, super shy <br />
+                      But wait a minute while I make you mine, make you mine <br />
+                      떨리는 지금도 you're on my mind all the time <br />
+                      I wanna tell you, but I'm super shy, super shy <br />
+                      And I wanna go out with you, where you wanna go? (Huh?) <br />
+                      Find a lil' spot, just sit and talk <br />
+                      Looking pretty, follow me, 우리 둘이 나란히 <br />
+                      보이지? 내 눈이 갑자기 빛나지 when you say I'm your dream <br />
+                      You don't even know my name, do you? <br />
+                      You don't even know my name, do you? <br />
+                      누구보다도 <br />
+                      I'm super shy, super shy <br />
+                      But wait a minute while I make you mine, make you mine <br />
+                      떨리는 지금도 you're on my mind all the time <br />
+                      I wanna tell you, but I'm super shy, super shy <br />
+                      I'm super shy, super shy <br />
+                      But wait a minute while I make you mine, make you mine <br />
+                      떨리는 지금도 you're on my mind all the time <br />
+                      I wanna tell you, but I'm super shy, super shy <br />
+                      나 원래 말도 잘하고 그런데 왜 이런지? <br />
+                      I don't like that <br />
+                      Something odd about you, yeah, you're special and you know it <br />
+                      You're the top, babe <br />
+                      I'm super shy, super shy <br />
+                      But wait a minute while I make you mine, make you mine <br />
+                      떨리는 지금도 you're on my mind all the time <br />
+                      I wanna tell you, but I'm super shy, super shy <br />
+                      I'm super shy, super shy <br />
+                      But wait a minute while I make you mine, make you mine <br />
+                      떨리는 지금도 you're on my mind all the time <br />
+                      I wanna tell you, but I'm super shy, super shy <br />
+                      You don't even know my name, do you? <br />
+                      You don't even know my name, do you? <br />
+                      누구보다도 <br />
+                      You don't even know my name (super shy, super shy) <br />
+                      Do you? (Make you mine, make you mine) <br />
+                      You don't even know my name (you're on my mind all the time, I wanna tell you) <br />
+                      Do you? (But I'm super shy, I'm super shy) <br />
+                    </span>
+                    <ScrollBar orientation="vertical" />
+                  </ScrollArea>
+
+                </CarouselItem>
+                <CarouselItem>
+                  <ScrollArea className='w-full h-[50rem]'>
+                    <span className='text-4xl font-semibold'>
+                      Chapter: 2 <br />
+                      I'm super shy, super shy <br />
+                      But wait a minute while I make you mine, make you mine <br />
+
+                    </span>
+                    <ScrollBar orientation="vertical" />
+                  </ScrollArea>
+                </CarouselItem>
+
+                <CarouselItem>
+                  <ScrollArea className='w-full h-[50rem]'>
+                    <span className='text-4xl font-semibold'>
+                      Chapter: 3 <br />
+                      I'm super shy, super shy <br />
+                      But wait a minute while I make you mine, make you mine <br />
+
+                    </span>
+                    <ScrollBar orientation="vertical" />
+                  </ScrollArea>
+                </CarouselItem>
+
               </CarouselContent>
+              
               <CarouselPrevious />
               <CarouselNext />
             </Carousel>
