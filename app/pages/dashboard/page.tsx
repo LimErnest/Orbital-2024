@@ -61,7 +61,7 @@ export default function LandingPage() {
             
             <div>
               <Link
-                href='/pages/mahjong'
+                href='/pages/coming-soon'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
@@ -82,7 +82,7 @@ export default function LandingPage() {
             
             <div>
               <Link
-                href='/pages/poker'
+                href='/pages/coming-soon'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',

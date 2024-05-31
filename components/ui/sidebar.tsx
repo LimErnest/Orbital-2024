@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
       {children}
       <div className='border-t border-gray-300 px-2 py-2'>
         <Link
-          href='/pages/poker'
+          href='/pages/coming-soon'
           className={cn(
             buttonVariants({
               variant: 'ghost',

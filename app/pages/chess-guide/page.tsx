@@ -7,7 +7,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { CheckUser } from '@/components/ui/checkuser'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ScrollArea, ScrollBar } from '@/components/ui/guide-scroll-area'
-import { Chapter1 } from '@/components/ui/chessguide/chapter1'
+import { Chapter1, Chapter2, Chapter3 } from '@/components/ui/chessguide/chapters'
 
 export const metadata: Metadata = {
   title: 'Guidance',
@@ -61,7 +61,7 @@ export default function GuidePage() {
               </Link>
 
               <Link
-                href='/pages/daily_quiz'
+                href='/pages/coming-soon'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
@@ -80,7 +80,7 @@ export default function GuidePage() {
               </Link>
 
               <Link
-                href='/pages/leaderboard'
+                href='/pages/coming-soon'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
@@ -99,7 +99,7 @@ export default function GuidePage() {
               </Link>
 
               <Link
-                href='/pages/final_quest'
+                href='/pages/coming-soon'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
@@ -126,9 +126,7 @@ export default function GuidePage() {
             className='flex flex h-full w-full shrink-0 flex-row rounded-lg border border-gray-300 bg-white'
           >
             <TabsList className='flex h-full w-1/6 flex-shrink flex-col justify-start overflow-auto border-r border-gray-300 px-3 py-3'>
-              <TabsTrigger value='chapter1'>
-                Chapter 1: Introduction
-              </TabsTrigger>
+              <TabsTrigger value='chapter1'>Chapter 1: Introduction</TabsTrigger>
               <TabsTrigger value='chapter2'>Chapter 2: Pawns</TabsTrigger>
               <TabsTrigger value='chapter3'>Chapter 3: Knights</TabsTrigger>
               <TabsTrigger value='chapter4'>Chapter 4: Bishops</TabsTrigger>
@@ -157,6 +155,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter2 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
@@ -166,6 +165,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter3 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
