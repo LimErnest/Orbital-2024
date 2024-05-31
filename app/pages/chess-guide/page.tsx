@@ -7,7 +7,20 @@ import { buttonVariants } from '@/components/ui/button'
 import { CheckUser } from '@/components/ui/checkuser'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ScrollArea, ScrollBar } from '@/components/ui/guide-scroll-area'
-import { Chapter1, Chapter2, Chapter3 } from '@/components/ui/chessguide/chapters'
+import {
+  Chapter1,
+  Chapter2,
+  Chapter3,
+  Chapter4,
+  Chapter5,
+  Chapter6,
+  Chapter7,
+  Chapter8,
+  Chapter9,
+  Chapter10,
+  Chapter11,
+  Chapter12
+} from '@/components/ui/chessguide/chapters'
 
 export const metadata: Metadata = {
   title: 'Guidance',
@@ -126,7 +139,9 @@ export default function GuidePage() {
             className='flex flex h-full w-full shrink-0 flex-row rounded-lg border border-gray-300 bg-white'
           >
             <TabsList className='flex h-full w-1/6 flex-shrink flex-col justify-start overflow-auto border-r border-gray-300 px-3 py-3'>
-              <TabsTrigger value='chapter1'>Chapter 1: Introduction</TabsTrigger>
+              <TabsTrigger value='chapter1'>
+                Chapter 1: Introduction
+              </TabsTrigger>
               <TabsTrigger value='chapter2'>Chapter 2: Pawns</TabsTrigger>
               <TabsTrigger value='chapter3'>Chapter 3: Knights</TabsTrigger>
               <TabsTrigger value='chapter4'>Chapter 4: Bishops</TabsTrigger>
@@ -135,7 +150,9 @@ export default function GuidePage() {
               <TabsTrigger value='chapter7'>Chapter 7: King</TabsTrigger>
               <TabsTrigger value='chapter8'>Chapter 8: Check/Mate</TabsTrigger>
               <TabsTrigger value='chapter9'>Chapter 9: Castling</TabsTrigger>
-              <TabsTrigger value='chapter10'>Chapter 10: En Passant</TabsTrigger>
+              <TabsTrigger value='chapter10'>
+                Chapter 10: En Passant
+              </TabsTrigger>
               <TabsTrigger value='chapter11'>Chapter 11: Draws</TabsTrigger>
               <TabsTrigger value='chapter12'>Chapter 12: Summary</TabsTrigger>
             </TabsList>
@@ -175,6 +192,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter4 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
@@ -184,6 +202,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter5 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
@@ -193,6 +212,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter6 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
@@ -202,6 +222,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter7 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
@@ -211,6 +232,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter8 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
@@ -220,6 +242,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter9 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
@@ -229,6 +252,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter10 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
@@ -238,6 +262,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter11 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
@@ -247,6 +272,7 @@ export default function GuidePage() {
               className='w-5/6 flex-shrink flex-grow p-4'
             >
               <ScrollArea className='h-full w-full border-0 shadow-none'>
+                <Chapter12 />
                 <ScrollBar orientation='vertical' />
               </ScrollArea>
             </TabsContent>
