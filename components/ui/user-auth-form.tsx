@@ -26,10 +26,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [password, setPassword] = React.useState<string>('')
   const [email, setEmail] = React.useState<string>('')
+  const [username, setUsername] = React.useState<string>('')
   const [confirmPassword, setConfirmPassword] = React.useState<string>('')
   const [isInvalidDialogOpen, setIsInvalidDialogOpen] = React.useState<boolean>(false)
   const [errorType, setErrorType] = React.useState<string>('')
-  const { user, signUp } = useAuth()
+  const { user, signUp, updateUsername } = useAuth()
   
 
   async function onSubmit(event: React.SyntheticEvent) {
@@ -39,7 +40,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     if (isValid) {
       setIsLoading(true)
       try {
-        await signUp(email, password)
+        await signUp(email, password, username)
         console.log(user)
         window.location.href = '/pages/dashboard'
       } catch (error: any) {
@@ -88,7 +89,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             </Label>
             <Input
               id='email'
-              placeholder='name@example.com'
+              placeholder='Email (name@example.com)'
               type='email'
               autoCapitalize='none'
               autoComplete='email'
@@ -96,6 +97,21 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               disabled={isLoading}
               value={email}
               onChange={e => setEmail(e.target.value)}
+              required
+            />
+            <Label className='sr-only' htmlFor='email'>
+              Username
+            </Label>
+            <Input
+              id='username'
+              placeholder='Username'
+              type='username'
+              autoCapitalize='none'
+              autoComplete='username'
+              autoCorrect='off'
+              disabled={isLoading}
+              value={username}
+              onChange={e => setUsername(e.target.value)}
               required
             />
             <Label className='sr-only' htmlFor='password'>
@@ -117,7 +133,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               Confirm Password
             </Label>
             <div className='p-3 text-sm'>
-              Password must be at least 8 characters long, including 1 number
+              Password must be at least 8 characters long, including 1 number,
               and 1 special character.
             </div>
             <Input

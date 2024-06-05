@@ -5,10 +5,11 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
+  updateProfile
 } from 'firebase/auth'
 import { auth, db } from '../../firebase/firebase'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 
 interface UserType {
   email: string | null
@@ -33,43 +34,64 @@ export const AuthContextProvider = ({
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async user => {
       if (user) {
-        const docRef = doc(db, 'users', user.uid)
-        const docSnap = await getDoc(docRef)
-        if (docSnap.exists()) {
           setUser({
             email: user.email,
             uid: user.uid,
-            username: docSnap.data().username
+            username: user.displayName
           })
         } else {
           setUser({
-            email: user.email,
-            uid: user.uid,
-            username: ''
+            email: null,
+            uid: null,
+            username: null
           })
         }
-      } else {
-        setUser({ email: null, uid: null, username: '' })
-      }
     })
     return () => unsubscribe()
   }, [])
 
-  const signUp = (email: string, password: string) => {
-    return createUserWithEmailAndPassword(auth, email, password)
-  }
+  const signUp = async (email: string, password: string, displayName: string) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password).catch((err) =>
+        console.log(err)
+      );
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        await updateProfile(currentUser, { displayName: displayName }).catch(
+          (err) => console.log(err)
+        );
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+
+  const updateUsername = async (username: string) => {
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      await updateProfile(currentUser, { displayName: username}).catch(
+        (err) => console.log(err)
+      );
+      setUser({
+        email: user.email,
+        uid: user.uid,
+        username: username
+      })
+    }
+  }
+  
   const logIn = (email: string, password: string) => {
     return signInWithEmailAndPassword(auth, email, password)
   }
 
   const logOut = async () => {
-    setUser({ email: null, uid: null, username: '' })
+    setUser({ email: null, uid: null, username: null })
     return await signOut(auth)
   }
 
   return (
-    <AuthContext.Provider value={{ user, signUp, logIn, logOut}}>
+    <AuthContext.Provider value={{ user, signUp, logIn, logOut, updateUsername}}>
       {children}
     </AuthContext.Provider>
   )
