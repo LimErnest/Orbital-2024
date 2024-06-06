@@ -26,7 +26,7 @@ export default function AuthenticationPage() {
         />
         <Navbar/>
         <div className='flex items-center justify-center lg:p-8'>
-          <div className='border- mx-auto flex h-[450px] w-full flex-col justify-center space-y-6 rounded-md border border-gray-300 bg-white p-4 sm:w-[450px]'>
+          <div className='border- mx-auto flex h-[500px] w-full flex-col justify-center space-y-6 rounded-md border border-gray-300 bg-white p-4 sm:w-[450px]'>
             <div className='flex flex-col space-y-2 text-center'>
               <h1 className='text-2xl font-semibold tracking-tight'>
                 Create an account

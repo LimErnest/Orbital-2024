@@ -28,9 +28,6 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
   const { logOut, user } = useAuth()
   const [username, setUsername] = useState('')
-  const [inputUsername, setInputUsername] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [updateUsername, setUpdateUsername] = useState(false)
 
   const handleLogout = async (event: React.MouseEvent) => {
     event.preventDefault()
@@ -38,26 +35,11 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
     window.location.href = '/pages/login'
   }
 
-  const handleUsernameSubmit = async () => {
-    if (user?.uid && inputUsername) {
-      const docRef = doc(db, 'users', user.uid)
-      await setDoc(docRef, { username: inputUsername })
-      setUsername(inputUsername)
-      setUpdateUsername(false)
-      user.username = inputUsername
-    }
-  }
-
   useEffect(() => {
-    const fetchUsername = async () => {
-      if (user && user.username !== '') {
-        setUsername(user.username)
-      } else {
-        setUpdateUsername(true)
-      }
+    if (user) {
+      setUsername(user.username);
     }
-    fetchUsername()
-  })
+  }, [user]);
 
   return (
     <div
@@ -125,33 +107,6 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
           Log Out
         </Button>
       </div>
-
-      <AlertDialog open={updateUsername} onOpenChange={setUpdateUsername}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Please set a username</AlertDialogTitle>
-            <AlertDialogDescription>
-              <Input
-                id='username'
-                placeholder='Username'
-                type='text'
-                autoCapitalize='none'
-                autoComplete='none'
-                autoCorrect='off'
-                disabled={isLoading}
-                value={inputUsername}
-                onChange={e => setInputUsername(e.target.value)}
-                required={true}
-              />
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction onClick={handleUsernameSubmit}>
-              Continue
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </div>
   )
 }
