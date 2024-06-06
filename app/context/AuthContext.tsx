@@ -51,18 +51,10 @@ export const AuthContextProvider = ({
   }, [])
 
   const signUp = async (email: string, password: string, displayName: string) => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password).catch((err) =>
-        console.log(err)
-      );
-      const currentUser = auth.currentUser;
-      if (currentUser) {
-        await updateProfile(currentUser, { displayName: displayName }).catch(
-          (err) => console.log(err)
-        );
-      }
-    } catch (err) {
-      console.log(err);
+    await createUserWithEmailAndPassword(auth, email, password);
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      await updateProfile(currentUser, { displayName: displayName });
     }
   };
 
