@@ -47,11 +47,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         if (error.code == 'auth/email-already-in-use'){
           setErrorType('email')
           setIsInvalidDialogOpen(true)
-        } else {
-          console.error(error)
-          setErrorType('email')
-          setIsInvalidDialogOpen(true)
-        }
+        } 
       } finally {
         setIsLoading(false)
       }
@@ -61,7 +57,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   function checkPassword() {
     let error = ''
     const specialCharRegex = /[!@#$%^&*(),.?":{}|<>_\-+=\[\]\\\/]/
-    const letterRegex = /[a-zA-Z]/
 
     if (password !== confirmPassword) {
       error = 'mismatch'
@@ -73,8 +68,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       error = 'number'
     } else if (!specialCharRegex.test(password)) {
       error = 'special'
-    } else if (!letterRegex.test(password)) {
-      error = 'letter'
     }
 
     if (error) {
@@ -140,8 +133,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               Confirm Password
             </Label>
             <div className='p-3 text-sm'>
-              Password must be at least 8 characters long, including 1 letter,
-              1 number and 1 special character.
+              Password must be at least 8 characters long, including 1 number,
+              and 1 special character.
             </div>
             <Input
               id='Confirm password'
@@ -187,8 +180,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 'Password must include at least 1 special character.'}
               {errorType === 'both' &&
                 'Password must include at least 1 number and 1 special character.'}
-              {errorType === 'letter' &&
-                'Password must include at least 1 letter.'}
               {errorType === 'email' &&
                 'Email already exists. Please sign in or use a different email.'}
             </AlertDialogDescription>
