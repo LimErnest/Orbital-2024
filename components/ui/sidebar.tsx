@@ -7,27 +7,16 @@ import { cn } from '@/lib/utils'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { useAuth } from '../../app/context/AuthContext'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
-} from '@/components/ui/alert-dialog'
-import { Input } from '@/components/ui/input'
-import { db } from '../../firebase/firebase'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { Icons } from './icon'
+import { redirect } from 'next/navigation'
+import { set } from 'react-hook-form'
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
   const { logOut, user } = useAuth()
   const [username, setUsername] = useState('')
+  const [loading, setLoading] = useState(true)
 
   const handleLogout = async (event: React.MouseEvent) => {
     event.preventDefault()
@@ -36,10 +25,23 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
   }
 
   useEffect(() => {
-    if (user) {
-      setUsername(user.username);
+    if (user.session === null) {
+      return
+    } else if (user.session === false) {
+      redirect('/pages/login')
+    } else {
+      setUsername(user.username)
+      setLoading(false)
     }
-  }, [user]);
+  }, [user])
+
+  if (loading) {
+    return (
+      <div className='fixed inset-0 z-50 flex items-center justify-center bg-white'>
+        <Icons.spinner className='h-20 w-20 animate-spin' />
+      </div>
+    )
+  }
 
   return (
     <div
