@@ -15,6 +15,7 @@ interface UserType {
   email: string | null
   uid: string | null
   username: string | null
+  session : true | false | null
 }
 
 const AuthContext = createContext({})
@@ -29,7 +30,8 @@ export const AuthContextProvider = ({
   const [user, setUser] = useState<UserType>({
     email: null,
     uid: null,
-    username: null
+    username: null,
+    session: null
   })
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async user => {
@@ -37,13 +39,15 @@ export const AuthContextProvider = ({
           setUser({
             email: user.email,
             uid: user.uid,
-            username: user.displayName
+            username: user.displayName,
+            session: true
           })
         } else {
           setUser({
             email: null,
             uid: null,
-            username: null
+            username: null,
+            session: false
           })
         }
     })
@@ -51,18 +55,10 @@ export const AuthContextProvider = ({
   }, [])
 
   const signUp = async (email: string, password: string, displayName: string) => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password).catch((err) =>
-        console.log(err)
-      );
-      const currentUser = auth.currentUser;
-      if (currentUser) {
-        await updateProfile(currentUser, { displayName: displayName }).catch(
-          (err) => console.log(err)
-        );
-      }
-    } catch (err) {
-      console.log(err);
+    await createUserWithEmailAndPassword(auth, email, password);
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      await updateProfile(currentUser, { displayName: displayName });
     }
   };
 
@@ -76,7 +72,8 @@ export const AuthContextProvider = ({
       setUser({
         email: user.email,
         uid: user.uid,
-        username: username
+        username: username,
+        session: true
       })
     }
   }
@@ -86,7 +83,7 @@ export const AuthContextProvider = ({
   }
 
   const logOut = async () => {
-    setUser({ email: null, uid: null, username: null })
+    setUser({ email: null, uid: null, username: null, session: false })
     return await signOut(auth)
   }
 
