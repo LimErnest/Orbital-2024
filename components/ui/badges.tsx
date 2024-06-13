@@ -32,7 +32,7 @@ async function fetchUserBadge(uid: string) {
             mahjong100Guide: data.mahjong100Guide,
             mahjongFinalQuest: data.mahjongFinalQuest,
             poker50Guide: data.poker50Guide,
-            poker100Guide: data.mahjong100Guide,
+            poker100Guide: data.poker100Guide,
             pokerFinalQuest: data.pokerFinalQuest,
         };
     } else {
