@@ -6,16 +6,22 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  updateProfile
+  updateProfile,
+  updatePassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential
 } from 'firebase/auth'
 import { auth, db } from '../../firebase/firebase'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+
 
 interface UserType {
   email: string | null
   uid: string | null
   username: string | null
-  session : true | false | null
+  session: true | false | null
+  profilePicture: string | null
 }
 
 const AuthContext = createContext({})
@@ -31,32 +37,41 @@ export const AuthContextProvider = ({
     email: null,
     uid: null,
     username: null,
-    session: null
+    session: null,
+    profilePicture: null
   })
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async user => {
       if (user) {
-          setUser({
-            email: user.email,
-            uid: user.uid,
-            username: user.displayName,
-            session: true
-          })
-        } else {
-          setUser({
-            email: null,
-            uid: null,
-            username: null,
-            session: false
-          })
-        }
+        setUser({
+          email: user.email,
+          uid: user.uid,
+          username: user.displayName,
+          session: true,
+          profilePicture: user.photoURL
+        })
+      } else {
+        setUser({
+          email: null,
+          uid: null,
+          username: null,
+          session: false,
+          profilePicture: null
+        })
+      }
     })
     return () => unsubscribe()
   }, [])
 
-  const signUp = async (email: string, password: string, displayName: string) => {
-    await createUserWithEmailAndPassword(auth, email, password);
-    const currentUser = auth.currentUser;
+  const currentUser = auth.currentUser
+  const storage = getStorage()
+
+  const signUp = async (
+    email: string,
+    password: string,
+    displayName: string
+  ) => {
+    await createUserWithEmailAndPassword(auth, email, password)
     if (currentUser) {
       await updateProfile(currentUser, { displayName: displayName });
       await setDoc(doc(db, "badges", currentUser.uid), {
@@ -71,35 +86,59 @@ export const AuthContextProvider = ({
         pokerFinalQuest: false
       })
     }
-  };
-
+  }
 
   const updateUsername = async (username: string) => {
-    const currentUser = auth.currentUser;
     if (currentUser) {
-      await updateProfile(currentUser, { displayName: username}).catch(
-        (err) => console.log(err)
-      );
+      await updateProfile(currentUser, { displayName: username }).catch(err =>
+        console.log(err)
+      )
       setUser({
         email: user.email,
         uid: user.uid,
         username: username,
-        session: true
+        session: true,
+        profilePicture: user.profilePicture
       })
     }
   }
-  
+
+  const changePassword = async (current: string, password: string) => {
+    if (currentUser && user.email) {
+      const credential = EmailAuthProvider.credential(user.email, current)
+      await reauthenticateWithCredential(currentUser, credential)
+      await updatePassword(currentUser, password).catch(err => console.log(err))
+    }
+  }
+
   const logIn = (email: string, password: string) => {
     return signInWithEmailAndPassword(auth, email, password)
   }
 
   const logOut = async () => {
-    setUser({ email: null, uid: null, username: null, session: false })
     return await signOut(auth)
   }
 
+  const upload = async (file: File) => {
+    if (currentUser) {
+      const fileRef = ref(storage, 'profilePicture/' + currentUser.uid + '.jpg')
+      const snapshot = await uploadBytes(fileRef, file)
+      const URL = await getDownloadURL(fileRef)
+      updateProfile(currentUser, { photoURL: URL })
+      setUser({
+        email: user.email,
+        uid: user.uid,
+        username: user.username,
+        session: true,
+        profilePicture: URL
+      })
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, signUp, logIn, logOut, updateUsername}}>
+    <AuthContext.Provider
+      value={{ user, signUp, logIn, logOut, updateUsername, changePassword, upload }}
+    >
       {children}
     </AuthContext.Provider>
   )

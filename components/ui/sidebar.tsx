@@ -21,12 +21,13 @@ import { Icons } from './icon'
 import { redirect } from 'next/navigation'
 import { set } from 'react-hook-form'
 import { Badges } from '@/components/ui/badges'
+import { Settings} from '@/components/ui/settings'
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
   const { logOut, user } = useAuth()
-  const [username, setUsername] = useState('')
+  const [profilePicture, setProfilePicture] = useState('/img/default.png')
   const [loading, setLoading] = useState(true)
 
   const handleLogout = async (event: React.MouseEvent) => {
@@ -41,7 +42,9 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
     } else if (user.session === false) {
       redirect('/pages/login')
     } else {
-      setUsername(user.username)
+      if (user.profilePicture) {
+        setProfilePicture(user.profilePicture)
+      }
       setLoading(false)
     }
   }, [user])
@@ -94,25 +97,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
       </div>
       {children}
       <div className='border-t border-gray-300 px-2 py-2'>
-        <Link
-          href='/pages/coming-soon'
-          className={cn(
-            buttonVariants({
-              variant: 'ghost',
-              className: 'flex justify-start rounded-sm hover:bg-blue-300'
-            })
-          )}
-        >
-          <Image
-            src='/img/settings_icon.jpg'
-            alt='Settings'
-            width={20}
-            height={5}
-            className='mr-2'
-          />
-          Settings
-        </Link>
-
+        <Settings />
         <Button
           onClick={handleLogout}
           className={cn(
