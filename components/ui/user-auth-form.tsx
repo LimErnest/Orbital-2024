@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { useAuth } from '../../app/context/AuthContext'
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
@@ -41,8 +41,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       setIsLoading(true)
       try {
         await signUp(email, password, username)
-        console.log(user)
-        window.location.href = '/pages/dashboard'
+        window.location.href = '/pages/dashboard' 
       } catch (error: any) {
         if (error.code == 'auth/email-already-in-use') {
           setErrorType('email')

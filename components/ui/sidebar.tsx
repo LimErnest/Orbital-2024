@@ -5,13 +5,25 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Button, buttonVariants } from '@/components/ui/button'
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+
 import { useAuth } from '../../app/context/AuthContext'
 import { Icons } from './icon'
 import { redirect } from 'next/navigation'
+import { set } from 'react-hook-form'
+import { Badges } from '@/components/ui/badges'
 import { Settings} from '@/components/ui/settings'
 
-interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
   const { logOut, user } = useAuth()
@@ -60,15 +72,28 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
         >
           Guidance
         </Link>
-        <div className='flex flex-row items-center px-4 pb-3'>
-          <Avatar className='h-[3rem] w-[3rem]'>
-            <AvatarImage src={profilePicture} alt='User' />
-            <AvatarFallback></AvatarFallback>
-          </Avatar>
-          <span className='overflow-wrap break-word text-rg ml-4 hyphens-auto text-black'>
-            {user.username}
-          </span>
-        </div>
+
+        <Dialog>
+          <DialogTrigger>
+            <div className='flex flex-row items-center px-4 pb-3'>
+              <Avatar className='h-[3rem] w-[3rem]'>
+                <AvatarImage src='https://github.com/shadcn.png' alt='User' />
+                <AvatarFallback></AvatarFallback>
+              </Avatar>
+              <span className='overflow-wrap break-word text-rg ml-4 hyphens-auto text-black'>
+                {username}
+              </span>
+            </div>
+          </DialogTrigger>
+          <DialogContent className='max-w-screen-md w-full h-auto md:h-4/5 p-6 overflow-y-auto'>
+            <DialogHeader>
+              <DialogTitle className='text-3xl'>Badge Inventory</DialogTitle>
+              <DialogDescription>
+                  <Badges />
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </div>
       {children}
       <div className='border-t border-gray-300 px-2 py-2'>
@@ -98,7 +123,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
 }
 
 export interface SidebarSectionProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+  extends React.HTMLAttributes<HTMLDivElement> { }
 
 const SidebarSection: React.FC<SidebarSectionProps> = ({
   children,
