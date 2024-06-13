@@ -77,7 +77,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
           <DialogTrigger>
             <div className='flex flex-row items-center px-4 pb-3'>
               <Avatar className='h-[3rem] w-[3rem]'>
-                <AvatarImage src='https://github.com/shadcn.png' alt='User' />
+                <AvatarImage src={profilePicture} alt='User' />
                 <AvatarFallback></AvatarFallback>
               </Avatar>
               <span className='overflow-wrap break-word text-rg ml-4 hyphens-auto text-black'>
