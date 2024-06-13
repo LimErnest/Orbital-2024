@@ -28,13 +28,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [email, setEmail] = React.useState<string>('')
   const [username, setUsername] = React.useState<string>('')
   const [confirmPassword, setConfirmPassword] = React.useState<string>('')
-  const [isInvalidDialogOpen, setIsInvalidDialogOpen] = React.useState<boolean>(false)
+  const [isInvalidDialogOpen, setIsInvalidDialogOpen] =
+    React.useState<boolean>(false)
   const [errorType, setErrorType] = React.useState<string>('')
-  const { signUp, updateUsername } = useAuth()
+  const { user, signUp, updateUsername } = useAuth()
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
-    const isValid = checkPassword()
+    const isValid = checkPasswordAndUsername()
 
     if (isValid) {
       setIsLoading(true)
@@ -52,11 +53,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     }
   }
 
-  function checkPassword() {
+  function checkPasswordAndUsername() {
     let error = ''
     const specialCharRegex = /[!@#$%^&*(),.?":{}|<>_\-+=\[\]\\\/]/
-
-    if (password !== confirmPassword) {
+    if (username.length < 1) {
+      error = 'username'
+    } else if (password !== confirmPassword) {
       error = 'mismatch'
     } else if (password.length < 8) {
       error = 'length'
@@ -163,11 +165,16 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              {errorType === 'email'
-                ? 'Email does not meet requirements'
-                : 'Password does not meet requirements'}
+              {errorType === 'email' && 'Email does not meet requirements'}
+              {errorType === 'username' &&
+                'Username does not meet requirements'}
+              {errorType !== 'email' &&
+                errorType !== 'username' &&
+                'Password does not meet requirements'}
             </AlertDialogTitle>
             <AlertDialogDescription>
+              {errorType === 'username' &&
+                'Username must be at least 1 character long.'}
               {errorType === 'mismatch' &&
                 'Please ensure that the passwords you entered match before continuing.'}
               {errorType === 'length' &&
