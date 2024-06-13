@@ -9,7 +9,7 @@ import {
   updateProfile
 } from 'firebase/auth'
 import { auth, db } from '../../firebase/firebase'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 
 interface UserType {
   email: string | null
@@ -59,6 +59,17 @@ export const AuthContextProvider = ({
     const currentUser = auth.currentUser;
     if (currentUser) {
       await updateProfile(currentUser, { displayName: displayName });
+      await setDoc(doc(db, "badges", currentUser.uid), {
+        chess50Guide: false,
+        chess100Guide: false,
+        chessFinalQuest: false,
+        mahjong50Guide: false,
+        mahjong100Guide: false,
+        mahjongFinalQuest: false,
+        poker50Guide: false,
+        poker100Guide: false,
+        pokerFinalQuest: false
+      })
     }
   };
 
