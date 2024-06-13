@@ -81,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
                 <AvatarFallback></AvatarFallback>
               </Avatar>
               <span className='overflow-wrap break-word text-rg ml-4 hyphens-auto text-black'>
-                {username}
+                {user.username}
               </span>
             </div>
           </DialogTrigger>
