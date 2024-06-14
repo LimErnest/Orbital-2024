@@ -19,6 +19,7 @@ import {
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
 import { useAuth } from '../../app/context/AuthContext'
+import { useEffect } from 'react'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
@@ -40,18 +41,26 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     if (isValid) {
       setIsLoading(true)
       try {
-        await signUp(email, password, username)
-        window.location.href = '/pages/dashboard' 
+        await signUp(email, password)
       } catch (error: any) {
         if (error.code == 'auth/email-already-in-use') {
           setErrorType('email')
           setIsInvalidDialogOpen(true)
         }
-      } finally {
+        console.log(error)
         setIsLoading(false)
       }
     }
   }
+
+  useEffect(() => {
+    if (user.session !== true) {
+      return
+    } else {
+      updateUsername(username)
+      window.location.href = '/pages/dashboard' 
+    }
+  }, [user])
 
   function checkPasswordAndUsername() {
     let error = ''
