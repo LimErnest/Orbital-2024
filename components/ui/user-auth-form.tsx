@@ -21,7 +21,7 @@ import {
 import { useAuth } from '../../app/context/AuthContext'
 import { useEffect } from 'react'
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
@@ -57,8 +57,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     if (user.session !== true) {
       return
     } else {
-      updateUsername(username)
-      window.location.href = '/pages/dashboard' 
+      if (username !== '') {
+        updateUsername(username)
+        window.location.href = '/pages/dashboard'
+      }
     }
   }, [user])
 
