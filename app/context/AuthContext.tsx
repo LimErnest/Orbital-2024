@@ -15,6 +15,7 @@ import { auth, db } from '../../firebase/firebase'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
+
 interface UserType {
   email: string | null
   uid: string | null
@@ -67,12 +68,21 @@ export const AuthContextProvider = ({
 
   const signUp = async (
     email: string,
-    password: string,
-    displayName: string
+    password: string
   ) => {
     await createUserWithEmailAndPassword(auth, email, password)
     if (currentUser) {
-      await updateProfile(currentUser, { displayName: displayName })
+      await setDoc(doc(db, "badges", currentUser.uid), {
+        chess50Guide: false,
+        chess100Guide: false,
+        chessFinalQuest: false,
+        mahjong50Guide: false,
+        mahjong100Guide: false,
+        mahjongFinalQuest: false,
+        poker50Guide: false,
+        poker100Guide: false,
+        pokerFinalQuest: false
+      })
     }
   }
 

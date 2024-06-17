@@ -34,7 +34,7 @@ export function Settings() {
   const [isInvalidDialogOpen, setIsInvalidDialogOpen] =
     React.useState<boolean>(false)
   const [errorType, setErrorType] = React.useState<string>('')
-  const { updateUsername, changePassword, upload } = useAuth()
+  const { updateUsername, changePassword, upload, logOut } = useAuth()
   const [currPassword, setCurrPassword] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [confirmPassword, setConfirmPassword] = React.useState<string>('')
@@ -48,8 +48,8 @@ export function Settings() {
     if (valid) {
       await updateUsername(username)
       setUsername('')
+      successDialog()
     }
-    successDialog()
     setIsLoading(false)
   }
 
@@ -70,10 +70,7 @@ export function Settings() {
       if (isValid) {
         await changePassword(currPassword, password)
       }
-      setCurrPassword('')
-      setPassword('')
-      setConfirmPassword('')
-      successDialog()
+      logOut()
     } catch (error: any) {
       if (error.code == 'auth/invalid-credential') {
         setErrorType('wrong credentials')
@@ -209,6 +206,9 @@ export function Settings() {
             <SheetDescription>
               Password must be at least 8 characters long, including 1 number,
               and 1 special character.
+              <br />
+              <br />
+              You will be logged out if successful.
             </SheetDescription>
           </SheetHeader>
           <div className='grid gap-4 py-4'>
