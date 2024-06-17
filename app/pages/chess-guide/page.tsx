@@ -74,7 +74,7 @@ export default function GuidePage() {
               </Link>
 
               <Link
-                href='/pages/coming-soon'
+                href='/pages/chess-daily'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
@@ -84,7 +84,7 @@ export default function GuidePage() {
               >
                 <Image
                   src='/img/pawn_icon.jpg'
-                  alt='Mahjong'
+                  alt='Chess-DailyQuiz'
                   width={30}
                   height={10}
                   className='mr-2'
