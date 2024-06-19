@@ -112,7 +112,7 @@ export default function GuidePage() {
               </Link>
 
               <Link
-                href='/pages/coming-soon'
+                href='/pages/chess-finalQuest'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
