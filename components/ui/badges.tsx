@@ -65,16 +65,18 @@ export function Badges() {
         pokerFinalQuest: false
     });
 
-
-    if (user) {
-        console.log("User:", user);
-        fetchUserBadge(user.uid)
-            .then(data => {
-                console.log("Fetched badge data:", data);
-                setBadges(data);
-            })
-            .catch(error => console.error("Error fetching user badge:", error));
-    }
+    useEffect(() => {
+        if (user) {
+            console.log("User:", user);
+            fetchUserBadge(user.uid)
+                .then(data => {
+                    console.log("Fetched badge data:", data);
+                    setBadges(data);
+                })
+                .catch(error => console.error("Error fetching user badge:", error));
+        }
+    }, [user])
+    
 
 
     return (
