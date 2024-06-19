@@ -14,6 +14,7 @@ import {
 import { auth, db } from '../../firebase/firebase'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { noSSR } from 'next/dynamic'
 
 
 interface UserType {
@@ -70,9 +71,10 @@ export const AuthContextProvider = ({
     email: string,
     password: string
   ) => {
-    await createUserWithEmailAndPassword(auth, email, password)
-    if (currentUser) {
-      await setDoc(doc(db, "badges", currentUser.uid), {
+    const userCreden = await createUserWithEmailAndPassword(auth, email, password)
+    const user = userCreden.user
+    if (user) {
+      const badgesDoc = setDoc(doc(db, "badges", user.uid), {
         chess50Guide: false,
         chess100Guide: false,
         chessFinalQuest: false,
@@ -83,6 +85,14 @@ export const AuthContextProvider = ({
         poker100Guide: false,
         pokerFinalQuest: false
       })
+      const ratingDoc = setDoc(doc(db, "rating", user.uid), {
+        chessRating: "400",
+        attempts: 3,
+        puzzleID: 0,
+        noOfCorrect: 0
+      })
+
+      await Promise.all([badgesDoc, ratingDoc])
     }
   }
 
