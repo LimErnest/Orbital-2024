@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChessPuzzle } from '@react-chess-tools/react-chess-puzzle'
-import { useState } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Sidebar, SidebarSection } from '@/components/ui/sidebar'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -16,18 +16,130 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import ArrayofPuzzle from '@/daily_puzzles.json'
+import { db } from '../../../firebase/firebase'
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { useAuth } from '../../context/AuthContext'
+
+export interface Puzzle {
+  PuzzleId: number;
+  FEN: string;
+  Moves: string[];
+}
+
+interface ArrayPuzzles {
+  [key: string]: Puzzle[]; // Keyed by string (chessRating), value is an array of Puzzle
+}
+
+const RatingPuzzle: ArrayPuzzles = ArrayofPuzzle;
+
+type Rating = "400" | "500" | "600" | "700" | "800" | "900" | "1000" | "1100";
+
+function isRating(value: any): value is Rating {
+  return ["400", "500", "600", "700", "800", "900", "1000", "1100"].includes(value);
+}
+
+async function fetchUserRating(uid: string) {
+  const docRef = doc(db, "rating", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+    return {
+      chessRating: data.chessRating,
+      attempts: data.attempts,
+      puzzleID: data.puzzleID,
+      noOfCorrect: data.noOfCorrect
+    };
+  } else {
+    console.log("No such document!");
+    return {
+      chessRating: "400",
+      attempts: 0,
+      puzzleID: 0,
+      noOfCorrect: 0,
+    };
+  }
+}
 
 export default function ChessDailyPage() {
-  const puzzles = [
-    {
-      fen: '2r2rk1/6pp/p1q5/1pn2p2/1B1pPP2/3Pn1QB/1PP2R1P/6RK b - - 3 24',
-      moves: ['f8f6', 'g3g7'],
-      makeFirstMove: true
-    }
-  ]
 
-  const [puzzleIndex, setPuzzleIndex] = useState(0)
-  const puzzle = puzzles[puzzleIndex]
+  const { user } = useAuth()
+  const [rating, setRating] = useState<Rating>("600")
+  const [attempt, setAttempt] = useState(0)
+  const [puzzleID, setPuzzleID] = useState(0)
+  const [correctCount, setCorrectCount] = useState(0)
+  const [arrayOfPuzzle, setArrayOfPuzzle] = useState<Puzzle[]>([])
+  const [puzzle, setPuzzle] = useState<Puzzle>(ArrayofPuzzle[rating][puzzleID])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (user) {
+      fetchUserRating(user.uid)
+        .then(data => {
+          console.log("Fetched badge data:", data);
+          setRating(data.chessRating)
+          setAttempt(data.attempts)
+          setPuzzleID(data.puzzleID)
+          setCorrectCount(data.noOfCorrect) 
+          setPuzzle(RatingPuzzle[data.chessRating][data.puzzleID])
+          console.log("user is changed")
+          console.log(rating, data.chessRating)
+        })
+        .catch(error => console.error("Error fetching user badge:", error));
+    }
+  }, [user])
+
+  const decreaseAttempt = async () => {
+    const newAttempt = attempt - 1;
+    setAttempt(newAttempt)
+
+    if (user) {
+      const docRef = doc(db, "rating", user.uid);
+      await updateDoc(docRef, { attempts: newAttempt });
+    }
+  }
+
+  if(loading) {
+    <div>Loading...</div>
+  }
+
+  const setNewPuzzle = async () => {
+    const newCorrectCount = correctCount + 1
+    if (newCorrectCount >= 3) {
+      if (Number(rating) < 1100) {
+        const newRating = String(Number(rating) + 100)
+        if (isRating(newRating)) {  
+          setRating(newRating)
+          setPuzzleID(0);
+        }
+      }
+      setCorrectCount(0)
+    } else {
+      setCorrectCount(newCorrectCount)
+    }
+
+    if (user) {
+      const docRef = doc(db, "rating", user.uid);
+      await updateDoc(docRef, 
+        { puzzleID: puzzleID, 
+          noOfCorrect: correctCount,
+          chessRating: rating
+        });
+    }
+
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    const puzzles = ArrayofPuzzle[rating];
+    setArrayOfPuzzle(puzzles);
+    setPuzzle(puzzles[puzzleID]);
+  }, [rating])
+
+  const newPuzzleID = puzzleID + 1
+  const nextPuzzle = arrayOfPuzzle[puzzleID]
+
 
   return (
     <div className='flex'>
@@ -54,7 +166,7 @@ export default function ChessDailyPage() {
             </Link>
 
             <Link
-              href='/pages/chess'
+              href='/pages/chess-guide'
               className={cn(
                 buttonVariants({
                   variant: 'ghost',
@@ -133,35 +245,126 @@ export default function ChessDailyPage() {
         </Sidebar>
       </div>
 
-      <div className='flex flex-row h-1/2 w-1/2 p-20'>
-        <ChessPuzzle.Root puzzle={puzzle}>
-          <ChessPuzzle.Board />
+      {attempt == 0 ? (
+        <div className='flex justify-center text-4xl h-screen w-full'>
+          <h1 className='py-20'>You have no attempts left come back again tomorrow</h1>
+        </div>
+      ) : (
+        <ChessPuzzle.Root puzzle={{
+          fen: puzzle.FEN,
+          moves: puzzle.Moves,
+          makeFirstMove: true
+        }}>
+          <div className='flex flex-row h-screen w-full overflow-hidden p-10'>
+            <div className='w-1/2'>
+              <ChessPuzzle.Board />
+            </div>
 
-          <div className='h-screen w-1/2 p-20'>
-            <Card>
-              <CardHeader>
-                <CardTitle>Daily Quiz #1</CardTitle>
-                <CardDescription></CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ChessPuzzle.Reset asChild>
-                  <button>restart</button>
-                </ChessPuzzle.Reset>
-                <ChessPuzzle.Reset
-                  asChild
-                  puzzle={puzzles[(puzzleIndex + 1) % puzzles.length]}
-                  onReset={() => setPuzzleIndex((puzzleIndex + 1) % puzzles.length)}
-                >
-                  <Button>next</Button>
-                </ChessPuzzle.Reset>
-                <ChessPuzzle.Hint>hint</ChessPuzzle.Hint>
-                
-              </CardContent>
-            </Card>
+            <div className='flex justify-center h-1/2 w-full sm:w-2/5 p-4 sm:p-10'>
+              <Card className='w-full'>
+                <CardHeader>
+                  <CardTitle className='flex justify-center text-4xl'>
+                    Daily Quiz #{puzzle.PuzzleId} {rating} Rating
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+
+                  <div className='flex flex-row justify-center'>
+                    <div className=''>
+                      <ChessPuzzle.Reset
+                        asChild
+                        puzzle={{
+                          fen: puzzle?.FEN,
+                          moves: puzzle?.Moves,
+                          makeFirstMove: true
+                        }}
+                        showOn={
+                          ["in-progress"]
+                        }>
+                        <Button
+                          className={cn(
+                            buttonVariants({ size: 'xl' }),
+                            'px-8 py-4 text-xl'
+                          )}
+                        >Restart</Button>
+                      </ChessPuzzle.Reset>
+                    </div>
+
+                    <div className='px-4'>
+                      <ChessPuzzle.Reset
+                        asChild
+                        puzzle={{
+                          fen: puzzle.FEN,
+                          moves: puzzle.Moves,
+                          makeFirstMove: true
+                        }}
+                        onReset={() => {
+                          decreaseAttempt()
+                        }}
+                        showOn={
+                          ["failed"]
+                        }>
+                        <Button
+                          className={cn(
+                            buttonVariants({ size: 'xl' }),
+                            'px-8 py-4 text-xl'
+                          )}
+                        >Try Again</Button>
+                      </ChessPuzzle.Reset>
+                    </div>
+
+                    <div className=''>
+                      <ChessPuzzle.Reset
+                        asChild
+                        onReset={() => {
+                          setLoading(true)
+                          setPuzzleID(newPuzzleID)
+                          setPuzzle(nextPuzzle)
+                          setNewPuzzle()
+                        }}
+                        puzzle={{
+                          fen: nextPuzzle?.FEN,
+                          moves: nextPuzzle?.Moves,
+                          makeFirstMove: true
+                        }}
+                        
+                        showOn={
+                          ["solved"]
+                        }
+                      >
+                        <Button
+                          className={cn(
+                            buttonVariants({ size: 'xl' }),
+                            'px-8 py-4 text-xl'
+                          )}
+                        >Next</Button>
+                      </ChessPuzzle.Reset>
+                    </div>
+
+                    {/* <div>
+                      <ChessPuzzle.Hint>
+                        <div
+                          className={cn(
+                            buttonVariants({ size: 'xl' }),
+                            'px-8 py-4 text-xl'
+                          )}
+                        >
+                          Hint
+                        </div>
+                      </ChessPuzzle.Hint>
+                    </div> */}
+                  </div>
+                </CardContent>
+                <CardFooter className='flex justify-center'>You have {attempt},{correctCount} attempts left</CardFooter>
+              </Card>
+            </div>
+
           </div>
         </ChessPuzzle.Root>
-      </div>
+      )
+      }
 
-    </div>
+
+    </div >
   )
 }
