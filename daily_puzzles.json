@@ -1,5 +1,5 @@
 {
-"400-499 Rating":[
+"400":[
  {
   "PuzzleId": 1,
   "FEN": "2r2rk1/6pp/p1q5/1pn2p2/1B1pPP2/3Pn1QB/1PP2R1P/6RK b - - 3 24",
@@ -501,7 +501,7 @@
   "Moves": ["c1d1", "d8d1"]
  }
 ],
-"500-599 Rating":[
+"500":[
  {
   "PuzzleId": 1,
   "FEN": "3rk2r/p1p1b1pp/8/4p3/8/4Q3/PP1qNPPP/R4RK1 w k - 0 20",
@@ -1003,7 +1003,7 @@
   "Moves": ["b8b2", "c7c8", "d5d8", "c8d8"]
  }
 ],
-"600-699 Rating":[
+"600":[
  {
   "PuzzleId": 1,
   "FEN": "r1bk4/pppp3p/2n5/2b1prN1/8/1B6/PPPP2PP/RNB2RK1 w - - 1 14",
@@ -1505,7 +1505,7 @@
   "Moves": ["d5b6", "d1d8"]
  }
 ],
-"700-799 Rating":[
+"700":[
  {
   "PuzzleId": 1,
   "FEN": "8/8/6p1/K5Pp/Pp4kP/8/8/8 b - - 0 52",
@@ -2007,7 +2007,7 @@
   "Moves": ["f4f5", "h5h7"]
  }
 ],
-"800-899 Rating":[
+"800":[
  {
   "PuzzleId": 1,
   "FEN": "8/1p5k/p3pQq1/3pP3/2p3P1/2P5/PP6/2K5 w - - 3 33",
@@ -2509,7 +2509,7 @@
   "Moves": ["a7a8", "b6b5", "a4a5", "h3a3"]
  }
 ],
-"900-999 Rating":[
+"900":[
  {
   "PuzzleId": 1,
   "FEN": "1q3bk1/5ppp/8/3QP3/2B5/6NP/6PK/4r3 b - - 3 38",
@@ -3011,7 +3011,7 @@
   "Moves": ["d7f8", "e2e5", "h4f6", "e5f6"]
  }
 ],
-"1000-1099 Rating":[
+"1000":[
  {
   "PuzzleId": 1,
   "FEN": "2b1rk2/p2r1p1p/2qp2pN/2p5/2P1PQ2/1PbB4/P5PP/3R1RK1 b - - 5 23",
@@ -3513,7 +3513,7 @@
   "Moves": ["d7f6", "c2a4", "c7c6", "a4b4"]
  }
 ],
-"1100-1200 Rating":[
+"1100":[
  {
   "PuzzleId": 1,
   "FEN": "8/8/3p1k1p/3Pqpp1/2Q5/6PP/5P1K/8 w - - 3 34",
