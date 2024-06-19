@@ -340,22 +340,9 @@ export default function ChessDailyPage() {
                         >Next</Button>
                       </ChessPuzzle.Reset>
                     </div>
-
-                    {/* <div>
-                      <ChessPuzzle.Hint>
-                        <div
-                          className={cn(
-                            buttonVariants({ size: 'xl' }),
-                            'px-8 py-4 text-xl'
-                          )}
-                        >
-                          Hint
-                        </div>
-                      </ChessPuzzle.Hint>
-                    </div> */}
                   </div>
                 </CardContent>
-                <CardFooter className='flex justify-center'>You have {attempt},{correctCount} attempts left</CardFooter>
+                <CardFooter className='flex justify-center'>You have {attempt} attempts left</CardFooter>
               </Card>
             </div>
 
