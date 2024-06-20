@@ -14,8 +14,6 @@ import {
 import { auth, db } from '../../firebase/firebase'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { noSSR } from 'next/dynamic'
-
 
 interface UserType {
   email: string | null
@@ -23,6 +21,7 @@ interface UserType {
   username: string | null
   session: true | false | null
   profilePicture: string | null
+  xp: number | null
 }
 
 const AuthContext = createContext({})
@@ -39,17 +38,22 @@ export const AuthContextProvider = ({
     uid: null,
     username: null,
     session: null,
-    profilePicture: null
+    profilePicture: null,
+    xp: null
   })
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async user => {
       if (user) {
+        const docRef = doc(db, 'xp', user.uid)
+        const docSnap = await getDoc(docRef)
+        const data = docSnap.data()
         setUser({
           email: user.email,
           uid: user.uid,
           username: user.displayName,
           session: true,
-          profilePicture: user.photoURL
+          profilePicture: user.photoURL,
+          xp: data?.xp
         })
       } else {
         setUser({
@@ -57,7 +61,8 @@ export const AuthContextProvider = ({
           uid: null,
           username: null,
           session: false,
-          profilePicture: null
+          profilePicture: null,
+          xp: null
         })
       }
     })
@@ -67,14 +72,15 @@ export const AuthContextProvider = ({
   const currentUser = auth.currentUser
   const storage = getStorage()
 
-  const signUp = async (
-    email: string,
-    password: string
-  ) => {
-    const userCreden = await createUserWithEmailAndPassword(auth, email, password)
+  const signUp = async (email: string, password: string) => {
+    const userCreden = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    )
     const user = userCreden.user
     if (user) {
-      const badgesDoc = setDoc(doc(db, "badges", user.uid), {
+      const badgesDoc = setDoc(doc(db, 'badges', user.uid), {
         chess50Guide: false,
         chess100Guide: false,
         chessFinalQuest: false,
@@ -85,14 +91,19 @@ export const AuthContextProvider = ({
         poker100Guide: false,
         pokerFinalQuest: false
       })
-      const ratingDoc = setDoc(doc(db, "rating", user.uid), {
-        chessRating: "400",
+      const ratingDoc = setDoc(doc(db, 'rating', user.uid), {
+        chessRating: '400',
         attempts: 3,
         puzzleID: 0,
         noOfCorrect: 0
       })
-
-      await Promise.all([badgesDoc, ratingDoc])
+      const xpDoc = setDoc(doc(db, 'xp', user.uid), {
+        xp: 0
+      })
+      const chessGuideDoc = setDoc(doc(db, 'chessguide', user.uid), {
+        lastChapter: 1
+      })
+      await Promise.all([badgesDoc, ratingDoc, xpDoc, chessGuideDoc])
     }
   }
 
@@ -106,7 +117,8 @@ export const AuthContextProvider = ({
         uid: user.uid,
         username: username,
         session: true,
-        profilePicture: user.profilePicture
+        profilePicture: user.profilePicture,
+        xp: user.xp
       })
     }
   }
@@ -138,14 +150,61 @@ export const AuthContextProvider = ({
         uid: user.uid,
         username: user.username,
         session: true,
-        profilePicture: URL
+        profilePicture: URL,
+        xp: user.xp
       })
+    }
+  }
+
+  const addXp = async (xp: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'xp', currentUser.uid)
+      const docSnap = await getDoc(docRef)
+      const data = docSnap.data()
+      const newXP = data?.xp + xp
+      await setDoc(docRef, { xp: newXP })
+      setUser({
+        email: user.email,
+        uid: user.uid,
+        username: user.username,
+        session: true,
+        profilePicture: user.profilePicture,
+        xp: newXP
+      })
+    }
+  }
+
+  const updateChessChapter = async (chapter: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'chessguide', currentUser.uid)
+      const docSnap = await getDoc(docRef)
+      const data = docSnap.data()
+      if (data) {
+        if (data.lastChapter > chapter) {
+          return data.lastChapter
+        } else {
+          await setDoc(docRef, { lastChapter: chapter })
+          return chapter
+        }
+      } else {
+        await setDoc(docRef, { lastChapter: chapter })
+      }
     }
   }
 
   return (
     <AuthContext.Provider
-      value={{ user, signUp, logIn, logOut, updateUsername, changePassword, upload }}
+      value={{
+        user,
+        signUp,
+        logIn,
+        logOut,
+        updateUsername,
+        changePassword,
+        upload,
+        addXp,
+        updateChessChapter
+      }}
     >
       {children}
     </AuthContext.Provider>

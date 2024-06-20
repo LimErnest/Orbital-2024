@@ -14,14 +14,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button, buttonVariants } from '@/components/ui/button'
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-
 import { useAuth } from '../../app/context/AuthContext'
 import { Icons } from './icon'
 import { redirect } from 'next/navigation'
-import { set } from 'react-hook-form'
 import { Badges } from '@/components/ui/badges'
-import { Settings} from '@/components/ui/settings'
+import { Settings } from '@/components/ui/settings'
+import { XpBar } from './xpbar'
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> { }
 
@@ -84,6 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
                 {user.username}
               </span>
             </div>
+            <XpBar />
           </DialogTrigger>
           <DialogContent className='max-w-screen-md w-full h-auto md:h-4/5 p-6 overflow-y-auto'>
             <DialogHeader>
