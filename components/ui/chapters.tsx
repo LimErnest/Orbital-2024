@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { Chessboard } from 'react-chessboard'
 import Image from 'next/image'
-import { requestFormReset } from 'react-dom'
 
 const Chapter1 = () => {
   return (
@@ -697,13 +696,13 @@ const Chapter8 = () => {
       <Board>
         <Chessboard
           position='8/4k3/8/8/8/4B3/4R3/8'
-          boardWidth={400}
+          boardWidth={300}
           arePiecesDraggable={false}
           customArrows={[['e3', 'c5']]}
         />
         <Chessboard
           position='8/4k3/8/2B5/8/8/4R3/8'
-          boardWidth={400}
+          boardWidth={300}
           arePiecesDraggable={false}
           customArrows={[
             ['c5', 'e7'],
@@ -788,12 +787,12 @@ const Chapter9 = () => {
       <Board>
         <Chessboard
           position='r3k3/8/8/8/8/8/8/4K2R'
-          boardWidth={400}
+          boardWidth={300}
           arePiecesDraggable={false}
         />
         <Chessboard
           position='2kr4/8/8/8/8/8/8/5RK1'
-          boardWidth={400}
+          boardWidth={300}
           arePiecesDraggable={false}
         />
       </Board>

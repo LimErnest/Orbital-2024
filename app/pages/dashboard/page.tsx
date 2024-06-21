@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { Sidebar, SidebarSection } from '@/components/ui/sidebar'
 import { buttonVariants } from '@/components/ui/button'
 import { CheckUser } from '@/components/ui/checkuser'
+import { TestXp } from '@/components/ui/xptester'
 
 export const metadata: Metadata = {
   title: 'Guidance',
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 export default function LandingPage() {
   return (
     <>
-      <div>
+      <div className='flex flex-col'>
         <Sidebar className= 'flex flex-col bg-gray-100'>
           <SidebarSection className = 'py-2 px-2'>
             <div>
