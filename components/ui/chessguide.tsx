@@ -15,16 +15,30 @@ import {
   Chapter10,
   Chapter11,
   Chapter12
-} from '@/components/ui/chessguide/chapters'
+} from '@/components/ui/chapters'
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/app/context/AuthContext'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 
 const ChessGuide = () => {
-  const { updateChessChapter, addXp } = useAuth()
+  const { updateChessChapter, addXp, updateBadge } = useAuth()
   const [lastCompletedChapter, setLastCompletedChapter] = useState(1)
   const [currentTab, setCurrentTab] = useState('chapter1')
+  const [badge, setBadge] = useState<string>('')
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   useEffect(() => {
     async function fetchChapter() {
@@ -39,6 +53,16 @@ const ChessGuide = () => {
       setLastCompletedChapter(chapter)
       const xp = addXp(20)
       const chap = updateChessChapter(chapter)
+      if (chapter === 6) {
+        updateBadge('chess50Guide')
+        addXp(50)
+        setIsDialogOpen(true)
+      }
+      if (chapter === 12) {
+        updateBadge('chess100Guide')
+        addXp(100)
+        setIsDialogOpen(true)
+      }
     }
     setCurrentTab(`chapter${chapter}`)
   }
@@ -233,6 +257,30 @@ const ChessGuide = () => {
 
       <TabsContent value='chapter6' className='w-5/6 flex-shrink flex-grow p-4'>
         <ScrollArea className='h-full w-full border-0 shadow-none'>
+          <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  Congratulations on unlocking an achievement! 🎉
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  <div className='flex flex-col items-center'>
+                    <Avatar className='mt-2 h-48 w-48'>
+                      <AvatarImage src='/img/knightbadge.png' />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    <span className='text-rg mt-6 font-medium'>
+                      For completing 50% of the chess guide you have an
+                      additional 50xp.
+                    </span>
+                  </div>
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogAction>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
           <Chapter6 />
           <ChapterNavigation chapterNumber={6} />
           <ScrollBar orientation='vertical' />
@@ -290,6 +338,30 @@ const ChessGuide = () => {
         className='w-5/6 flex-shrink flex-grow p-4'
       >
         <ScrollArea className='h-full w-full border-0 shadow-none'>
+          <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  Congratulations on unlocking an achievement! 🎉
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  <div className='flex flex-col items-center'>
+                    <Avatar className='mt-2 h-48 w-48'>
+                      <AvatarImage src='/img/rookbadge.png' />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    <span className='text-rg mt-6 font-medium'>
+                      For completing the chess guide you have an additional
+                      100xp.
+                    </span>
+                  </div>
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogAction>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
           <Chapter12 />
           <PrevChapterButton chapterNumber={11} />
           <ScrollBar orientation='vertical' />

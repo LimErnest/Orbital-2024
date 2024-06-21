@@ -12,7 +12,7 @@ import {
   reauthenticateWithCredential
 } from 'firebase/auth'
 import { auth, db } from '../../firebase/firebase'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 interface UserType {
@@ -192,6 +192,15 @@ export const AuthContextProvider = ({
     }
   }
 
+  const updateBadge = async (updatedBadge: string) => {
+    if (currentUser) {
+      const docRef = doc(db, 'badges', currentUser.uid)
+      await updateDoc(docRef, { 
+        [updatedBadge]: true 
+      })  
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -203,7 +212,8 @@ export const AuthContextProvider = ({
         changePassword,
         upload,
         addXp,
-        updateChessChapter
+        updateChessChapter,
+        updateBadge
       }}
     >
       {children}
