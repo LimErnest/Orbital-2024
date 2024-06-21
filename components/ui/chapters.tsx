@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { Chessboard } from 'react-chessboard'
 import Image from 'next/image'
-import { requestFormReset } from 'react-dom'
 
 const Chapter1 = () => {
   return (
