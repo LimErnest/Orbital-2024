@@ -15,6 +15,13 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { Icons } from './icon'
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { cn } from '@/lib/utils'
+
 
 async function fetchUserBadge(uid: string) {
   const docRef = doc(db, 'badges', uid)
@@ -76,11 +83,11 @@ export function Badges() {
           setLoading(false)
         })
         .catch(error => {
-            console.error('Error fetching user badge:', error)
-            setLoading(false)
+          console.error('Error fetching user badge:', error)
+          setLoading(false)
         })
     } else {
-        setLoading(false)
+      setLoading(false)
     }
   }, [user])
 
@@ -107,10 +114,17 @@ export function Badges() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             ) : (
-              <Avatar className='h-24 w-24'>
-                <AvatarImage src='/img/noknightbadge.png' />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Avatar className='h-24 w-24'>
+                    <AvatarImage src='/img/noknightbadge.png' />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </HoverCardTrigger>
+                <HoverCardContent className='p-2 w-17'>
+                  Locked
+                </HoverCardContent>
+              </HoverCard>
             )}
           </CardContent>
         </Card>
@@ -127,10 +141,17 @@ export function Badges() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             ) : (
-              <Avatar className='h-24 w-24'>
-                <AvatarImage src='/img/norookbadge.png' />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Avatar className='h-24 w-24'>
+                    <AvatarImage src='/img/norookbadge.png' />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </HoverCardTrigger>
+                <HoverCardContent className='p-2 w-17'>
+                  Locked
+                </HoverCardContent>
+              </HoverCard>
             )}
           </CardContent>
         </Card>
@@ -147,10 +168,17 @@ export function Badges() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             ) : (
-              <Avatar className='h-24 w-24'>
-                <AvatarImage src='/img/noqueenbadge.png' />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Avatar className='h-24 w-24'>
+                    <AvatarImage src='/img/noqueenbadge.png' />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </HoverCardTrigger>
+                <HoverCardContent className='p-2 w-17'>
+                  Locked
+                </HoverCardContent>
+              </HoverCard>
             )}
           </CardContent>
         </Card>
@@ -169,10 +197,17 @@ export function Badges() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             ) : (
-              <Avatar className='h-24 w-24'>
-                <AvatarImage src='/img/nobaibanbadge.png' />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Avatar className='h-24 w-24'>
+                    <AvatarImage src='/img/nobaibanbadge.png' />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </HoverCardTrigger>
+                <HoverCardContent className='p-2 w-17'>
+                  Locked
+                </HoverCardContent>
+              </HoverCard>
             )}
           </CardContent>
         </Card>
@@ -189,10 +224,17 @@ export function Badges() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             ) : (
-              <Avatar className='h-24 w-24'>
-                <AvatarImage src='/img/nozhongbadge.png' />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Avatar className='h-24 w-24'>
+                    <AvatarImage src='/img/nozhongbadge.png' />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </HoverCardTrigger>
+                <HoverCardContent className='p-2 w-17'>
+                  Locked
+                </HoverCardContent>
+              </HoverCard>
             )}
           </CardContent>
         </Card>
@@ -209,10 +251,17 @@ export function Badges() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             ) : (
-              <Avatar className='h-24 w-24'>
-                <AvatarImage src='/img/nofabadge.png' />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Avatar className='h-24 w-24'>
+                    <AvatarImage src='/img/nofabadge.png' />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </HoverCardTrigger>
+                <HoverCardContent className='p-2 w-17'>
+                  Locked
+                </HoverCardContent>
+              </HoverCard>
             )}
           </CardContent>
         </Card>
@@ -231,10 +280,17 @@ export function Badges() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             ) : (
-              <Avatar className='h-24 w-24'>
-                <AvatarImage src='/img/noqueencardbadge.png' />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Avatar className='h-24 w-24'>
+                    <AvatarImage src='/img/noqueencardbadge.png' />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </HoverCardTrigger>
+                <HoverCardContent className='p-2 w-17'>
+                  Locked
+                </HoverCardContent>
+              </HoverCard>
             )}
           </CardContent>
         </Card>
@@ -251,10 +307,17 @@ export function Badges() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             ) : (
-              <Avatar className='h-24 w-24'>
-                <AvatarImage src='/img/nokingbadge.png' />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Avatar className='h-24 w-24'>
+                    <AvatarImage src='/img/nokingbadge.png' />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </HoverCardTrigger>
+                <HoverCardContent className='p-2 w-17'>
+                  Locked
+                </HoverCardContent>
+              </HoverCard>
             )}
           </CardContent>
         </Card>
@@ -271,10 +334,17 @@ export function Badges() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             ) : (
-              <Avatar className='h-24 w-24'>
-                <AvatarImage src='/img/noacebadge.png' />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Avatar className='h-24 w-24'>
+                    <AvatarImage src='/img/noacebadge.png' />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </HoverCardTrigger>
+                <HoverCardContent className='p-2 w-17'>
+                  Locked
+                </HoverCardContent>
+              </HoverCard>
             )}
           </CardContent>
         </Card>
