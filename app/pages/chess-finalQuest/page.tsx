@@ -192,7 +192,7 @@ export default function ChessDailyPage() {
 
             {finalQuestStatus ? (
                 <div className='flex justify-center text-4xl h-screen w-full'>
-                    <h1 className='py-20'>CONGRAULATIONS YOU HAVE PASSED THE CHESS FINAL QUEST</h1>
+                    <h1 className='py-20'>CONGRAULATIONS YOU HAVE PASSED THE CHESS FINAL QUEST 🎉</h1>
                 </div>
             ) : (
                 <ChessPuzzle.Root puzzle={{
