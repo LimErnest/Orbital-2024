@@ -218,26 +218,6 @@ export default function ChessDailyPage() {
                                 <CardContent>
 
                                     <div className='flex flex-row justify-center'>
-                                        <div className=''>
-                                            <ChessPuzzle.Reset
-                                                asChild
-                                                puzzle={{
-                                                    fen: puzzle?.FEN,
-                                                    moves: puzzle?.Moves,
-                                                    makeFirstMove: true
-                                                }}
-                                                showOn={
-                                                    ["in-progress"]
-                                                }>
-                                                <Button
-                                                    className={cn(
-                                                        buttonVariants({ size: 'xl' }),
-                                                        'px-8 py-4 text-xl'
-                                                    )}
-                                                >Restart</Button>
-                                            </ChessPuzzle.Reset>
-                                        </div>
-
                                         <div className='px-4'>
                                             <ChessPuzzle.Reset
                                                 asChild
