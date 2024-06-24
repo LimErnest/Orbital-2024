@@ -5,6 +5,12 @@ import { Progress } from '@/components/ui/progressbar'
 import { useState } from 'react'
 import { useAuth } from '../../app/context/AuthContext'
 import { useEffect } from 'react'
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+
 
 
 export function XpBar() {
@@ -18,20 +24,30 @@ export function XpBar() {
     if (user) {
       setProgress({
         xp: user.xp % 100,
-        level: 1 + Math.floor(user.xp/100)
+        level: 1 + Math.floor(user.xp / 100)
       })
     }
   }, [user])
 
   return (
-    <div className=' flex flex-row items-center justify-center px-4 pb-2'>
-      <span className='whitespace-nowrap text-sm text-black'>
-        Level {progress.level}
-      </span>
-      <Progress
-        value={progress.xp}
-        className='ml-4 w-full border border-black shadow-lg'
-      />
-    </div>
+    <HoverCard>
+      <HoverCardTrigger>
+        <div className=' flex flex-row items-center justify-center px-4 pb-2'>
+          <span className='whitespace-nowrap text-sm text-black'>
+            Level {progress.level}
+          </span>
+          <Progress
+            value={progress.xp}
+            className='ml-4 w-full border border-black shadow-lg'
+          />
+        </div>
+      </HoverCardTrigger>
+      <HoverCardContent className='p-2 w-24 text-nowrap'>
+        {progress.xp} / 100
+      </HoverCardContent>
+    </HoverCard>
+
+
+
   )
 }
