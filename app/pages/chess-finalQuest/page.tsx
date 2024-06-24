@@ -20,6 +20,7 @@ import ArrayofPuzzle from '@/daily_puzzles.json'
 import { db } from '../../../firebase/firebase'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { useAuth } from '../../context/AuthContext'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 
 export interface Puzzle {
     PuzzleId: number;
@@ -191,8 +192,14 @@ export default function ChessDailyPage() {
             </div>
 
             {finalQuestStatus ? (
-                <div className='flex justify-center text-4xl h-screen w-full'>
-                    <h1 className='py-20'>CONGRAULATIONS YOU HAVE PASSED THE CHESS FINAL QUEST 🎉</h1>
+                <div className='flex flex-col items-center text-4xl h-screen w-full mt-20'>
+                    <h1>CONGRAULATIONS YOU HAVE PASSED THE CHESS FINAL QUEST 🎉</h1>
+                    <div className='flex flex-col items-center'>
+                        <Avatar className='mt-5 h-48 w-48'>
+                            <AvatarImage src='/img/queenbadge.png' />
+                            <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
+                    </div>
                 </div>
             ) : (
                 <ChessPuzzle.Root puzzle={{
@@ -216,7 +223,6 @@ export default function ChessDailyPage() {
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
-
                                     <div className='flex flex-row justify-center'>
                                         <div className='px-4'>
                                             <ChessPuzzle.Reset
