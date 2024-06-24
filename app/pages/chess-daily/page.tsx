@@ -56,7 +56,7 @@ async function fetchUserRating(uid: string) {
     return {
       chessRating: "400",
       attempts: 0,
-      puzzleID: 0,
+      puzzleID: 1,
       noOfCorrect: 0,
     };
   }
@@ -67,11 +67,11 @@ export default function ChessDailyPage() {
   const { user } = useAuth()
   const [rating, setRating] = useState<Rating>("600")
   const [attempt, setAttempt] = useState(0)
-  const [puzzleID, setPuzzleID] = useState(0)
+  const [puzzleID, setPuzzleID] = useState(1)
   const [correctCount, setCorrectCount] = useState(0)
   const [arrayOfPuzzle, setArrayOfPuzzle] = useState<Puzzle[]>([])
   const [puzzle, setPuzzle] = useState<Puzzle>(ArrayofPuzzle[rating][puzzleID])
-  const [loading, setLoading] = useState(false)
+
 
   useEffect(() => {
     if (user) {
@@ -81,10 +81,9 @@ export default function ChessDailyPage() {
           setRating(data.chessRating)
           setAttempt(data.attempts)
           setPuzzleID(data.puzzleID)
-          setCorrectCount(data.noOfCorrect) 
-          setPuzzle(RatingPuzzle[data.chessRating][data.puzzleID])
+          setCorrectCount(data.noOfCorrect)
+          setPuzzle(RatingPuzzle[data.chessRating][data.puzzleID - 1])
           console.log("user is changed")
-          console.log(rating, data.chessRating)
         })
         .catch(error => console.error("Error fetching user badge:", error));
     }
@@ -100,46 +99,54 @@ export default function ChessDailyPage() {
     }
   }
 
-  if(loading) {
-    <div>Loading...</div>
-  }
-
   const setNewPuzzle = async () => {
-    const newCorrectCount = correctCount + 1
+
+    let newRating: String = rating
+    let currentPuzzleID = puzzleID + 1
+    let newCorrectCount = correctCount + 1
+
     if (newCorrectCount >= 3) {
       if (Number(rating) < 1100) {
-        const newRating = String(Number(rating) + 100)
-        if (isRating(newRating)) {  
+        newRating = String(Number(rating) + 100)
+        if (isRating(newRating)) {
           setRating(newRating)
-          setPuzzleID(0);
+          currentPuzzleID = 1
+
         }
       }
-      setCorrectCount(0)
-    } else {
-      setCorrectCount(newCorrectCount)
+      newCorrectCount = 0
     }
+
+    setPuzzleID(currentPuzzleID);
+    setCorrectCount(newCorrectCount);
 
     if (user) {
       const docRef = doc(db, "rating", user.uid);
-      await updateDoc(docRef, 
-        { puzzleID: puzzleID, 
-          noOfCorrect: correctCount,
-          chessRating: rating
+      await updateDoc(docRef,
+        {
+          puzzleID: currentPuzzleID,
+          noOfCorrect: newCorrectCount,
+          chessRating: newRating
         });
+      console.log("doc is updated")
     }
-
-    setLoading(false)
   }
 
   useEffect(() => {
     const puzzles = ArrayofPuzzle[rating];
     setArrayOfPuzzle(puzzles);
-    setPuzzle(puzzles[puzzleID]);
+    setPuzzle(puzzles[puzzleID - 1]);
+    console.log("rating is changed")
   }, [rating])
 
-  const newPuzzleID = puzzleID + 1
-  const nextPuzzle = arrayOfPuzzle[puzzleID]
+  let newPuzzleID = puzzleID + 1
+  let newIndex = newPuzzleID - 1
+  let nextPuzzle = arrayOfPuzzle[newIndex]
 
+  if (correctCount == 2 && rating != '1100') {
+    const puzzles = RatingPuzzle[String(Number(rating) + 100)];
+    nextPuzzle = puzzles[0]
+  }
 
   return (
     <div className='flex'>
@@ -264,7 +271,7 @@ export default function ChessDailyPage() {
               <Card className='w-full'>
                 <CardHeader>
                   <CardTitle className='flex justify-center text-4xl'>
-                    Daily Quiz #{puzzle.PuzzleId} {rating} Rating
+                    Daily Quiz #{puzzleID} {rating} Rating
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -274,8 +281,8 @@ export default function ChessDailyPage() {
                       <ChessPuzzle.Reset
                         asChild
                         puzzle={{
-                          fen: puzzle?.FEN,
-                          moves: puzzle?.Moves,
+                          fen: puzzle.FEN,
+                          moves: puzzle.Moves,
                           makeFirstMove: true
                         }}
                         showOn={
@@ -317,17 +324,15 @@ export default function ChessDailyPage() {
                       <ChessPuzzle.Reset
                         asChild
                         onReset={() => {
-                          setLoading(true)
-                          setPuzzleID(newPuzzleID)
                           setPuzzle(nextPuzzle)
                           setNewPuzzle()
                         }}
                         puzzle={{
-                          fen: nextPuzzle?.FEN,
-                          moves: nextPuzzle?.Moves,
+                          fen: nextPuzzle.FEN,
+                          moves: nextPuzzle.Moves,
                           makeFirstMove: true
                         }}
-                        
+
                         showOn={
                           ["solved"]
                         }
