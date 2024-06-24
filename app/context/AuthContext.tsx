@@ -94,7 +94,7 @@ export const AuthContextProvider = ({
       const ratingDoc = setDoc(doc(db, 'rating', user.uid), {
         chessRating: '400',
         attempts: 3,
-        puzzleID: 0,
+        puzzleID: 1,
         noOfCorrect: 0
       })
       const xpDoc = setDoc(doc(db, 'xp', user.uid), {
@@ -195,9 +195,9 @@ export const AuthContextProvider = ({
   const updateBadge = async (updatedBadge: string) => {
     if (currentUser) {
       const docRef = doc(db, 'badges', currentUser.uid)
-      await updateDoc(docRef, { 
-        [updatedBadge]: true 
-      })  
+      await updateDoc(docRef, {
+        [updatedBadge]: true
+      })
     }
   }
 
