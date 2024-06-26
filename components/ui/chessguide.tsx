@@ -34,7 +34,7 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 
 const ChessGuide = () => {
-  const { updateChessChapter, addXp, updateBadge } = useAuth()
+  const { updateChessChapter, addXp, updateBadge, user } = useAuth()
   const [lastCompletedChapter, setLastCompletedChapter] = useState(1)
   const [currentTab, setCurrentTab] = useState('chapter1')
   const [badge, setBadge] = useState<string>('')
@@ -46,7 +46,7 @@ const ChessGuide = () => {
       setLastCompletedChapter(chap)
     }
     fetchChapter()
-  }, [])
+  }, [user])
 
   async function updateChapter(chapter: number) {
     if (chapter > lastCompletedChapter) {
