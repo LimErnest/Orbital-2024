@@ -34,7 +34,7 @@ export function Settings() {
   const [isInvalidDialogOpen, setIsInvalidDialogOpen] =
     React.useState<boolean>(false)
   const [errorType, setErrorType] = React.useState<string>('')
-  const { updateUsername, changePassword, upload, logOut } = useAuth()
+  const { updateUsername, changePassword, upload, logOut, user, logIn } = useAuth()
   const [currPassword, setCurrPassword] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [confirmPassword, setConfirmPassword] = React.useState<string>('')
@@ -66,16 +66,24 @@ export function Settings() {
     event.preventDefault()
     setIsLoading(true)
     try {
+      const userEmail = user.email
+      console.log('i have not login')
+      await logIn(userEmail, currPassword)
+      console.log('i have login')
+
       const isValid = checkPassword()
       if (isValid) {
         await changePassword(currPassword, password)
+        logOut()
       }
-      logOut()
     } catch (error: any) {
-      if (error.code == 'auth/invalid-credential') {
+      console.log(error.code)
+      if (error.code == 'auth/invalid-login-credentials') {
+        console.log('isvalid returns an error')
         setErrorType('wrong credentials')
         setIsInvalidDialogOpen(true)
       }
+
     } finally {
       setIsLoading(false)
     }
@@ -84,6 +92,7 @@ export function Settings() {
   function checkPassword() {
     let error = ''
     const specialCharRegex = /[!@#$%^&*(),.?":{}|<>_\-+=\[\]\\\/]/
+
 
     if (password !== confirmPassword) {
       error = 'mismatch'
@@ -301,7 +310,7 @@ export function Settings() {
                     })
                   )}
                 >
-                   X 
+                  X
                 </Button>
               </div>
             </div>
@@ -339,13 +348,13 @@ export function Settings() {
               {errorType === 'mismatch' &&
                 'Please ensure that the passwords you entered match before continuing.'}
               {errorType === 'length' &&
-                'Password must be at least 8 characters long.'}
+                'New Password must be at least 8 characters long.'}
               {errorType === 'number' &&
-                'Password must include at least 1 number.'}
+                'New Password must include at least 1 number.'}
               {errorType === 'special' &&
-                'Password must include at least 1 special character.'}
+                'New Password must include at least 1 special character.'}
               {errorType === 'both' &&
-                'Password must include at least 1 number and 1 special character.'}
+                'New Password must include at least 1 number and 1 special character.'}
               {errorType === 'same' &&
                 'Current password and new password cannot be the same.'}
               {errorType === 'wrong credentials' &&
