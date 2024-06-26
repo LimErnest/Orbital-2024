@@ -27,7 +27,8 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [password, setPassword] = React.useState<string>('')
   const [email, setEmail] = React.useState<string>('')
-  const [isInvalidDialogOpen, setIsInvalidDialogOpen] =React.useState<boolean>(false)
+  const [isInvalidDialogOpen, setIsInvalidDialogOpen] =
+    React.useState<boolean>(false)
   const [errorType, setErrorType] = React.useState<string>('')
   const { user, logIn } = useAuth()
 
@@ -50,7 +51,6 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
       } else {
         console.log(error.message)
       }
-    } finally {
       setIsLoading(false)
     }
   }
