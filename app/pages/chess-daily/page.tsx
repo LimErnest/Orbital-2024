@@ -49,7 +49,7 @@ async function fetchUserRating(uid: string) {
       attempts: data.attempts,
       puzzleID: data.puzzleID,
       noOfCorrect: data.noOfCorrect,
-      latestDate: data.date
+      latestDate: data.latestDate
     };
   } else {
     console.log("No such document!");
@@ -72,7 +72,7 @@ export default function ChessDailyPage() {
   const [correctCount, setCorrectCount] = useState(0)
   const [arrayOfPuzzle, setArrayOfPuzzle] = useState<Puzzle[]>([])
   const [puzzle, setPuzzle] = useState<Puzzle>(ArrayofPuzzle[rating][puzzleID])
-  const date = new Date().toLocaleDateString()
+  const currDate = new Date().toLocaleDateString()
 
   useEffect(() => {
     if (user) {
@@ -84,6 +84,9 @@ export default function ChessDailyPage() {
           setPuzzleID(data.puzzleID)
           setCorrectCount(data.noOfCorrect)
           setPuzzle(RatingPuzzle[data.chessRating][data.puzzleID - 1])
+          console.log(data.latestDate)
+          console.log(currDate)
+          updateLatestDate(data.latestDate);
           console.log("user is changed")
         })
         .catch(error => console.error("Error fetching user badge:", error));
@@ -97,6 +100,17 @@ export default function ChessDailyPage() {
     if (user) {
       const docRef = doc(db, "rating", user.uid);
       await updateDoc(docRef, { attempts: newAttempt });
+    }
+  }
+
+  const updateLatestDate = async (date: string) => {
+    if (date != currDate) { //different day
+      setAttempt(3)
+
+      if (user) {
+        const docRef = doc(db, "rating", user.uid);
+        await updateDoc(docRef, { attempts: 3, latestDate: currDate });
+      }
     }
   }
 
@@ -127,8 +141,7 @@ export default function ChessDailyPage() {
         {
           puzzleID: currentPuzzleID,
           noOfCorrect: newCorrectCount,
-          chessRating: newRating,
-          latestDate: date
+          chessRating: newRating
         });
       console.log("doc is updated")
     }
