@@ -11,7 +11,6 @@ import { cn } from '@/lib/utils'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -49,7 +48,8 @@ async function fetchUserRating(uid: string) {
       chessRating: data.chessRating,
       attempts: data.attempts,
       puzzleID: data.puzzleID,
-      noOfCorrect: data.noOfCorrect
+      noOfCorrect: data.noOfCorrect,
+      latestDate: data.latestDate
     };
   } else {
     console.log("No such document!");
@@ -58,20 +58,21 @@ async function fetchUserRating(uid: string) {
       attempts: 0,
       puzzleID: 1,
       noOfCorrect: 0,
+      lastestDate: new Date().toLocaleDateString()
     };
   }
 }
 
 export default function ChessDailyPage() {
 
-  const { user } = useAuth()
+  const { user, addXp } = useAuth()
   const [rating, setRating] = useState<Rating>("600")
   const [attempt, setAttempt] = useState(0)
   const [puzzleID, setPuzzleID] = useState(1)
   const [correctCount, setCorrectCount] = useState(0)
   const [arrayOfPuzzle, setArrayOfPuzzle] = useState<Puzzle[]>([])
   const [puzzle, setPuzzle] = useState<Puzzle>(ArrayofPuzzle[rating][puzzleID])
-
+  const currDate = new Date().toLocaleDateString()
 
   useEffect(() => {
     if (user) {
@@ -83,6 +84,9 @@ export default function ChessDailyPage() {
           setPuzzleID(data.puzzleID)
           setCorrectCount(data.noOfCorrect)
           setPuzzle(RatingPuzzle[data.chessRating][data.puzzleID - 1])
+          console.log(data.latestDate)
+          console.log(currDate)
+          updateLatestDate(data.latestDate);
           console.log("user is changed")
         })
         .catch(error => console.error("Error fetching user badge:", error));
@@ -96,6 +100,17 @@ export default function ChessDailyPage() {
     if (user) {
       const docRef = doc(db, "rating", user.uid);
       await updateDoc(docRef, { attempts: newAttempt });
+    }
+  }
+
+  const updateLatestDate = async (date: string) => {
+    if (date != currDate) { //different day
+      setAttempt(3)
+
+      if (user) {
+        const docRef = doc(db, "rating", user.uid);
+        await updateDoc(docRef, { attempts: 3, latestDate: currDate });
+      }
     }
   }
 
