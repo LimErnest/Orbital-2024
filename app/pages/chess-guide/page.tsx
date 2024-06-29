@@ -5,22 +5,7 @@ import { cn } from '@/lib/utils'
 import { Sidebar, SidebarSection } from '@/components/ui/sidebar'
 import { buttonVariants } from '@/components/ui/button'
 import { CheckUser } from '@/components/ui/checkuser'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ScrollArea, ScrollBar } from '@/components/ui/guide-scroll-area'
-import {
-  Chapter1,
-  Chapter2,
-  Chapter3,
-  Chapter4,
-  Chapter5,
-  Chapter6,
-  Chapter7,
-  Chapter8,
-  Chapter9,
-  Chapter10,
-  Chapter11,
-  Chapter12
-} from '@/components/ui/chessguide/chapters'
+import { ChessGuide } from '@/components/ui/chessguide'
 
 export const metadata: Metadata = {
   title: 'Guidance',
@@ -74,7 +59,7 @@ export default function GuidePage() {
               </Link>
 
               <Link
-                href='/pages/coming-soon'
+                href='/pages/chess-daily'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
@@ -84,7 +69,7 @@ export default function GuidePage() {
               >
                 <Image
                   src='/img/pawn_icon.jpg'
-                  alt='Mahjong'
+                  alt='Chess-DailyQuiz'
                   width={30}
                   height={10}
                   className='mr-2'
@@ -112,7 +97,7 @@ export default function GuidePage() {
               </Link>
 
               <Link
-                href='/pages/coming-soon'
+                href='/pages/chess-finalQuest'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
@@ -134,149 +119,7 @@ export default function GuidePage() {
         </div>
 
         <div className='h-screen w-full overflow-hidden p-20'>
-          <Tabs
-            defaultValue='chapter1'
-            className='flex flex h-full w-full shrink-0 flex-row rounded-lg border border-gray-300 bg-white'
-          >
-            <TabsList className='flex h-full w-1/6 flex-shrink flex-col justify-start overflow-auto border-r border-gray-300 px-3 py-3'>
-              <TabsTrigger value='chapter1'>
-                Chapter 1: Introduction
-              </TabsTrigger>
-              <TabsTrigger value='chapter2'>Chapter 2: Pawns</TabsTrigger>
-              <TabsTrigger value='chapter3'>Chapter 3: Knights</TabsTrigger>
-              <TabsTrigger value='chapter4'>Chapter 4: Bishops</TabsTrigger>
-              <TabsTrigger value='chapter5'>Chapter 5: Rooks</TabsTrigger>
-              <TabsTrigger value='chapter6'>Chapter 6: Queen</TabsTrigger>
-              <TabsTrigger value='chapter7'>Chapter 7: King</TabsTrigger>
-              <TabsTrigger value='chapter8'>Chapter 8: Check/Mate</TabsTrigger>
-              <TabsTrigger value='chapter9'>Chapter 9: Castling</TabsTrigger>
-              <TabsTrigger value='chapter10'>
-                Chapter 10: En Passant
-              </TabsTrigger>
-              <TabsTrigger value='chapter11'>Chapter 11: Draws</TabsTrigger>
-              <TabsTrigger value='chapter12'>Chapter 12: Summary</TabsTrigger>
-            </TabsList>
-
-            <TabsContent
-              value='chapter1'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter1 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter2'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter2 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter3'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter3 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter4'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter4 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter5'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter5 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter6'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter6 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter7'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter7 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter8'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter8 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter9'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter9 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter10'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter10 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter11'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter11 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent
-              value='chapter12'
-              className='w-5/6 flex-shrink flex-grow p-4'
-            >
-              <ScrollArea className='h-full w-full border-0 shadow-none'>
-                <Chapter12 />
-                <ScrollBar orientation='vertical' />
-              </ScrollArea>
-            </TabsContent>
-          </Tabs>
+          <ChessGuide />
         </div>
       </div>
     </>
