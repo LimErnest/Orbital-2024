@@ -362,7 +362,12 @@ export default function ChessDailyPage() {
                     </div>
                   </div>
                 </CardContent>
-                <CardFooter className='flex justify-center'>You have {attempt} attempts left</CardFooter>
+                <CardFooter className='flex justify-center'>
+                  You have {attempt} attempts left<br />
+                </CardFooter>
+                <CardFooter className='flex justify-center'>
+                  If the first move is not played, please refresh the page
+                </CardFooter>
               </Card>
             </div>
 
