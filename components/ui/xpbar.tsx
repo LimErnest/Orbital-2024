@@ -8,10 +8,8 @@ import { useEffect } from 'react'
 import {
   HoverCard,
   HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card"
-
-
+  HoverCardTrigger
+} from '@/components/ui/hover-card'
 
 export function XpBar() {
   const { user } = useAuth()
@@ -42,12 +40,9 @@ export function XpBar() {
           />
         </div>
       </HoverCardTrigger>
-      <HoverCardContent className='p-2 w-24 text-nowrap'>
+      <HoverCardContent className='w-24 text-nowrap p-2'>
         {progress.xp} / 100
       </HoverCardContent>
     </HoverCard>
-
-
-
   )
 }
