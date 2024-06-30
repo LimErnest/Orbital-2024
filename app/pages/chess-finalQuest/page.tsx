@@ -52,7 +52,7 @@ async function fetchFinalQuestBadge(uid: string) {
 export default function ChessDailyPage() {
 
     const arrayOfPuzzle = ArrayofPuzzle["1100"]
-    const { user } = useAuth()
+    const { user, updateBadge, addXp } = useAuth()
     const [puzzleID, setPuzzleID] = useState(1)
     const [puzzle, setPuzzle] = useState<Puzzle>(arrayOfPuzzle[puzzleID + 94])
     const [finalQuestStatus, setfinalQuestStatus] = useState(false)
@@ -80,10 +80,8 @@ export default function ChessDailyPage() {
     const updateFinalQuestStatus = async () => {
         if (newPuzzleID > 5) {
             setfinalQuestStatus(true)
-            if (user) {
-                const docRef = doc(db, "badges", user.uid);
-                updateDoc(docRef, { chessFinalQuest: true });
-            }
+            updateBadge("chessFinalQuest")
+            addXp(200)
         }
     }
 
