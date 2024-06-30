@@ -52,7 +52,8 @@ async function fetchUserRating(uid: string) {
       attempts: data.attempts,
       puzzleID: data.puzzleID,
       noOfCorrect: data.noOfCorrect,
-      latestDate: data.latestDate
+      latestDate: data.latestDate,
+      threePuzzleCorrect: data.threePuzzleCorrect
     }
   } else {
     console.log('No such document!')
@@ -61,7 +62,8 @@ async function fetchUserRating(uid: string) {
       attempts: 0,
       puzzleID: 1,
       noOfCorrect: 0,
-      lastestDate: new Date().toLocaleDateString()
+      lastestDate: new Date().toLocaleDateString(),
+      threePuzzleCorrect: false
     }
   }
 }
@@ -74,7 +76,7 @@ export default function ChessDailyPage() {
   const [correctCount, setCorrectCount] = useState(0)
   const [arrayOfPuzzle, setArrayOfPuzzle] = useState<Puzzle[]>([])
   const [puzzle, setPuzzle] = useState<Puzzle>(ArrayofPuzzle[rating][puzzleID])
-  const [completed, setCompleted] = useState(false)
+  const [threePuzzleCorrect, setThreePuzzleCorrect] = useState(false)
   const currDate = new Date().toLocaleDateString()
 
   useEffect(() => {
@@ -84,11 +86,10 @@ export default function ChessDailyPage() {
           console.log('Fetched badge data:', data)
           setRating(data.chessRating)
           setAttempt(data.attempts)
+          setThreePuzzleCorrect(data.threePuzzleCorrect)
           setPuzzleID(data.puzzleID)
           setCorrectCount(data.noOfCorrect)
           setPuzzle(RatingPuzzle[data.chessRating][data.puzzleID - 1])
-          console.log(data.latestDate)
-          console.log(currDate)
           updateLatestDate(data.latestDate)
           console.log('user is changed')
         })
@@ -113,7 +114,7 @@ export default function ChessDailyPage() {
 
       if (user) {
         const docRef = doc(db, 'rating', user.uid)
-        await updateDoc(docRef, { attempts: 3, latestDate: currDate })
+        await updateDoc(docRef, { attempts: 3, threePuzzleCorrect: false, latestDate: currDate })
       }
     }
   }
@@ -122,6 +123,7 @@ export default function ChessDailyPage() {
     let newRating: String = rating
     let currentPuzzleID = puzzleID + 1
     let newCorrectCount = correctCount + 1
+    let completedThreePuzzle = threePuzzleCorrect
     addXp(20)
     if (newCorrectCount >= 3) {
       if (Number(rating) < 1100) {
@@ -131,7 +133,8 @@ export default function ChessDailyPage() {
           currentPuzzleID = 1
         }
       }
-      setCompleted(true)
+      completedThreePuzzle = true
+      setThreePuzzleCorrect(true)
       newCorrectCount = 0
     }
 
@@ -142,7 +145,8 @@ export default function ChessDailyPage() {
       await updateDoc(docRef, {
         puzzleID: currentPuzzleID,
         noOfCorrect: newCorrectCount,
-        chessRating: newRating
+        chessRating: newRating,
+        threePuzzleCorrect: completedThreePuzzle
       })
       console.log('doc is updated')
     }
@@ -167,7 +171,7 @@ export default function ChessDailyPage() {
   return (
     <div className='flex'>
       <ChessSidebar highlightedLink={'quiz'} />
-      {completed ? (
+      {threePuzzleCorrect ? (
         <div className='flex h-screen w-full items-center justify-center text-4xl'>
           <h1 className='py-20'>
             Congratulations! You have completed the daily quiz.

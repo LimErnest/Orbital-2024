@@ -96,7 +96,8 @@ export const AuthContextProvider = ({
         attempts: 3,
         puzzleID: 1,
         noOfCorrect: 0,
-        latestDate: new Date().toLocaleDateString()
+        latestDate: new Date().toLocaleDateString(),
+        threePuzzleCorrect: false
       })
       const xpDoc = setDoc(doc(db, 'xp', user.uid), {
         xp: 0
