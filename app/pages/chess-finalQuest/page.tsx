@@ -82,7 +82,7 @@ export default function ChessDailyPage() {
         if (newPuzzleID > 5) {
             setfinalQuestStatus(true)
             updateBadge("chessFinalQuest")
-            addXp(200)
+            addXp(250)
         }
     }
 
