@@ -14,12 +14,16 @@ import {
 } from '@/components/ui/hover-card'
 import { userAgent } from 'next/server'
 
-const ChessSidebar = ({ highlightedLink }) => {
+interface ChessSidebarProps {
+  highlightedLink: string;
+}
+
+const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
   const { user, checkGuide } = useAuth()
   const [hasCompletedGuide, setHasCompletedGuide] = useState(false)
 
   useEffect(() => {
-    checkGuide().then((completed) => {
+    checkGuide().then((completed: boolean) => {
       setHasCompletedGuide(completed)
     })
   }, [user])
@@ -52,9 +56,8 @@ const ChessSidebar = ({ highlightedLink }) => {
             className={cn(
               buttonVariants({
                 variant: 'ghost',
-                className: `flex justify-start rounded-sm hover:bg-blue-300 ${
-                  highlightedLink === 'guide' ? 'bg-blue-300' : ''
-                }`
+                className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'guide' ? 'bg-blue-300' : ''
+                  }`
               })
             )}
           >
@@ -73,9 +76,8 @@ const ChessSidebar = ({ highlightedLink }) => {
             className={cn(
               buttonVariants({
                 variant: 'ghost',
-                className: `flex justify-start rounded-sm hover:bg-blue-300 ${
-                  highlightedLink === 'quiz' ? 'bg-blue-300' : ''
-                }`
+                className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'quiz' ? 'bg-blue-300' : ''
+                  }`
               })
             )}
           >
@@ -94,9 +96,8 @@ const ChessSidebar = ({ highlightedLink }) => {
             className={cn(
               buttonVariants({
                 variant: 'ghost',
-                className: `flex justify-start rounded-sm hover:bg-blue-300 ${
-                  highlightedLink === 'leaderboard' ? 'bg-blue-300' : ''
-                }`
+                className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'leaderboard' ? 'bg-blue-300' : ''
+                  }`
               })
             )}
           >
@@ -116,9 +117,8 @@ const ChessSidebar = ({ highlightedLink }) => {
               className={cn(
                 buttonVariants({
                   variant: 'ghost',
-                  className: `flex justify-start rounded-sm hover:bg-blue-300 ${
-                    highlightedLink === 'final' ? 'bg-blue-300' : ''
-                  }`
+                  className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'final' ? 'bg-blue-300' : ''
+                    }`
                 })
               )}
             >
@@ -153,7 +153,7 @@ const ChessSidebar = ({ highlightedLink }) => {
                   Final Quest
                 </div>
               </HoverCardTrigger>
-              <HoverCardContent className='ml-4 w-24 text-nowrap p-2' style={{ width: 'max-content', maxWidth: '100%' }}>
+              <HoverCardContent className='ml-4 w-24 p-2 text-nowrap text-sm' style={{ width: 'max-content', maxWidth: '100%' }}>
                 Please complete the guide first
               </HoverCardContent>
             </HoverCard>
