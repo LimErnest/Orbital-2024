@@ -1,19 +1,17 @@
 import { Metadata } from 'next'
-import { ChessGuide } from '@/components/ui/chessguide'
-import { ChessSidebar } from '@/components/ui/chess-sidebar'
+import { PokerSidebar } from '@/components/ui/poker-components/poker-sidebar'
 
 export const metadata: Metadata = {
   title: 'Guidance',
   description: 'Authentication forms built using the components.'
 }
 
-export default function GuidePage() {
+export default function pokerDaily() {
   return (
     <>
       <div className='flex'>
-        <ChessSidebar highlightedLink = {'guide'} />
+        <PokerSidebar highlightedLink = {'quiz'} />
         <div className='h-screen w-full overflow-hidden p-20'>
-          <ChessGuide />
         </div>
       </div>
     </>
