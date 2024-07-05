@@ -15,7 +15,7 @@ import {
   Chapter10,
   Chapter11,
   Chapter12
-} from '@/components/ui/chess-chapters'
+} from '@/components/ui/poker-components/poker-chapters'
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
@@ -23,21 +23,18 @@ import { useAuth } from '@/app/context/AuthContext'
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
+  AlertDialogTitle
 } from '@/components/ui/alert-dialog'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 
-const ChessGuide = () => {
+const PokerGuide = () => {
   const { updateChessChapter, addXp, updateBadge, user } = useAuth()
   const [lastCompletedChapter, setLastCompletedChapter] = useState(1)
   const [currentTab, setCurrentTab] = useState('chapter1')
-  const [badge, setBadge] = useState<string>('')
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   useEffect(() => {
@@ -371,4 +368,4 @@ const ChessGuide = () => {
   )
 }
 
-export { ChessGuide }
+export { PokerGuide }
