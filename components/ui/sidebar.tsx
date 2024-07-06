@@ -70,33 +70,54 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
         >
           Guidance
         </Link>
-
-        <Dialog>
-          <DialogTrigger>
-            <div className='flex flex-row items-center px-4 pb-3'>
-              <Avatar className='h-[3rem] w-[3rem]'>
-                <AvatarImage src={profilePicture} alt='User' />
-                <AvatarFallback></AvatarFallback>
-              </Avatar>
-              <span className='overflow-wrap break-word text-rg ml-4 hyphens-auto text-black'>
-                {user.username}
-              </span>
-            </div>
-            <XpBar />
-          </DialogTrigger>
-          <DialogContent className='max-w-screen-md w-full h-auto md:h-4/5 p-6 overflow-y-auto'>
-            <DialogHeader>
-              <DialogTitle className='text-3xl'>Badge Inventory</DialogTitle>
-              <DialogDescription>
-                  <Badges />
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
+        <div className='flex flex-row items-center px-4 pb-3'>
+          <Avatar className='h-[3rem] w-[3rem]'>
+            <AvatarImage src={profilePicture} alt='User' />
+            <AvatarFallback></AvatarFallback>
+          </Avatar>
+          <span className='overflow-wrap break-word text-rg ml-4 hyphens-auto text-black'>
+            {user.username}
+          </span>
+        </div>
+        <XpBar />
       </div>
       {children}
       <div className='border-t border-gray-300 px-2 py-2'>
+        <div>
+          <Dialog>
+            <DialogTrigger className='w-full'>
+              <Button
+                className={cn(
+                  buttonVariants({
+                    variant: 'ghost',
+                    className:
+                      'flex w-full justify-start rounded-sm bg-transparent text-black shadow-none hover:bg-blue-300'
+                  })
+                )}
+              >
+                <Image
+                  src='/img/badgeinventory.png'
+                  alt='Badge'
+                  width={20}
+                  height={5}
+                  className='mr-2'
+                />
+                Badge Inventory
+              </Button>
+            </DialogTrigger>
+            <DialogContent className='max-w-screen-md w-full h-auto md:h-4/5 p-6 overflow-y-auto'>
+              <DialogHeader>
+                <DialogTitle className='text-3xl'>Badge Inventory</DialogTitle>
+                <DialogDescription>
+                  <Badges />
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        </div>
+
         <Settings />
+
         <Button
           onClick={handleLogout}
           className={cn(
@@ -109,7 +130,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
         >
           <Image
             src='/img/power_icon.jpg'
-            alt='Settings'
+            alt='Logout'
             width={20}
             height={5}
             className='mr-2'
