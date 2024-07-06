@@ -104,7 +104,7 @@ export default function LandingPage() {
 
             <div>
               <Link
-                href='/pages/leaderboard'
+                href='/pages/coming-soon'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
@@ -114,7 +114,7 @@ export default function LandingPage() {
                 )}
               >
                 <Image
-                  src='/img/pawn_icon.jpg'
+                  src='/img/leaderboard.png'
                   alt='Poker'
                   width={30}
                   height={10}
