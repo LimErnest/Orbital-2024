@@ -24,6 +24,8 @@ interface UserType {
   xp: number | null
 }
 
+type Rating = '400' | '500' | '600' | '700' | '800' | '900' | '1000' | '1100'
+
 const AuthContext = createContext({})
 
 export const useAuth = () => useContext<any>(AuthContext)
@@ -105,7 +107,11 @@ export const AuthContextProvider = ({
       const chessGuideDoc = setDoc(doc(db, 'chessguide', user.uid), {
         lastChapter: 1
       })
-      await Promise.all([badgesDoc, ratingDoc, xpDoc, chessGuideDoc])
+      const finalQuestDoc = setDoc(doc(db, 'finalQuest', user.uid), {
+        finalQuestPuzzleID: 1,
+        isCompleted: false
+      })
+      await Promise.all([badgesDoc, ratingDoc, xpDoc, chessGuideDoc, finalQuestDoc])
     }
   }
 
@@ -197,9 +203,7 @@ export const AuthContextProvider = ({
   const updateBadge = async (updatedBadge: string) => {
     if (currentUser) {
       const docRef = doc(db, 'badges', currentUser.uid)
-      await updateDoc(docRef, {
-        [updatedBadge]: true
-      })
+      await updateDoc(docRef, { [updatedBadge]: true })
     }
   }
 
@@ -214,6 +218,107 @@ export const AuthContextProvider = ({
     }
   }
 
+  const updateAttempt = async (newAttempt: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      await updateDoc(docRef, { attempts: newAttempt })
+    }
+  }
+
+  const updateUserTries = async (date: string) => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      await updateDoc(docRef, { attempts: 3, threePuzzleCorrect: false, latestDate: date })
+    }
+  }
+
+  const updatePuzzle = async (newPuzzleID: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      await updateDoc(docRef, { puzzleID: newPuzzleID })
+    }
+  }
+
+  const updateRating = async (newRating: Rating) => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      await updateDoc(docRef, { chessRating: newRating })
+    }
+  }
+
+  const updateCorrectCount = async (newCorrectCount: number, completedThreePuzzle: boolean) => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      await updateDoc(docRef, { noOfCorrect: newCorrectCount, threePuzzleCorrect: completedThreePuzzle })
+    }
+  }
+
+  const fetchUserRating = async () => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      const docSnap = await getDoc(docRef)
+      const data = docSnap.data()
+
+      if (data) {
+        return {
+          chessRating: data.chessRating,
+          attempts: data.attempts,
+          puzzleID: data.puzzleID,
+          noOfCorrect: data.noOfCorrect,
+          latestDate: data.latestDate,
+          threePuzzleCorrect: data.threePuzzleCorrect
+        }
+      } else {
+        console.log('No such document!')
+        return {
+          chessRating: '400',
+          attempts: 0,
+          puzzleID: 1,
+          noOfCorrect: 0,
+          lastestDate: new Date().toLocaleDateString(),
+          threePuzzleCorrect: false
+        }
+      }
+    }
+  }
+
+  const updateFinalPuzzle = async (newPuzzleID: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'finalQuest', currentUser.uid)
+      await updateDoc(docRef, { finalQuestPuzzleID: newPuzzleID })
+    }
+  }
+
+  const updateFinalQuestStatus = async () => {
+    if (currentUser) {
+      const docRef = doc(db, 'finalQuest', currentUser.uid)
+      await updateDoc(docRef, { isCompleted: true })
+    }
+  }
+
+  const fetchFinalQuest = async (uid: string) => {
+    const docRef = doc(db, 'finalQuest', uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+
+      const data = docSnap.data();
+      console.log('exists', data)
+      return {
+        finalQuestPuzzleID: data.finalQuestPuzzleID,
+        isCompleted: data.isCompleted
+      }
+    } else {
+      console.log("No such document!")
+      return {
+        finalQuestPuzzleID: 1,
+        isCompleted: false
+      }
+    }
+
+  }
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -227,7 +332,16 @@ export const AuthContextProvider = ({
         addXp,
         updateChessChapter,
         updateBadge,
-        checkGuide
+        checkGuide,
+        updateAttempt,
+        updateUserTries,
+        updatePuzzle,
+        updateRating,
+        updateCorrectCount,
+        fetchUserRating,
+        updateFinalPuzzle,
+        updateFinalQuestStatus,
+        fetchFinalQuest
       }}
     >
       {children}

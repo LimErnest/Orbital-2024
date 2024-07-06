@@ -91,26 +91,6 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
             Daily Quiz
           </Link>
 
-          <Link
-            href='/pages/coming-soon'
-            className={cn(
-              buttonVariants({
-                variant: 'ghost',
-                className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'leaderboard' ? 'bg-blue-300' : ''
-                  }`
-              })
-            )}
-          >
-            <Image
-              src='/img/pawn_icon.jpg'
-              alt='Poker'
-              width={30}
-              height={10}
-              className='mr-2'
-            />
-            Leaderboard
-          </Link>
-
           {hasCompletedGuide || highlightedLink == 'final' ? (
             <Link
               href='/pages/chess-finalQuest'

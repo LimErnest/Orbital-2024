@@ -16,8 +16,8 @@ export default function LandingPage() {
   return (
     <>
       <div className='flex flex-col'>
-        <Sidebar className= 'flex flex-col bg-gray-100'>
-          <SidebarSection className = 'py-2 px-2'>
+        <Sidebar className='flex flex-col bg-gray-100'>
+          <SidebarSection className='py-2 px-2'>
             <div>
               <Link
                 href='/pages/dashboard'
@@ -38,7 +38,7 @@ export default function LandingPage() {
                 Home
               </Link>
             </div>
-            
+
             <div>
               <Link
                 href='/pages/chess-guide'
@@ -59,7 +59,7 @@ export default function LandingPage() {
                 Chess
               </Link>
             </div>
-            
+
             <div>
               <Link
                 href='/pages/coming-soon'
@@ -80,7 +80,7 @@ export default function LandingPage() {
                 Mahjong
               </Link>
             </div>
-            
+
             <div>
               <Link
                 href='/pages/coming-soon'
@@ -101,6 +101,29 @@ export default function LandingPage() {
                 Poker
               </Link>
             </div>
+
+            <div>
+              <Link
+                href='/pages/leaderboard'
+                className={cn(
+                  buttonVariants({
+                    variant: 'ghost',
+                    className: `flex justify-start rounded-sm hover:bg-blue-300 
+                      }`
+                  })
+                )}
+              >
+                <Image
+                  src='/img/pawn_icon.jpg'
+                  alt='Poker'
+                  width={30}
+                  height={10}
+                  className='mr-2'
+                />
+                Leaderboard
+              </Link>
+            </div>
+
           </SidebarSection>
         </Sidebar>
       </div>
