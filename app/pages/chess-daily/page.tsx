@@ -20,6 +20,7 @@ import { db } from '../../../firebase/firebase'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { useAuth } from '../../context/AuthContext'
 import { ChessSidebar } from '@/components/ui/chess-sidebar'
+import { HowToPlay } from '@/components/ui/howToPlay'
 
 export interface Puzzle {
   PuzzleId: number
@@ -194,6 +195,9 @@ export default function ChessDailyQuizPage() {
                 </CardHeader>
                 <CardContent>
                   <div className='flex flex-row justify-center'>
+                    
+                    <HowToPlay />
+
                     <div className=''>
                       <ChessPuzzle.Reset
                         asChild
@@ -215,7 +219,7 @@ export default function ChessDailyQuizPage() {
                       </ChessPuzzle.Reset>
                     </div>
 
-                    <div className='px-4'>
+                    <div className=''>
                       <ChessPuzzle.Reset
                         asChild
                         puzzle={{

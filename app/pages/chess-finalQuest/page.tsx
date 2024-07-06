@@ -23,6 +23,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { ChessSidebar } from '@/components/ui/chess-sidebar'
 import { Arya } from 'next/font/google'
+import { HowToPlay } from '@/components/ui/howToPlay'
 
 export interface Puzzle {
     PuzzleId: number;
@@ -140,6 +141,9 @@ export default function ChessFinalQuestPage() {
                                 </CardHeader>
                                 <CardContent>
                                     <div className='flex flex-row justify-center'>
+
+                                        <HowToPlay />
+
                                         <div className=''>
                                             <ChessPuzzle.Reset
                                                 asChild
@@ -161,7 +165,7 @@ export default function ChessFinalQuestPage() {
                                             </ChessPuzzle.Reset>
                                         </div>
 
-                                        <div className='px-4'>
+                                        <div className=''>
                                             <ChessPuzzle.Reset
                                                 asChild
                                                 puzzle={{
