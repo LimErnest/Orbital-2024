@@ -9,10 +9,21 @@ import {
   updateProfile,
   updatePassword,
   EmailAuthProvider,
-  reauthenticateWithCredential
+  reauthenticateWithCredential,
+  getAuth
 } from 'firebase/auth'
 import { auth, db } from '../../firebase/firebase'
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs
+} from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 interface UserType {
@@ -22,6 +33,11 @@ interface UserType {
   session: true | false | null
   profilePicture: string | null
   xp: number | null
+}
+
+interface UserXP {
+  xp: number
+  username: string
 }
 
 type Rating = '400' | '500' | '600' | '700' | '800' | '900' | '1000' | '1100'
@@ -49,6 +65,10 @@ export const AuthContextProvider = ({
         const docRef = doc(db, 'xp', user.uid)
         const docSnap = await getDoc(docRef)
         const data = docSnap.data()
+        updateDoc(docRef, {
+          username: user.displayName
+        })
+
         setUser({
           email: user.email,
           uid: user.uid,
@@ -102,7 +122,8 @@ export const AuthContextProvider = ({
         threePuzzleCorrect: false
       })
       const xpDoc = setDoc(doc(db, 'xp', user.uid), {
-        xp: 0
+        xp: 0,
+        username: ""
       })
       const chessGuideDoc = setDoc(doc(db, 'chessguide', user.uid), {
         lastChapter: 1
@@ -116,10 +137,15 @@ export const AuthContextProvider = ({
   }
 
   const updateUsername = async (username: string) => {
+
     if (currentUser) {
       await updateProfile(currentUser, { displayName: username }).catch(err =>
         console.log(err)
       )
+      const docRef = doc(db, 'xp', currentUser.uid)
+      updateDoc(docRef, {
+        username: username
+      })
       setUser({
         email: user.email,
         uid: user.uid,
@@ -170,7 +196,7 @@ export const AuthContextProvider = ({
       const docSnap = await getDoc(docRef)
       const data = docSnap.data()
       const newXP = data?.xp + xp
-      await setDoc(docRef, { xp: newXP })
+      await updateDoc(docRef, { xp: newXP })
       setUser({
         email: user.email,
         uid: user.uid,
@@ -318,6 +344,19 @@ export const AuthContextProvider = ({
 
   }
 
+  const queryCollection = async () => {
+    const xpRef = collection(db, 'xp')
+    const q = await query(xpRef, orderBy("xp", "desc"), limit(20));
+    const users = await getDocs(q)
+    const arrayOfUsers: UserXP[] = []
+    users.forEach(user => {
+      const player = user.data()
+      arrayOfUsers.push({ xp: player.xp, username: player.username })
+      console.log(player.xp, player.username)
+    })
+    return arrayOfUsers
+  }
+
 
   return (
     <AuthContext.Provider
@@ -341,7 +380,8 @@ export const AuthContextProvider = ({
         fetchUserRating,
         updateFinalPuzzle,
         updateFinalQuestStatus,
-        fetchFinalQuest
+        fetchFinalQuest,
+        queryCollection
       }}
     >
       {children}
