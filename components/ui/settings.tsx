@@ -172,8 +172,9 @@ export function Settings() {
               src='/img/settings_icon.jpg'
               alt='Settings'
               width={20}
-              height={5}
+              height={20}
               className='mr-2'
+              style={{ height: 'auto' }}
             />
             Settings
           </Button>

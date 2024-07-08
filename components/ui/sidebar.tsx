@@ -86,24 +86,17 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
         <div>
           <Dialog>
             <DialogTrigger className='w-full'>
-              <Button
-                className={cn(
-                  buttonVariants({
-                    variant: 'ghost',
-                    className:
-                      'flex w-full justify-start rounded-sm bg-transparent text-black shadow-none hover:bg-blue-300'
-                  })
-                )}
-              >
+              <div className='px-4 py-2 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'>
                 <Image
                   src='/img/badgeinventory.png'
                   alt='Badge'
                   width={20}
-                  height={5}
+                  height={20}
                   className='mr-2'
+                  style={{ height: 'auto' }}
                 />
                 Badge Inventory
-              </Button>
+              </div>
             </DialogTrigger>
             <DialogContent className='max-w-screen-md w-full h-auto md:h-4/5 p-6 overflow-y-auto'>
               <DialogHeader>
@@ -132,8 +125,9 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
             src='/img/power_icon.jpg'
             alt='Logout'
             width={20}
-            height={5}
+            height={20}
             className='mr-2'
+            style={{ height: 'auto' }}
           />
           Log Out
         </Button>
