@@ -45,8 +45,9 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
               src='/img/home_icon.jpg'
               alt='Home'
               width={30}
-              height={10}
+              height={30}
               className='mr-2'
+              style={{ height: 'auto' }}
             />
             Home
           </Link>
@@ -65,8 +66,9 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
               src='/img/pawn_icon.jpg'
               alt='Chess'
               width={30}
-              height={10}
+              height={30}
               className='mr-2'
+              style={{ height: 'auto' }}
             />
             Guide
           </Link>
@@ -85,8 +87,9 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
               src='/img/pawn_icon.jpg'
               alt='Chess-DailyQuiz'
               width={30}
-              height={10}
+              height={30}
               className='mr-2'
+              style={{ height: 'auto' }}
             />
             Daily Quiz
           </Link>
@@ -106,8 +109,9 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
                 src='/img/pawn_icon.jpg'
                 alt='Poker'
                 width={30}
-                height={10}
+                height={30}
                 className='mr-2'
+                style={{ height: 'auto' }}
               />
               Final Quest
             </Link>
@@ -127,8 +131,9 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
                     src='/img/pawn_icon.jpg'
                     alt='Poker'
                     width={30}
-                    height={10}
+                    height={30}
                     className='mr-2'
+                    style={{ height: 'auto' }}
                   />
                   Final Quest
                 </div>
