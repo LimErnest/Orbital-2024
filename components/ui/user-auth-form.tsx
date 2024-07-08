@@ -70,7 +70,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   function checkPasswordAndUsername() {
     let error = ''
     const specialCharRegex = /[!@#$%^&*(),.?":{}|<>_\-+=\[\]\\\/]/
-    if (username.length < 1) {
+    if (username.length < 1 || username.length > 8) {
       error = 'username'
     } else if (password !== confirmPassword) {
       error = 'mismatch'
@@ -190,7 +190,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             </AlertDialogTitle>
             <AlertDialogDescription>
               {errorType === 'username' &&
-                'Username must be at least 1 character long.'}
+                'Username must be 1 to 8 characters long.'}
               {errorType === 'mismatch' &&
                 'Please ensure that the passwords you entered match before continuing.'}
               {errorType === 'length' &&
