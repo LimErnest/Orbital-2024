@@ -4,8 +4,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Sidebar, SidebarSection } from '@/components/ui/sidebar'
 import { buttonVariants } from '@/components/ui/button'
-import { CheckUser } from '@/components/ui/checkuser'
-import { TestXp } from '@/components/ui/xptester'
+
 
 export const metadata: Metadata = {
   title: 'Guidance',
@@ -104,7 +103,7 @@ export default function LandingPage() {
 
             <div>
               <Link
-                href='/pages/coming-soon'
+                href='/pages/leaderboard'
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
