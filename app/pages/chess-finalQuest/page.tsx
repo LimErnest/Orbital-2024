@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChessPuzzle } from '@react-chess-tools/react-chess-puzzle'
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Sidebar, SidebarSection } from '@/components/ui/sidebar'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -18,10 +18,12 @@ import {
 } from "@/components/ui/card"
 import ArrayofPuzzle from '@/daily_puzzles.json'
 import { db } from '../../../firebase/firebase'
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc } from 'firebase/firestore'
 import { useAuth } from '../../context/AuthContext'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { ChessSidebar } from '@/components/ui/chess-sidebar'
+import { Arya } from 'next/font/google'
+import { HowToPlay } from '@/components/ui/howToPlay'
 
 export interface Puzzle {
     PuzzleId: number;
@@ -29,61 +31,75 @@ export interface Puzzle {
     Moves: string[];
 }
 
-interface ArrayPuzzles {
-    [key: string]: Puzzle[]; // Keyed by string (chessRating), value is an array of Puzzle
+interface UserFinalQuestData {
+    finalQuestPuzzleID: number,
+    isCompleted: boolean
 }
 
-async function fetchFinalQuestBadge(uid: string) {
-    const docRef = doc(db, "badges", uid);
-    const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-        const data = docSnap.data();
-        return {
-            chessFinalQuest: data.chessFinalQuest
-        };
-    } else {
-        console.log("No such document!");
-        return {
-            chessFinalQuest: false
-        };
-    }
-}
-
-export default function ChessDailyPage() {
-
+export default function ChessFinalQuestPage() {
     const arrayOfPuzzle = ArrayofPuzzle["1100"]
-    const { user, updateBadge, addXp } = useAuth()
+    const { user,
+        updateBadge,
+        addXp,
+        updateFinalPuzzle,
+        updateFinalQuestStatus,
+        fetchFinalQuest
+    } = useAuth()
     const [puzzleID, setPuzzleID] = useState(1)
     const [puzzle, setPuzzle] = useState<Puzzle>(arrayOfPuzzle[puzzleID + 94])
     const [finalQuestStatus, setfinalQuestStatus] = useState(false)
 
-    useEffect(() => {
-        if (user) {
-            fetchFinalQuestBadge(user.uid)
-                .then(data => {
-                    console.log("Fetched badge data:", data);
-                    setfinalQuestStatus(data.chessFinalQuest)
-                })
-                .catch(error => console.error("Error fetching user badge:", error));
-        }
-    }, [user])
+    const effectRan = useRef(false)
 
-    const resetQuest = () => {
-        setPuzzleID(1)
-        setPuzzle(firstPuzzle)
+    useEffect(() => {
+        console.log('effect is called')
+        if (effectRan.current === true) {
+            if (user) {
+                console.log(user.uid, user)
+                fetchFinalQuest(user.uid)
+                    .then((data: UserFinalQuestData) => {
+                        console.log(data)
+                        updateUserFinalQuest(data)
+                    })
+                console.log('user is changed')
+            }
+        }
+        return () => {
+            console.log('unmounted')
+            effectRan.current = true
+        }
+
+    }, [])
+
+    const updateUserFinalQuest = async (data: UserFinalQuestData) => {
+        if (!data) {
+            console.error("Data is undefined or null");
+            return;
+        } else {
+            console.log("Fetched finalQuest:", data);
+            setPuzzleID(data.finalQuestPuzzleID)
+            setfinalQuestStatus(data.isCompleted)
+            setPuzzle(arrayOfPuzzle[data.finalQuestPuzzleID + 94])
+        }
+
     }
 
     const newPuzzleID = puzzleID + 1
     const nextPuzzle = arrayOfPuzzle[newPuzzleID + 94]
-    const firstPuzzle = arrayOfPuzzle[95]
 
-    const updateFinalQuestStatus = async () => {
+    const setNewPuzzle = async () => {
         if (newPuzzleID > 5) {
             setfinalQuestStatus(true)
+            updateFinalQuestStatus()
             updateBadge("chessFinalQuest")
             addXp(250)
         }
+
+        let currentFinalPuzzleID = puzzleID + 1
+
+        setPuzzleID(currentFinalPuzzleID)
+        updateFinalPuzzle(currentFinalPuzzleID)
     }
 
     return (
@@ -100,11 +116,14 @@ export default function ChessDailyPage() {
                     </div>
                 </div>
             ) : (
-                <ChessPuzzle.Root puzzle={{
-                    fen: puzzle.FEN,
-                    moves: puzzle.Moves,
-                    makeFirstMove: true
-                }}>
+                <ChessPuzzle.Root
+                    puzzle={{
+                        fen: puzzle.FEN,
+                        moves: puzzle.Moves,
+                        makeFirstMove: true
+                    }}
+                >
+
                     <div className='flex flex-row h-screen w-full overflow-hidden p-10'>
                         <div className='w-1/2'>
                             <ChessPuzzle.Board />
@@ -122,16 +141,37 @@ export default function ChessDailyPage() {
                                 </CardHeader>
                                 <CardContent>
                                     <div className='flex flex-row justify-center'>
-                                        <div className='px-4'>
+
+                                        <HowToPlay />
+
+                                        <div className=''>
                                             <ChessPuzzle.Reset
                                                 asChild
                                                 puzzle={{
-                                                    fen: firstPuzzle.FEN,
-                                                    moves: firstPuzzle.Moves,
+                                                    fen: puzzle.FEN,
+                                                    moves: puzzle.Moves,
                                                     makeFirstMove: true
                                                 }}
-                                                onReset={() => {
-                                                    resetQuest()
+                                                showOn={['in-progress']}
+                                            >
+                                                <Button
+                                                    className={cn(
+                                                        buttonVariants({ size: 'xl' }),
+                                                        'px-8 py-4 text-xl'
+                                                    )}
+                                                >
+                                                    Restart
+                                                </Button>
+                                            </ChessPuzzle.Reset>
+                                        </div>
+
+                                        <div className=''>
+                                            <ChessPuzzle.Reset
+                                                asChild
+                                                puzzle={{
+                                                    fen: puzzle.FEN,
+                                                    moves: puzzle.Moves,
+                                                    makeFirstMove: true
                                                 }}
                                                 showOn={
                                                     ["failed"]
@@ -149,10 +189,8 @@ export default function ChessDailyPage() {
                                             <ChessPuzzle.Reset
                                                 asChild
                                                 onReset={() => {
-                                                    setPuzzleID(newPuzzleID)
-                                                    updateFinalQuestStatus()
                                                     setPuzzle(nextPuzzle)
-
+                                                    setNewPuzzle()
                                                 }}
                                                 puzzle={{
                                                     fen: nextPuzzle?.FEN,
