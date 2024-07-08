@@ -21,7 +21,7 @@ import {
 import { useAuth } from '../../app/context/AuthContext'
 import { useEffect } from 'react'
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
@@ -46,9 +46,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         if (error.code == 'auth/email-already-in-use') {
           setErrorType('email')
           setIsInvalidDialogOpen(true)
-        } else if (error.code == 'auth/invalid-email') {
-          setErrorType('invalidEmail')
-          setIsInvalidDialogOpen(true)
         }
         console.log(error)
         setIsLoading(false)
@@ -70,7 +67,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   function checkPasswordAndUsername() {
     let error = ''
     const specialCharRegex = /[!@#$%^&*(),.?":{}|<>_\-+=\[\]\\\/]/
-    if (username.length < 1 || username.length > 8) {
+    if (username.length < 1) {
       error = 'username'
     } else if (password !== confirmPassword) {
       error = 'mismatch'
@@ -180,17 +177,15 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <AlertDialogHeader>
             <AlertDialogTitle>
               {errorType === 'email' && 'Email does not meet requirements'}
-              {errorType === 'invalidEmail' && 'Email is invalid'}
               {errorType === 'username' &&
                 'Username does not meet requirements'}
               {errorType !== 'email' &&
                 errorType !== 'username' &&
-                errorType !== 'invalidEmail' &&
                 'Password does not meet requirements'}
             </AlertDialogTitle>
             <AlertDialogDescription>
               {errorType === 'username' &&
-                'Username must be 1 to 8 characters long.'}
+                'Username must be at least 1 character long.'}
               {errorType === 'mismatch' &&
                 'Please ensure that the passwords you entered match before continuing.'}
               {errorType === 'length' &&
@@ -203,8 +198,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 'Password must include at least 1 number and 1 special character.'}
               {errorType === 'email' &&
                 'Email already exists. Please sign in or use a different email.'}
-              {errorType === 'invalidEmail' &&
-                'Email is invalid. Please use a valid email.'}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
