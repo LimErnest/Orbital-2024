@@ -3,186 +3,142 @@
 import * as React from 'react'
 import { Chessboard } from 'react-chessboard'
 import Image from 'next/image'
+import {
+  createPokerHand,
+  getDescription,
+  handToString,
+  getEvaluatedScore,
+  getRank,
+  updateHand,
+  compareTo
+} from 'poker-hand-utils'
+import { Card, CardSection } from '@/components/ui/poker-components/card'
 
 const Chapter1 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>The Game of Chess</StyledH1>
+      <StyledH1>Hands in Poker</StyledH1>
       <StyledLi>
-        Chess is a game of strategy and tactics for two players, played on an
-        8x8 chequered board. Although chess sets come in many varieties and
-        colours, the traditional colours are white and black, and that is how we
-        will be referring to the two players on this website. The aim of the
-        game is to trap your opponent's king, which is called Checkmate. A game
-        can also be won if your opponent gives up (in chess, we call this
-        'resigning'), and there are a variety of ways a game can end in a draw,
-        in which case neither player wins. We'll look at these in more detail
-        later on.
+        No matter what type of poker you play, the hands will always be the
+        same. To start familiarizing yourself with the different hands, print
+        out a "cheat sheet" and study it. Then, memorize the different hands so
+        you can easily recognize them. Here are the winning poker hands, from
+        highest to lowest:
       </StyledLi>
-      <StyledH1>The Chess Pieces</StyledH1>
+      <StyledH1>Royal Flush</StyledH1>
       <StyledLi>
-        Each player has an army consisting of a king, a queen, two rooks, two
-        bishops, and two knights, and eight pawns.
-      </StyledLi>
-      <StyledLi>
-        Each turn, you must move one piece to a new square. The player with the
-        white pieces goes first, and after that the players take it in turns to
-        move a piece. There are no dice in chess - every piece has its own way
-        of moving, and it's up to you which one you want to move. Each piece
-        also has the ability to capture, or 'take', an enemy piece. To do this,
-        you simply move your piece or pawn onto the square occupied by the enemy
-        piece, and remove it from the board.
-      </StyledLi>
-      <StyledH1>Setting up the board</StyledH1>
-      <StyledLi>
-        The board must always be placed so that each player has a light coloured
-        square in their bottom right hand corner. Placing the board the wrong
-        way round is a very common mistake - even TV shows get it wrong
-        sometimes. Once you have the board the right way round, you're ready to
-        start adding the pieces. Each player's pieces start on the first rank
-        (in chess, we call horizontal rows 'ranks') on that player's side of the
-        board.
-      </StyledLi>
-      <StyledH2>Rooks</StyledH2>
-      <StyledLi>
-        First, we put the rooks in the four corners of the board, like so:
+        The highest-ranking hand is a royal flush (the royal straight flush).
+        This hand includes a 10, Jack, Queen, King, and Ace of the same suit,
+        one kind (all clubs, diamonds, hearts or spades). It can only be tied
+        but not beaten by the royal flush of another suit.
       </StyledLi>
       <Board>
-        <Chessboard
-          position='r6r/8/8/8/8/8/8/R6R'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
+        <Card community={false} cards={'AS KS QS JS TS'} />
       </Board>
-      <StyledH2>Bishops and Knights</StyledH2>
+      <StyledH1>Straight Flush</StyledH1>
       <StyledLi>
-        Next, we place the knights next to the rooks, and the bishops next to
-        the knights:
+        A straight flush is made up of 5 consecutive cards of the same suit.
       </StyledLi>
       <Board>
-        <Chessboard
-          position='rnb2bnr/8/8/8/8/8/8/RNB2BNR'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
+        <Card community={false} cards={'9D 8D 7D 6D 5D'} />
       </Board>
-      <StyledH2>King and Queen</StyledH2>
+      <StyledH1>Four of a kind</StyledH1>
       <StyledLi>
-        The king and queen go on the two central squares. There's an easy way to
-        remember which way round they go - the queen always starts on a square
-        of her own colour, so the white queen starts on the light central
-        square, and the black queen starts on the dark central square:
+        Four of a kind means you have 4 cards of the same rank (but different
+        suits, of course) and a fifth card of any rank (such as 4 aces and a 9).
+        If you have 4 aces, then no one can have any hand with an ace, so no
+        royal flush is available.
       </StyledLi>
       <Board>
-        <Chessboard
-          position='rnbqkbnr/8/8/8/8/8/8/RNBQKBNR'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
+        <Card community={false} cards={'8D 8H 8C 8S JD'} />
       </Board>
-      <StyledH2>Pawns</StyledH2>
+      <StyledH1>Full house</StyledH1>
       <StyledLi>
-        Finally, place all your pawns on the second rank, so that all the other
-        pieces have a pawn in front of them:
+        A full house contains 3 matching cards of 1 rank and 2 matching cards of
+        another rank.
       </StyledLi>
       <Board>
-        <Chessboard
-          position='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
+        <Card community={false} cards={'7D 7H 7C 3H 3D'} />
       </Board>
+      <StyledH1>Flush</StyledH1>
       <StyledLi>
-        And that's it, all ready to start a new game! But first, you'll need to
-        know how the pieces move, which is covered in the next six parts of the
-        tutorial.
+        A flush contains any 5 cards of the same suit. These skip around in rank
+        or sequence, but are from the same suit.
       </StyledLi>
+      <Board>
+        <Card community={false} cards={'AH JH 7H 6H 2H'} />
+      </Board>
+      <StyledH1>Straight</StyledH1>
+      <StyledLi>
+        A straight contains 5 cards of consecutive rank but from more than one
+        suit.
+      </StyledLi>
+      <Board>
+        <Card community={false} cards={'TC 9C 8C 7C 6C'} />
+      </Board>
+      <StyledH1>Three of a kind</StyledH1>
+      <StyledLi>
+        Three of a kind means you have three cards of the same rank, plus two
+        unmatched cards.
+      </StyledLi>
+      <Board>
+        <Card community={false} cards={'7D 7C 7S AS JS'} />
+      </Board>
+      <StyledH1>Two pairs</StyledH1>
+      <StyledLi>
+        Two pairs is made up of two cards of one rank, plus two cards of another
+        rank (different from the first pair), plus one unmatched card.
+      </StyledLi>
+      <Board>
+        <Card community={false} cards={'JH JD 5S 5S 2S'} />
+      </Board>
+      <StyledH1>Pair</StyledH1>
+      <StyledLi>
+        Pair means you have 2 cards of the same rank, plus 3 other unmatched
+        cards.
+      </StyledLi>
+      <Board>
+        <Card community={false} cards={'AS AD 8S 4D 3H'} />
+      </Board>
+      <StyledH1>High card</StyledH1>
+      <StyledLi>
+        High card is the lowest-ranking (called a "nothing") hand, when no two
+        cards have the same rank, the five cards are not consecutive, and they
+        are not all from the same suit.
+      </StyledLi>
+      <Board>
+        <Card community={false} cards={'KD QC 7H 5S 2H'} />
+      </Board>
+      <StyledH1>Conclusion</StyledH1>
+      <StyledLi>
+        Keep in mind that if two people face off with the same type of hand, the
+        hand with the higher-ranking cards wins. If the hands have the exact
+        same ranks of cards (suit does not matter), it is a tie and the prize,
+        if any, is split evenly.
+      </StyledLi>
+      <StyledLi>
+        For easy reference, here is a list of the poker hands in order of
+        strength:
+      </StyledLi>
+      <ul className='list-disc pl-10'>
+        <StyledLi>Royal flush</StyledLi>
+        <StyledLi>Straight flush</StyledLi>
+        <StyledLi>Four of a kind</StyledLi>
+        <StyledLi>Full house</StyledLi>
+        <StyledLi>Flush</StyledLi>
+        <StyledLi>Straight</StyledLi>
+        <StyledLi>Three of a kind</StyledLi>
+        <StyledLi>Two pairs</StyledLi>
+        <StyledLi>Pair</StyledLi>
+        <StyledLi>High card</StyledLi>
+      </ul>
     </div>
   )
 }
 
 const Chapter2 = () => {
   return (
-    <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>Pawns</StyledH1>
-      <StyledLi>
-        The pawn appears, at first glance, to be the weakest and least important
-        member of the chess army. However, looks can be deceiving, and the
-        humble pawn can be very important, as we will discover in later
-        tutorials. Each player starts the game with eight pawns.
-      </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/pppppppp/8/8/8/8/PPPPPPPP/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
-      </Board>
-      <StyledH1>The Movement</StyledH1>
-      <StyledLi>
-        Except on its first move, the pawn is only allowed to move one square
-        forwards, and never backwards. On its very first move, a pawn has the
-        choice of moving one or two squares, although both squares must be
-        unoccupied to do this. On all subsequent moves, the pawn can move one
-        square only, even if it only moved one square on its first turn - it
-        only has one chance to move two
-      </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/2p5/8/8/8/1P6/P7/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['a2', 'a4'],
-            ['b3', 'b4'],
-            ['c7', 'c6']
-          ]}
-        />
-      </Board>
-      <StyledH1>Capturing</StyledH1>
-      <StyledLi>
-        If the square directly in front of a pawn is occupied, the pawn is
-        blocked and cannot move forwards. Unlike all the other pieces, a pawn
-        does not capture the same way it moves. Instead, a pawn captures by
-        moving one square diagonally forward. In the diagram below, the white
-        pawn cannot capture the black pawn directly in front of it, but it may
-        capture the black queen by moving one square diagonally forward.
-      </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/8/8/1pq5/1P6/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[['b3', 'c4']]}
-        />
-      </Board>
-      <StyledH1>Promotion</StyledH1>
-      <StyledLi>
-        The most important feature of pawns is their ability to promote when
-        they reach the opposite side of the board. If your pawn gets all the way
-        to the opponent's back rank, it is immediately promoted to a more
-        powerful piece - take the pawn off the board, and replace it with a new
-        piece of your choice. The only restriction is that you cannot promote to
-        a king or another pawn. Usually, a pawn is promoted to a queen, as the
-        queen is the most powerful piece, but sometimes there is a good reason
-        to promote to a different piece such as a knight. It doesn't matter if
-        you have all your pieces still on the board, you can still promote to
-        whatever piece you want, even if this means you have two or three queens
-        on the board at once.
-      </StyledLi>
-      <Board>
-        <Image
-          src='/img/chessPromotion.jpg'
-          alt='Chess'
-          width={500}
-          height={500}
-        />
-      </Board>
-      <StyledLi>
-        Pawns also have a special move called 'en passant', but we will look at
-        that in detail later on.
-      </StyledLi>
-    </div>
+    <div className='flex list-none flex-col justify-center font-medium'></div>
   )
 }
 
@@ -201,13 +157,6 @@ const Chapter3 = () => {
         bamboozled by its hopping manoeuvers! Each player starts the game with
         two knights.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='1n4n1/8/8/8/8/8/8/1N4N1'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
-      </Board>
       <StyledH1>The Movement</StyledH1>
       <StyledLi>
         The knight moves in an L-shape, either two squares vertically and one
@@ -221,35 +170,8 @@ const Chapter3 = () => {
         knight jumps over everything in its path to land at its chosen
         destination
       </StyledLi>
-
-      <Board>
-        <Chessboard
-          position='8/8/8/2ppp3/3N4/2PPP3/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['d4', 'b5'],
-            ['d4', 'c6'],
-            ['d4', 'e6'],
-            ['d4', 'f5'],
-            ['d4', 'f3'],
-            ['d4', 'e2'],
-            ['d4', 'c2'],
-            ['d4', 'b3']
-          ]}
-        />
-      </Board>
-
       <StyledH1>Capturing</StyledH1>
       <StyledLi>The knight captures the same way as it moves.</StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/4q3/8/3N4/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[['d4', 'e6']]}
-        />
-      </Board>
     </div>
   )
 }
@@ -265,64 +187,21 @@ const Chapter4 = () => {
         squares, and one that moves on dark squares - so between them, the two
         bishops can cover all the squares on the board.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='2b2b2/8/8/8/8/8/8/2B2B2'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
-      </Board>
+
       <StyledH1>The Movement</StyledH1>
       <StyledLi>
         The bishop can move any number of squares in a straight diagonal line,
         so long as the squares between the bishop and its destination are
         unoccupied. The diagram below shows the legal moves for a bishop.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/8/4B3/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'b8'],
-            ['e5', 'a1'],
-            ['e5', 'h8'],
-            ['e5', 'h2']
-          ]}
-        />
-      </Board>
+
       <StyledLi>
         Unlike the knight, the bishop cannot jump over obstacles, so if
         something is blocking its path, the bishop can go no further.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/6p1/8/4B3/8/8/1P6/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'b8'],
-            ['e5', 'c3'],
-            ['e5', 'g7'],
-            ['e5', 'h2']
-          ]}
-        />
-      </Board>
+
       <StyledH1>Capturing</StyledH1>
       <StyledLi>The bishop captures the same way as it moves.</StyledLi>
-      <Board>
-        <Chessboard
-          position='1p6/8/5p2/4B3/8/2p3p1/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'b8'],
-            ['e5', 'c3'],
-            ['e5', 'f6'],
-            ['e5', 'g3']
-          ]}
-        />
-      </Board>
     </div>
   )
 }
@@ -1169,7 +1048,7 @@ const StyledH2 = ({ children }: { children: React.ReactNode }) => (
 )
 
 const Board = ({ children }: { children: React.ReactNode }) => (
-  <div className='mx-auto mb-4 mt-2 flex flex-row items-center gap-20'>
+  <div className='mx-auto mb-4 mt-2 flex flex-col items-center gap-10'>
     {children}
   </div>
 )
