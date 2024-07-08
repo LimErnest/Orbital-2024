@@ -116,7 +116,7 @@ const PokerGuide = () => {
             lastCompletedChapter < 2 ? 'text-gray-500' : 'text-gray-800'
           }
         >
-          Chapter 2: Pawns
+          Chapter 2: Set Up
         </TabsTrigger>
         <TabsTrigger
           value='chapter3'
@@ -125,88 +125,7 @@ const PokerGuide = () => {
             lastCompletedChapter < 3 ? 'text-gray-500' : 'text-gray-800'
           }
         >
-          Chapter 3: Knights
-        </TabsTrigger>
-        <TabsTrigger
-          value='chapter4'
-          disabled={lastCompletedChapter < 4}
-          className={
-            lastCompletedChapter < 4 ? 'text-gray-500' : 'text-gray-800'
-          }
-        >
-          Chapter 4: Bishops
-        </TabsTrigger>
-        <TabsTrigger
-          value='chapter5'
-          disabled={lastCompletedChapter < 5}
-          className={
-            lastCompletedChapter < 5 ? 'text-gray-500' : 'text-gray-800'
-          }
-        >
-          Chapter 5: Rooks
-        </TabsTrigger>
-        <TabsTrigger
-          value='chapter6'
-          disabled={lastCompletedChapter < 6}
-          className={
-            lastCompletedChapter < 6 ? 'text-gray-500' : 'text-gray-800'
-          }
-        >
-          Chapter 6: Queen
-        </TabsTrigger>
-        <TabsTrigger
-          value='chapter7'
-          disabled={lastCompletedChapter < 7}
-          className={
-            lastCompletedChapter < 7 ? 'text-gray-500' : 'text-gray-800'
-          }
-        >
-          Chapter 7: King
-        </TabsTrigger>
-        <TabsTrigger
-          value='chapter8'
-          disabled={lastCompletedChapter < 8}
-          className={
-            lastCompletedChapter < 8 ? 'text-gray-500' : 'text-gray-800'
-          }
-        >
-          Chapter 8: Check/Mate
-        </TabsTrigger>
-        <TabsTrigger
-          value='chapter9'
-          disabled={lastCompletedChapter < 9}
-          className={
-            lastCompletedChapter < 9 ? 'text-gray-500' : 'text-gray-800'
-          }
-        >
-          Chapter 9: Castling
-        </TabsTrigger>
-        <TabsTrigger
-          value='chapter10'
-          disabled={lastCompletedChapter < 10}
-          className={
-            lastCompletedChapter < 10 ? 'text-gray-500' : 'text-gray-800'
-          }
-        >
-          Chapter 10: En Passant
-        </TabsTrigger>
-        <TabsTrigger
-          value='chapter11'
-          disabled={lastCompletedChapter < 11}
-          className={
-            lastCompletedChapter < 11 ? 'text-gray-500' : 'text-gray-800'
-          }
-        >
-          Chapter 11: Draws
-        </TabsTrigger>
-        <TabsTrigger
-          value='chapter12'
-          disabled={lastCompletedChapter < 12}
-          className={
-            lastCompletedChapter < 12 ? 'text-gray-500' : 'text-gray-800'
-          }
-        >
-          Chapter 12: Summary
+          Chapter 3: Betting
         </TabsTrigger>
       </TabsList>
 
