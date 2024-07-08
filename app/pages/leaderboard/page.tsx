@@ -37,112 +37,80 @@ export default function Leaderboard() {
                 <div className='w-56'>
                     <Sidebar className='flex flex-col bg-gray-100'>
                         <SidebarSection className='py-2 px-2'>
-                            <div>
-                                <Link
-                                    href='/pages/dashboard'
-                                    className={cn(
-                                        buttonVariants({
-                                            variant: 'ghost',
-                                            className: 'flex justify-start rounded-sm hover:bg-blue-300'
-                                        })
-                                    )}
-                                >
-                                    <Image
-                                        src='/img/home_icon.jpg'
-                                        alt='Home'
-                                        width={30}
-                                        height={10}
-                                        className='mr-2'
-                                    />
-                                    Home
-                                </Link>
-                            </div>
+                            <Link
+                                href='/pages/dashboard'
+                                className='px-4 py-1 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'
+                            >
+                                <Image
+                                    src='/img/home_icon.jpg'
+                                    alt='Home'
+                                    width={30}
+                                    height={30}
+                                    className='mr-2'
+                                    style={{ height: 'auto' }}
+                                />
+                                Home
+                            </Link>
 
-                            <div>
-                                <Link
-                                    href='/pages/chess-guide'
-                                    className={cn(
-                                        buttonVariants({
-                                            variant: 'ghost',
-                                            className: 'flex justify-start w-full rounded-sm hover:bg-blue-300'
-                                        })
-                                    )}
-                                >
-                                    <Image
-                                        src='/img/pawn_icon.jpg'
-                                        alt='Chess'
-                                        width={30}
-                                        height={10}
-                                        className='mr-2'
-                                    />
-                                    Chess
-                                </Link>
-                            </div>
+                            <Link
+                                href='/pages/chess-guide'
+                                className='px-4 py-1 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'
+                            >
+                                <Image
+                                    src='/img/pawn_icon.jpg'
+                                    alt='Chess'
+                                    width={30}
+                                    height={30}
+                                    className='mr-2'
+                                    style={{ height: 'auto' }}
+                                />
+                                Chess
+                            </Link>
 
-                            <div>
-                                <Link
-                                    href='/pages/coming-soon'
-                                    className={cn(
-                                        buttonVariants({
-                                            variant: 'ghost',
-                                            className: 'flex justify-start rounded-sm hover:bg-blue-300'
-                                        })
-                                    )}
-                                >
-                                    <Image
-                                        src='/img/mahjong_icon.jpg'
-                                        alt='Mahjong'
-                                        width={30}
-                                        height={10}
-                                        className='mr-2'
-                                    />
-                                    Mahjong
-                                </Link>
-                            </div>
+                            <Link
+                                href='/pages/coming-soon'
+                                className='px-4 py-1 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'
+                            >
+                                <Image
+                                    src='/img/mahjong_icon.jpg'
+                                    alt='Mahjong'
+                                    width={30}
+                                    height={30}
+                                    className='mr-2'
+                                    style={{ height: 'auto' }}
+                                />
+                                Mahjong
+                            </Link>
 
-                            <div>
-                                <Link
-                                    href='/pages/coming-soon'
-                                    className={cn(
-                                        buttonVariants({
-                                            variant: 'ghost',
-                                            className: 'flex justify-start rounded-sm hover:bg-blue-300'
-                                        })
-                                    )}
-                                >
-                                    <Image
-                                        src='/img/poker_icon.jpg'
-                                        alt='Poker'
-                                        width={30}
-                                        height={10}
-                                        className='mr-2'
-                                    />
-                                    Poker
-                                </Link>
-                            </div>
+                            <Link
+                                href='/pages/coming-soon'
+                                className='px-4 py-1 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'
+                            >
+                                <Image
+                                    src='/img/poker_icon.jpg'
+                                    alt='Poker'
+                                    width={30}
+                                    height={30}
+                                    className='mr-2'
+                                    style={{ height: 'auto' }}
+                                />
+                                Poker
+                            </Link>
 
-                            <div>
-                                <Link
-                                    href='/pages/leaderboard'
-                                    className={cn(
-                                        buttonVariants({
-                                            variant: 'ghost',
-                                            className: `flex justify-start rounded-sm bg-blue-300 hover:bg-blue-300 
-                      }`
-                                        })
-                                    )}
-                                >
-                                    <Image
-                                        src='/img/leaderboard.png'
-                                        alt='Poker'
-                                        width={30}
-                                        height={10}
-                                        className='mr-2'
-                                    />
-                                    Leaderboard
-                                </Link>
-                            </div>
-
+                            <Link
+                                href='/pages/leaderboard'
+                                className='px-4 py-1 flex justify-start items-center rounded-sm bg-blue-300 whitespace-nowrap text-sm font-medium'
+                            >
+                                <Image
+                                    src='/img/leaderboard.png'
+                                    alt='Poker'
+                                    width={30}
+                                    height={30}
+                                    className='mr-2'
+                                    style={{ height: 'auto' }}
+                                />
+                                Leaderboard
+                            </Link>
                         </SidebarSection>
                     </Sidebar>
                 </div>
