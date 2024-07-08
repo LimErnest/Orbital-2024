@@ -11,8 +11,8 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  DialogTrigger
+} from '@/components/ui/dialog'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { useAuth } from '../../app/context/AuthContext'
 import { Icons } from './icon'
@@ -21,7 +21,7 @@ import { Badges } from '@/components/ui/badges'
 import { Settings } from '@/components/ui/settings'
 import { XpBar } from './xpbar'
 
-interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> { }
+interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
   const { logOut, user } = useAuth()
@@ -79,16 +79,18 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
                 <AvatarFallback></AvatarFallback>
               </Avatar>
               <span className='overflow-wrap break-word text-rg ml-4 hyphens-auto text-black'>
-                {user.username}
+                {user.username.length > 25
+                  ? `${user.username.substring(0, 25)}...`
+                  : user.username}
               </span>
             </div>
             <XpBar />
           </DialogTrigger>
-          <DialogContent className='max-w-screen-md w-full h-auto md:h-4/5 p-6 overflow-y-auto'>
+          <DialogContent className='h-auto w-full max-w-screen-md overflow-y-auto p-6 md:h-4/5'>
             <DialogHeader>
               <DialogTitle className='text-3xl'>Badge Inventory</DialogTitle>
               <DialogDescription>
-                  <Badges />
+                <Badges />
               </DialogDescription>
             </DialogHeader>
           </DialogContent>
@@ -122,7 +124,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
 }
 
 export interface SidebarSectionProps
-  extends React.HTMLAttributes<HTMLDivElement> { }
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 const SidebarSection: React.FC<SidebarSectionProps> = ({
   children,

@@ -138,40 +138,146 @@ const Chapter1 = () => {
 
 const Chapter2 = () => {
   return (
-    <div className='flex list-none flex-col justify-center font-medium'></div>
+    <div className='flex list-none flex-col justify-center font-medium'>
+      <StyledH1>Poker Positions at the Table</StyledH1>
+      <StyledLi>
+        The second thing you should familiarize your self with before we jump
+        into how to play a basic poker round is the poker positions at the
+        table. Because poker can traditionally be be played by anywhere from
+        2-10 players at a single table, it also means that seating's come with
+        disadvantages and advantages. The poker positions at a table will change
+        according to where the button and blinds are (they rotate clockwise
+        after each round). But here is the gist:
+      </StyledLi>
+      <ul className='list-disc pl-10'>
+        <StyledLi>The first seat belongs to the Small Blind (SB)</StyledLi>
+        <StyledLi>The second seat is the Big Blind (BB)</StyledLi>
+        <StyledLi>
+          The third seat is known as being Under-the-Gun (UTG)
+        </StyledLi>
+        <StyledLi>
+          The fourth seat , which is the one following UTG is known simply as
+          UTG+1
+        </StyledLi>
+        <StyledLi>The fifth seat is UTG+2</StyledLi>
+        <StyledLi>The sixth seat is UTG+3</StyledLi>
+        <StyledLi>The seventh seat is the lojack (LJ)</StyledLi>
+        <StyledLi>The eighth seat is the hijack (HJ)</StyledLi>
+        <StyledLi>The ninth seat is the cutoff (CO)</StyledLi>
+        <StyledLi>
+          The tenth seat is the dealer, also known as the Button (B)
+        </StyledLi>
+      </ul>
+      <Board>
+        <Image
+          src='/img/poker-position.png'
+          alt='Poker Positions'
+          width={800}
+          height={800}
+          className='mt-4'
+        />
+      </Board>
+      <StyledLi>
+        If you are in a game with less than 10 players, you can simply remove
+        the positions starting with UTG+3, followed by UTG+2 then UTG+1. If
+        there are still empty spots, you can remove the lojack, hijack, and
+        cutoff positions.
+      </StyledLi>
+      <StyledLi>
+        Now that we've got the seating down, let's move on to how betting
+        occurs!
+      </StyledLi>
+    </div>
   )
 }
 
 const Chapter3 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>Knights</StyledH1>
+      <StyledH1>Know Your Betting Options</StyledH1>
       <StyledLi>
-        Knights are often the trickiest pieces for beginners to master. Instead
-        of moving in straight lines like the other pieces, the knight has a
-        unique L-shaped move. The knight also has the ability to jump over other
-        pieces in its path. While all the other pieces can find their route
-        blocked by friendly and enemy units, the knight suffers no such
-        obstruction. Because of this jumping ability, the knight is often the
-        first piece into the action, and even experienced players can be
-        bamboozled by its hopping manoeuvers! Each player starts the game with
-        two knights.
+        When playing poker, you only ever have five options. Familiarize
+        yourself with these so you can always make the right decision at the
+        right time. You should know when to:
       </StyledLi>
-      <StyledH1>The Movement</StyledH1>
+      <ul className='list-disc pl-10'>
+        <StyledLi>
+          CHECK: Stay in the hand without betting your money (provided nobody
+          else bets).
+        </StyledLi>
+        <StyledLi>
+          FOLD: Discard your cards, giving up any chance to continue in the hand
+          and win the pot.
+        </StyledLi>
+        <StyledLi>
+          BET: The first player to put money in the pot starts off the betting.
+          Other players must then decide whether to call, fold or raise.
+        </StyledLi>
+        <StyledLi>
+          CALL: Match the full amount that has been bet by another player in
+          order to stay in the hand.
+        </StyledLi>
+        <StyledLi>
+          RAISE: Increase the amount of the existing bet. Other players will
+          then have to fold, call, or raise your bet.
+        </StyledLi>
+      </ul>
+      <StyledH1>Betting Vs. Calling</StyledH1>
       <StyledLi>
-        The knight moves in an L-shape, either two squares vertically and one
-        square horizontally, or two squares horizontally and one square
-        vertically. This means the knight has, at most, eight possible squares
-        it can jump to, as illustrated on the board below:
+        There is a big difference between calling and raising. The former is a
+        more passive move, while the latter uses aggression to put the decision
+        back on your opponents.
       </StyledLi>
-
       <StyledLi>
-        It doesn't matter if any of the intervening squares are occupied, the
-        knight jumps over everything in its path to land at its chosen
-        destination
+        When you call an existing bet, you are not putting any pressure on your
+        opponent. Remember that, on average, 3/4 of all hands are won when
+        somebody bets and everybody else folds. Nobody folds to a call.
       </StyledLi>
-      <StyledH1>Capturing</StyledH1>
-      <StyledLi>The knight captures the same way as it moves.</StyledLi>
+      <StyledLi>
+        When you are the aggressor, either by making an initial bet or raising
+        the existing one, you are forcing your opponents to react and giving
+        yourself a chance to win the pot before it gets to showdown. This should
+        reinforce the importance of aggression in poker.
+      </StyledLi>
+      <StyledH1>Betting As A Bluff</StyledH1>
+      <StyledLi>
+        You can't always rely on having the best cards to win. That's why
+        learning to bluff is so important. A few rules to remember for betting
+        as a bluff are:
+      </StyledLi>
+      <ul className='list-disc pl-10'>
+        <StyledLi>
+          Figure out when your opponents are not particularly strong. This will
+          make them more susceptible to a bluff. Look for signs of weakness and
+          up the aggression.
+        </StyledLi>
+        <StyledLi>
+          Recognize and exploit threats on the board. You may have raised
+          pre-flop with K-Q suited and then completely missed the A-7-5 flop.
+          However, your opponents are going to be inclined to believe you have a
+          strong hand so a continuation bet may take down the pot, even against
+          good players with middle pocket pairs.
+        </StyledLi>
+      </ul>
+      <StyledH1>When to fold</StyledH1>
+      <StyledLi>
+        Recognising when to fold is just as important as knowing when to bet.
+        There is the standard decisions of folding bad hands like 7-2 offsuit,
+        but there are also times when you should fold good hands. Here are a few
+        examples:
+      </StyledLi>
+      <ul className='list-disc pl-10'>
+        <StyledLi>When your preflop hand isn't strong after the flop</StyledLi>
+        <StyledLi>When a player who never bluffs is betting big</StyledLi>
+        <StyledLi>
+          When you have no pair or drawing potential with your hand post-flop
+        </StyledLi>
+        <StyledLi>When a very tight player is betting or raising big</StyledLi>
+      </ul>
+      <StyledLi>
+        Now that we've got the basics of betting down, lets get into how the
+        game of Poker is played!
+      </StyledLi>
     </div>
   )
 }
