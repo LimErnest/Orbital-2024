@@ -285,29 +285,82 @@ const Chapter3 = () => {
 const Chapter4 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>Bishops</StyledH1>
+      <StyledH1>Dealing of Cards</StyledH1>
       <StyledLi>
-        The Bishop is a long range piece that can be very powerful, but it has a
-        significant weakness - it can only ever move on squares of one colour.
-        Each player starts the game with two bishops - one that moves on light
-        squares, and one that moves on dark squares - so between them, the two
-        bishops can cover all the squares on the board.
+        Each player in a poker game is dealt two hole cards. The dealer begins
+        each game by distributing these cards one at a time to each player,
+        starting with the player in the small blind position. Hole cards are
+        kept face down throughout the game, and can only be seen by the player
+        holding them.
       </StyledLi>
-
-      <StyledH1>The Movement</StyledH1>
       <StyledLi>
-        The bishop can move any number of squares in a straight diagonal line,
-        so long as the squares between the bishop and its destination are
-        unoccupied. The diagram below shows the legal moves for a bishop.
+        After every player has two hole cards, the first of four betting rounds
+        begin. Poker betting rounds are known as preflop, flop, turn, and river.
       </StyledLi>
-
+      <StyledH1>Pre-flop</StyledH1>
+      <Board>
+        <Card community={false} cards={'back back'} />
+      </Board>
       <StyledLi>
-        Unlike the knight, the bishop cannot jump over obstacles, so if
-        something is blocking its path, the bishop can go no further.
+        When everyone has their two hole cards, the preflop betting round begins
+        with the player directly to the left of the big blind. This player has
+        three options:
       </StyledLi>
-
-      <StyledH1>Capturing</StyledH1>
-      <StyledLi>The bishop captures the same way as it moves.</StyledLi>
+      <ul className='list-disc pl-10'>
+        <StyledLi>
+          Call (matching the big blind amount or the most recent raise)
+        </StyledLi>
+        <StyledLi>
+          Raise (betting at least 2x the big blind or most recent raise, which
+          any subsequent players must at least match to stay in).
+        </StyledLi>
+        <StyledLi>
+          Fold (pushing their cards into the middle and surrendering any chance
+          to win the hand).
+        </StyledLi>
+      </ul>
+      <StyledH1>Example of Poker hand</StyledH1>
+      <StyledLi>
+        For this example, we'll go over a hand from a $1/$2 cash game. The
+        “$1/$2” denotes a $1 small blind and $2 big blind. After the blinds are
+        posted, the dealer begins dealing one card at a time to each player,
+        starting with the small blind position.
+      </StyledLi>
+      <Board>
+        <Image
+          src='/img/preflop.png'
+          alt='Poker Positions'
+          width={800}
+          height={800}
+          className='mt-4'
+        />
+      </Board>
+      <StyledLi>
+        So, in our $1/$2 example, the first player can either call the $2 big
+        blind amount, raise to at least $4, or fold.
+      </StyledLi>
+      <StyledLi>
+        Suppose the first player raises to $6. The action then moves one player
+        to the left, and this player can either call the $6 bet, or fold.
+        Suppose this player chooses to fold, and the next four players,
+        clockwise around the table, all fold as well.
+      </StyledLi>
+      <StyledLi>
+        This brings the action to the player directly to the right of the small
+        blind. The player in this position, known as the “button”, chooses to
+        call the $6 bet.
+      </StyledLi>
+      <StyledLi>
+        The small blind folds, surrendering their $1 forced bet into the pot.
+        The big blind, who already has a $2 forced bet in play, makes the call
+        by putting $4 more in the pot to match the $6 raise.
+      </StyledLi>
+      <StyledLi>
+        Note that if any of the players decided to re-raise more than $6, the
+        action goes back around to the first player, who can then call the
+        raise, or re-raise again (known as a four-bet). This continues until
+        everyone at the table has either folded or called the current bet.
+      </StyledLi>
     </div>
   )
 }
@@ -315,78 +368,39 @@ const Chapter4 = () => {
 const Chapter5 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>Rooks</StyledH1>
+      <StyledH1>Flop</StyledH1>
       <StyledLi>
-        The rooks, which are also sometimes known as 'castles', are the second
-        most powerful piece after the queen. Like the bishop they are long range
-        pieces, but they do not share the bishop's weakness and can reach every
-        square on the board. Because they start in the corners, rooks often
-        don't join in the battle until after the knights and bishops, but that
-        also means they often survive much deeper into the game. In fact, the
-        most commonly occurring endgames in chess are endgames involving rooks!
-        Each player starts the game with two rooks.
+        With the preflop betting round closed, the dealer burns a card, taking
+        the top card off the deck and putting it face-down on the table.
+      </StyledLi>
+      <StyledLi>
+        The dealer then deals the first three of five community cards, known as
+        the “flop”. In our example game, the dealer puts these three cards face
+        up for the flop:
       </StyledLi>
       <Board>
-        <Chessboard
-          position='r6r/8/8/8/8/8/8/R6R'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
+        <Card community={true} cards={'AH 7S TH'} />
       </Board>
-      <StyledH1>The Movement</StyledH1>
       <StyledLi>
-        The rook can move any number of squares in a straight line horizontally
-        or vertically, so long as none of the squares it passes through are
-        occupied. The board below shows the legal moves for a rook:
+        The small blind is first to act in all betting rounds after the flop. If
+        the small blind isn't still in the hand, the next live player to the
+        left of the small blind begins the action.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/8/4R3/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'e8'],
-            ['e5', 'e1'],
-            ['e5', 'a5'],
-            ['e5', 'h5']
-          ]}
-        />
-      </Board>
       <StyledLi>
-        Like the bishop, the rook can be blocked if other pieces get in its way.
+        In our example hand, the big blind, to the small blind's direct left, is
+        first to act on the flop. The big blind player has the option to check,
+        putting no money in the pot, or bet at least $2, the amount of the big
+        blind.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/8/P3R1p1/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'e8'],
-            ['e5', 'e1'],
-            ['e5', 'b5'],
-            ['e5', 'g5']
-          ]}
-        />
-      </Board>
-      <StyledH1>Capturing</StyledH1>
-      <StyledLi>Rooks captures the same way they move.</StyledLi>
-      <Board>
-        <Chessboard
-          position='4p3/8/8/p3R1p1/8/8/4p3/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'e8'],
-            ['e5', 'e2'],
-            ['e5', 'a5'],
-            ['e5', 'g5']
-          ]}
-        />
-      </Board>
       <StyledLi>
-        That's not quite all there is to know about rooks - there is a special
-        move called castling which involves a king and a rook, but that will
-        have a page to itself later on.
+        Let's suppose the big blind checks. The under-the-gun player now has the
+        same option to check or bet. In this game, the under-the-gun player also
+        checks, moving the action to the player on the button.
+      </StyledLi>
+      <StyledLi>
+        The button bets $10, and the action goes back to the big blind player.
+        The big blind calls, and the under-the-gun player folds. The pot is now
+        $37.
       </StyledLi>
     </div>
   )
@@ -395,87 +409,27 @@ const Chapter5 = () => {
 const Chapter6 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>The Queen</StyledH1>
+      <StyledH1>Turn</StyledH1>
       <StyledLi>
-        The mighty queen is the most powerful piece on the chessboard, combining
-        the powers of the rook and bishop. Such is the queen's power, that the
-        player who loses his or her queen is almost sure to lose the game as
-        well. No other piece rivals the speed and manoeuverability of the queen.
-        Each player starts the game with one queen.
+        The big blind and the button then advance to the turn.
+      </StyledLi>
+      <StyledLi>
+        Also known as “fourth street”, the turn is the fourth community card
+        dealt to the board. In our example, the dealer burns another card and
+        deals the turn. The board now looks like this:
       </StyledLi>
       <Board>
-        <Chessboard
-          position='3q4/8/8/8/8/8/8/3Q4'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
-      </Board>
-      <StyledH1>The Movement</StyledH1>
-      <StyledLi>
-        The queen can move any number of squares in a straight line
-        horizontally, vertically, or diagonally. In this way, she combines the
-        powers of the rook and bishop in a single piece. The legal moves of the
-        queen are displayed on the board below:
-      </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/8/4Q3/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'e8'],
-            ['e5', 'e1'],
-            ['e5', 'a5'],
-            ['e5', 'h5'],
-            ['e5', 'b8'],
-            ['e5', 'a1'],
-            ['e5', 'h8'],
-            ['e5', 'h2']
-          ]}
-        />
+        <Card community={true} cards={'AH 7S TH 3S'} />
       </Board>
       <StyledLi>
-        It might seem that the queen can do almost anything that another piece
-        can, but there are limits to the queen's prowess. Like the rook and
-        bishop, she lacks the knight's ability to jump over obstacles, and so
-        her routes must always be clear of obstruction.
+        The big blind checks, and the button bets $20 into the $37 pot. The big
+        blind raises to $60, and the button calls, putting in $40 more to match
+        the $60 raise. The big blind's move of checking, then raising when the
+        opponent bets, is known as a “check-raise”.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/4p3/8/4Q3/8/6P1/1p6/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'e7'],
-            ['e5', 'e1'],
-            ['e5', 'a5'],
-            ['e5', 'h5'],
-            ['e5', 'b8'],
-            ['e5', 'b2'],
-            ['e5', 'h8'],
-            ['e5', 'f4']
-          ]}
-        />
-      </Board>
-      <StyledH1>Capturing</StyledH1>
-      <StyledLi>The queen captures the same way they move.</StyledLi>
-      <Board>
-        <Chessboard
-          position='8/4p3/8/4Q3/8/8/1p6/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'e7'],
-            ['e5', 'e1'],
-            ['e5', 'b5'],
-            ['e5', 'h5'],
-            ['e5', 'b8'],
-            ['e5', 'b2'],
-            ['e5', 'h8'],
-            ['e5', 'g3']
-          ]}
-        />
-      </Board>
+      <StyledLi>
+        The pot is now $157, and the two players advance to the river.
+      </StyledLi>
     </div>
   )
 }
@@ -483,114 +437,56 @@ const Chapter6 = () => {
 const Chapter7 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>The King</StyledH1>
+      <StyledH1>River</StyledH1>
       <StyledLi>
-        The king is the most important piece in the game. You must keep your
-        king safe at all costs, because if your opponent traps your king, it's
-        checkmate and you lose the game. Don't worry though, the king is not
-        completely helpless and he has an army of loyal pieces and pawns to
-        protect him! Each player starts the game with one king, and unlike the
-        other pieces and pawns, the king is never captured and stays on the
-        board for the whole game.
+        The dealer burns another card and puts the fifth and final community
+        card on the board.
+      </StyledLi>
+      <StyledLi>
+        This card is known as the river, or “fifth street”. In our example hand,
+        the river is dealt to the board, and the five community cards look like
+        this:
       </StyledLi>
       <Board>
-        <Chessboard
-          position='4k3/8/8/8/8/8/8/4K3'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
+        <Card community={true} cards={'AH 7S TH 3S JH'} />
       </Board>
-      <StyledH1>The Movement</StyledH1>
       <StyledLi>
-        The king's movement is limited to one square in any direction, so he's
-        not the fastest piece in the box. Still, he is more powerful than a
-        pawn, and he can give bishops and knights a run for their money too! The
-        king's legal moves are displayed on the board below:
+        The big blind checks, and the button checks back, keeping the pot at
+        $157. The player who made the last aggressive move (a bet or raise)
+        generally turns over their cards first, and this part of the hand is
+        called the showdown.
+      </StyledLi>
+      <StyledLi>
+        The big blind turns over his/her hole cars, revealing:
       </StyledLi>
       <Board>
-        <Chessboard
-          position='8/8/8/4K3/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'e4'],
-            ['e5', 'e6'],
-            ['e5', 'd5'],
-            ['e5', 'f5'],
-            ['e5', 'd6'],
-            ['e5', 'd4'],
-            ['e5', 'f6'],
-            ['e5', 'f4']
-          ]}
-        />
+        <Card community={false} cards={'AC 3C'} />
       </Board>
       <StyledLi>
-        Despite his limited mobility, the king can still capture an enemy piece
-        if he can catch up with them!
+        This hand makes two pair, aces and threes, for the big blind. Using hole
+        cards and community cards to make the best possible five-card hand, the
+        big blind holds A♣ A♥ 3♣ 3♠ J♥.
+      </StyledLi>
+      <StyledLi>
+        The button doesn't have to turn over their cards at showdown, as they
+        have the option to "muck" without showing and surrender the pot to the
+        opponent. In this case though the button shows this hand:
       </StyledLi>
       <Board>
-        <Chessboard
-          position='8/8/4p3/4K3/3p4/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e5', 'e6'],
-            ['e5', 'd4']
-          ]}
-        />
+        <Card community={false} cards={'TS 9S'} />
       </Board>
       <StyledLi>
-        Because the king is so important, you must never move him onto a square
-        where he could be captured. This is called moving into check, and is
-        against the rules. If an enemy piece could move onto a square next turn,
-        then that square is off limits to the king.
+        The best possible five-card hand with these hole cards is T♠ T♥ A♥
+        J♥ 9♠. This gives the button a pair of tens, having missed a chance at
+        both a straight and a flush.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='3r4/8/r7/4K3/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['a6', 'h6'],
-            ['d8', 'd1'],
-            ['e5', 'e4'],
-            ['e5', 'f4'],
-            ['e5', 'f5']
-          ]}
-        />
-      </Board>
       <StyledLi>
-        This also applies when the king is capturing a piece. If capturing an
-        enemy piece would put him into check, then that piece is off limits. In
-        the example below, the king can capture the rook, but he cannot capture
-        the pawn, because the rook will put the king in check.
+        The big blind wins this hand, as two pair beats one pair in the poker
+        hand rankings.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/3r4/4K3/3p4/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['d6', 'd4'],
-            ['e5', 'd6']
-          ]}
-        />
-      </Board>
       <StyledLi>
-        Note that because the king can never move into check, this means that
-        the two kings may never stand next to each other - then both of them
-        would be in check. The position on the board below is illegal:
-      </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/8/3kK3/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
-      </Board>
-      <StyledLi>
-        That's not quite all there is to know about the king - he has a special
-        move called castling, which we will look at later on.
+        The player in the big blind collects the $157 pot. The button and blinds
+        shift one player to the left and a new hand begins.
       </StyledLi>
     </div>
   )
@@ -599,127 +495,35 @@ const Chapter7 = () => {
 const Chapter8 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>Check and Checkmate</StyledH1>
+      <StyledH1>What if a Hand Doesn't Go to Showdown?</StyledH1>
       <StyledLi>
-        We looked at check briefly in the last part, when we looked at the king.
-        Now it's time to look at this important concept in more detail.
-        Incidentally, some people announce 'Check' when they put their
-        opponent's king in check, but you really don't have to.
-      </StyledLi>
-      <StyledH1>Check</StyledH1>
-      <StyledLi>
-        As we learned previously, the king cannot move onto a square threatened
-        by an enemy piece or pawn, as that would be moving into check. But what
-        if your opponent moves a piece or pawn to threaten your king directly?
-        In that case, the king is in check, and you must get him out of check
-        immediately.
+        Many Texas Hold'em hands end without anyone even showing their cards. In
+        any betting round, the hand ends when one player bets or raises, and all
+        other players fold. The player that didn't fold wins the pot without a
+        showdown.
       </StyledLi>
       <StyledLi>
-        On the board below, white's king is in check from black's rook. White
-        must get his king out of check, or else black could capture it next
-        turn, which is something that must never be allowed to happen.
+        In the preflop betting round, the big blind wins the pot automatically
+        if all other players fold before the big blind player gets to act. This
+        is known as giving the big blind a "walk".
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/8/8/6P1/7P/5P2/1r4K1'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['g1', 'g2'],
-            ['g1', 'h2']
-          ]}
-        />
-      </Board>
+      <StyledH1>In the Event of a Tie (Chopped Pots)</StyledH1>
       <StyledLi>
-        Sometimes, your king has no safe squares it can escape to. All is not
-        lost, however, as there are other ways of getting out of check. You can
-        also capture the piece that is giving check, either with your king or
-        with another piece. Remember, though, if you're capturing with your king
-        you need to make sure that by doing so you aren't putting your king in
-        check from another piece!
+        When two or more players turn over hands of equal hand strength at
+        showdown, the hand results in a chop, aka chopped pot. All chips in the
+        pot are divided equally among the players that have the strongest hand.
+      </StyledLi>
+      <StyledH1>Starting a New Game</StyledH1>
+      <StyledLi>
+        When a new game starts, the initial position of the button and blinds is
+        determined by dealing each player one card. Whoever has the
+        highest-value card, with ace being the high and two as the low, starts
+        the game with the button.
       </StyledLi>
       <StyledLi>
-        On the board below, the white king is once again in check from a black
-        rook, but this time he has no squares to escape to. The black rook must
-        be captured to get out of check.
+        In the case of a tie, the suit of the card determines the winner. The
+        tiebreaker order for suits goes spades, hearts, diamonds, clubs.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/6B1/8/1R6/1P6/5PPP/1r4K1'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[['g6', 'b1']]}
-        />
-      </Board>
-      <StyledLi>
-        There is a third way to get out of check, if your king has no escape
-        squares and you cannot capture the piece giving check. You can move one
-        of your own pieces to block the path of the enemy piece, and get out of
-        check that way. Watch out for knights though, as their jumping ability
-        means they cannot be blocked this way, so if your king is in check from
-        a knight then this method won't work.
-      </StyledLi>
-      <StyledLi>
-        On the board below, black's king is in check from the white queen. The
-        black rook must move in order to bring the king out of check.
-      </StyledLi>
-      <Board>
-        <Chessboard
-          position='4n1rk/6p1/1r6/8/7Q/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[['b6', 'h6']]}
-        />
-      </Board>
-      <StyledH1>Double Check</StyledH1>
-      <StyledLi>
-        It may seem unlikely, but it's actually possible for a king to be in
-        check from two different pieces at once. This happens when a player
-        moves a piece to give check, and also opens up a line from a different
-        piece to give check from that piece also.
-      </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/4k3/8/8/8/4B3/4R3/8'
-          boardWidth={300}
-          arePiecesDraggable={false}
-          customArrows={[['e3', 'c5']]}
-        />
-        <Chessboard
-          position='8/4k3/8/2B5/8/8/4R3/8'
-          boardWidth={300}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['c5', 'e7'],
-            ['e2', 'e7']
-          ]}
-        />
-      </Board>
-      <StyledLi>
-        By moving, the bishop has opened a line from the rook to the king, so
-        the king is in check from both pieces at once! Double check can be a
-        powerful attack, because it isn't possible to block both checks with one
-        move. The only way to escape from a double check is to move the king.
-      </StyledLi>
-      <StyledH1>Checkmate</StyledH1>
-      <StyledLi>
-        So what happens if a king is in check, and cannot use any of the above
-        described methods to escape from check? In that case, he is in
-        checkmate, and the game ends. In the example below, the black king is in
-        check from the white bishop, and has no way to escape. Black is in
-        checkmate, and white has won the game!
-      </StyledLi>
-      <Board>
-        <Chessboard
-          position='7k/4N2p/8/4B3/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['e7', 'g8'],
-            ['e5', 'h8']
-          ]}
-        />
-      </Board>
     </div>
   )
 }

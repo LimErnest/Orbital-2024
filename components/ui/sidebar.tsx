@@ -79,9 +79,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
                 <AvatarFallback></AvatarFallback>
               </Avatar>
               <span className='overflow-wrap break-word text-rg ml-4 hyphens-auto text-black'>
-                {user.username.length > 25
-                  ? `${user.username.substring(0, 25)}...`
-                  : user.username}
+                {user.username}
               </span>
             </div>
             <XpBar />
