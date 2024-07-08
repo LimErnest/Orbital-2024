@@ -143,9 +143,7 @@ export const AuthContextProvider = ({
         console.log(err)
       )
       const docRef = doc(db, 'xp', currentUser.uid)
-      updateDoc(docRef, {
-        username: username
-      })
+      await updateDoc(docRef, { username: username })
       setUser({
         email: user.email,
         uid: user.uid,
