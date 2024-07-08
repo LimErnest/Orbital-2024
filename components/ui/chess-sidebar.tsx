@@ -45,9 +45,8 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
               src='/img/home_icon.jpg'
               alt='Home'
               width={30}
-              height={30}
+              height={10}
               className='mr-2'
-              style={{ height: 'auto' }}
             />
             Home
           </Link>
@@ -66,9 +65,8 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
               src='/img/pawn_icon.jpg'
               alt='Chess'
               width={30}
-              height={30}
+              height={10}
               className='mr-2'
-              style={{ height: 'auto' }}
             />
             Guide
           </Link>
@@ -87,11 +85,30 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
               src='/img/pawn_icon.jpg'
               alt='Chess-DailyQuiz'
               width={30}
-              height={30}
+              height={10}
               className='mr-2'
-              style={{ height: 'auto' }}
             />
             Daily Quiz
+          </Link>
+
+          <Link
+            href='/pages/coming-soon'
+            className={cn(
+              buttonVariants({
+                variant: 'ghost',
+                className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'leaderboard' ? 'bg-blue-300' : ''
+                  }`
+              })
+            )}
+          >
+            <Image
+              src='/img/pawn_icon.jpg'
+              alt='Poker'
+              width={30}
+              height={10}
+              className='mr-2'
+            />
+            Leaderboard
           </Link>
 
           {hasCompletedGuide || highlightedLink == 'final' ? (
@@ -109,9 +126,8 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
                 src='/img/pawn_icon.jpg'
                 alt='Poker'
                 width={30}
-                height={30}
+                height={10}
                 className='mr-2'
-                style={{ height: 'auto' }}
               />
               Final Quest
             </Link>
@@ -131,9 +147,8 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
                     src='/img/pawn_icon.jpg'
                     alt='Poker'
                     width={30}
-                    height={30}
+                    height={10}
                     className='mr-2'
-                    style={{ height: 'auto' }}
                   />
                   Final Quest
                 </div>
