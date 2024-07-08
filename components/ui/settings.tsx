@@ -54,7 +54,7 @@ export function Settings() {
   }
 
   function checkUsername() {
-    if (username.length < 1 || username.length > 8) {
+    if (username.length < 1) {
       setErrorType('username')
       setIsInvalidDialogOpen(true)
       return false
@@ -172,9 +172,8 @@ export function Settings() {
               src='/img/settings_icon.jpg'
               alt='Settings'
               width={20}
-              height={20}
+              height={5}
               className='mr-2'
-              style={{ height: 'auto' }}
             />
             Settings
           </Button>
@@ -183,7 +182,7 @@ export function Settings() {
           <SheetHeader>
             <SheetTitle>Update username</SheetTitle>
             <SheetDescription>
-              Username must be at 1 to 8 characters long.
+              Username must be at least 1 character long.
             </SheetDescription>
           </SheetHeader>
           <div className='grid gap-4 py-4'>
@@ -345,7 +344,7 @@ export function Settings() {
             </AlertDialogTitle>
             <AlertDialogDescription>
               {errorType === 'username' &&
-                'Username must be 1 to 8 characters long.'}
+                'Username must be at least 1 character long.'}
               {errorType === 'mismatch' &&
                 'Please ensure that the passwords you entered match before continuing.'}
               {errorType === 'length' &&
