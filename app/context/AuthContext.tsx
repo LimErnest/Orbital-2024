@@ -105,7 +105,10 @@ export const AuthContextProvider = ({
       const chessGuideDoc = setDoc(doc(db, 'chessguide', user.uid), {
         lastChapter: 1
       })
-      await Promise.all([badgesDoc, ratingDoc, xpDoc, chessGuideDoc])
+      const pokerGuideDoc = setDoc(doc(db, 'pokerguide', user.uid), {
+        lastChapter: 1
+      })
+      await Promise.all([badgesDoc, ratingDoc, xpDoc, chessGuideDoc, pokerGuideDoc])
     }
   }
 
@@ -214,6 +217,24 @@ export const AuthContextProvider = ({
     }
   }
 
+  const updatePokerChapter = async (chapter: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'pokerguide', currentUser.uid)
+      const docSnap = await getDoc(docRef)
+      const data = docSnap.data()
+      if (data) {
+        if (data.lastChapter > chapter) {
+          return data.lastChapter
+        } else {
+          await setDoc(docRef, { lastChapter: chapter })
+          return chapter
+        }
+      } else {
+        await setDoc(docRef, { lastChapter: chapter })
+      }
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -227,7 +248,8 @@ export const AuthContextProvider = ({
         addXp,
         updateChessChapter,
         updateBadge,
-        checkGuide
+        checkGuide,
+        updatePokerChapter
       }}
     >
       {children}
