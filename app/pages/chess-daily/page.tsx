@@ -20,23 +20,11 @@ import { db } from '../../../firebase/firebase'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { useAuth } from '../../context/AuthContext'
 import { ChessSidebar } from '@/components/ui/chess-sidebar'
-import { HowToPlay } from '@/components/ui/howToPlay'
 
 export interface Puzzle {
   PuzzleId: number
   FEN: string
   Moves: string[]
-}
-
-type Rating = '400' | '500' | '600' | '700' | '800' | '900' | '1000' | '1100'
-
-interface UserRatingData {
-  chessRating: Rating,
-  attempts: number,
-  puzzleID: number,
-  noOfCorrect: number,
-  latestDate: string,
-  threePuzzleCorrect: boolean
 }
 
 interface ArrayPuzzles {
@@ -45,22 +33,43 @@ interface ArrayPuzzles {
 
 const RatingPuzzle: ArrayPuzzles = ArrayofPuzzle
 
+type Rating = '400' | '500' | '600' | '700' | '800' | '900' | '1000' | '1100'
+
 function isRating(value: any): value is Rating {
   return ['400', '500', '600', '700', '800', '900', '1000', '1100'].includes(
     value
   )
 }
 
-export default function ChessDailyQuizPage() {
-  const { user,
-    addXp,
-    updateAttempt,
-    updateUserTries,
-    updatePuzzle,
-    updateRating,
-    updateCorrectCount,
-    fetchUserRating
-  } = useAuth()
+async function fetchUserRating(uid: string) {
+  const docRef = doc(db, 'rating', uid)
+  const docSnap = await getDoc(docRef)
+
+  if (docSnap.exists()) {
+    const data = docSnap.data()
+    return {
+      chessRating: data.chessRating,
+      attempts: data.attempts,
+      puzzleID: data.puzzleID,
+      noOfCorrect: data.noOfCorrect,
+      latestDate: data.latestDate,
+      threePuzzleCorrect: data.threePuzzleCorrect
+    }
+  } else {
+    console.log('No such document!')
+    return {
+      chessRating: '400',
+      attempts: 0,
+      puzzleID: 1,
+      noOfCorrect: 0,
+      lastestDate: new Date().toLocaleDateString(),
+      threePuzzleCorrect: false
+    }
+  }
+}
+
+export default function ChessDailyPage() {
+  const { user, addXp } = useAuth()
   const [rating, setRating] = useState<Rating>('600')
   const [attempt, setAttempt] = useState(0)
   const [puzzleID, setPuzzleID] = useState(1)
@@ -68,50 +77,45 @@ export default function ChessDailyQuizPage() {
   const [arrayOfPuzzle, setArrayOfPuzzle] = useState<Puzzle[]>([])
   const [puzzle, setPuzzle] = useState<Puzzle>(ArrayofPuzzle[rating][puzzleID])
   const [threePuzzleCorrect, setThreePuzzleCorrect] = useState(false)
+  const currDate = new Date().toLocaleDateString()
 
   useEffect(() => {
     if (user) {
-      fetchUserRating()
-        .then((data: UserRatingData) => {
-          updateUserRating(data)
-          console.log('user is changed', puzzle)
+      fetchUserRating(user.uid)
+        .then(data => {
+          console.log('Fetched badge data:', data)
+          setRating(data.chessRating)
+          setAttempt(data.attempts)
+          setThreePuzzleCorrect(data.threePuzzleCorrect)
+          setPuzzleID(data.puzzleID)
+          setCorrectCount(data.noOfCorrect)
+          setPuzzle(RatingPuzzle[data.chessRating][data.puzzleID - 1])
+          updateLatestDate(data.latestDate)
+          console.log('user is changed')
         })
+        .catch(error => console.error('Error fetching user badge:', error))
     }
   }, [user])
 
   const decreaseAttempt = async () => {
     const newAttempt = attempt - 1
     setAttempt(newAttempt)
-    updateAttempt(newAttempt)
+
+    if (user) {
+      const docRef = doc(db, 'rating', user.uid)
+      await updateDoc(docRef, { attempts: newAttempt })
+    }
   }
 
-  const updateUserRating = async (data: UserRatingData) => {
-    if (!data) {
-      console.error("Data is undefined or null");
-      return;
-    }
-
-    console.log('Fetched badge data:', data)
-
-    const currDate = new Date().toLocaleDateString()
-    if (data.latestDate != currDate) {
+  const updateLatestDate = async (date: string) => {
+    if (date != currDate) {
       //different day
       setAttempt(3)
-      setThreePuzzleCorrect(false)
-      updateUserTries(currDate)
-      setRating(data.chessRating)
-      setPuzzleID(data.puzzleID)
-      setCorrectCount(data.noOfCorrect)
-      setPuzzle(RatingPuzzle[data.chessRating][data.puzzleID - 1])
 
-    } else {
-      setAttempt(data.attempts)
-      setThreePuzzleCorrect(data.threePuzzleCorrect)
-      setRating(data.chessRating)
-      setPuzzleID(data.puzzleID)
-      setCorrectCount(data.noOfCorrect)
-      setPuzzle(RatingPuzzle[data.chessRating][data.puzzleID - 1])
-      console.log(puzzle)
+      if (user) {
+        const docRef = doc(db, 'rating', user.uid)
+        await updateDoc(docRef, { attempts: 3, threePuzzleCorrect: false, latestDate: currDate })
+      }
     }
   }
 
@@ -136,17 +140,23 @@ export default function ChessDailyQuizPage() {
 
     setCorrectCount(newCorrectCount)
     setPuzzleID(currentPuzzleID)
-
-    updatePuzzle(currentPuzzleID)
-    updateRating(newRating)
-    updateCorrectCount(newCorrectCount, completedThreePuzzle)
+    if (user) {
+      const docRef = doc(db, 'rating', user.uid)
+      await updateDoc(docRef, {
+        puzzleID: currentPuzzleID,
+        noOfCorrect: newCorrectCount,
+        chessRating: newRating,
+        threePuzzleCorrect: completedThreePuzzle
+      })
+      console.log('doc is updated')
+    }
   }
 
   useEffect(() => {
     const puzzles = ArrayofPuzzle[rating]
     setArrayOfPuzzle(puzzles)
     setPuzzle(puzzles[puzzleID - 1])
-    console.log('rating is changed', puzzle)
+    console.log('rating is changed')
   }, [rating])
 
   let newPuzzleID = puzzleID + 1
@@ -195,9 +205,6 @@ export default function ChessDailyQuizPage() {
                 </CardHeader>
                 <CardContent>
                   <div className='flex flex-row justify-center'>
-                    
-                    <HowToPlay />
-
                     <div className=''>
                       <ChessPuzzle.Reset
                         asChild
@@ -219,7 +226,7 @@ export default function ChessDailyQuizPage() {
                       </ChessPuzzle.Reset>
                     </div>
 
-                    <div className=''>
+                    <div className='px-4'>
                       <ChessPuzzle.Reset
                         asChild
                         puzzle={{
