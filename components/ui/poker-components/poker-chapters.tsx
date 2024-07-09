@@ -175,6 +175,7 @@ const Chapter2 = () => {
           width={800}
           height={800}
           className='mt-4'
+          style={{ height: 'auto' }}
         />
       </Board>
       <StyledLi>
@@ -333,6 +334,7 @@ const Chapter4 = () => {
           width={800}
           height={800}
           className='mt-4'
+          style={{ height: 'auto' }}
         />
       </Board>
       <StyledLi>

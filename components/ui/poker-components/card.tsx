@@ -46,7 +46,7 @@ const CardSection: React.FC<CardSectionProps> = ({
   const imagePath = `/cards/${imageString}.png`
   return (
     <div className={cn('h-full', className)} style={style} {...props}>
-      <Image src={imagePath} alt={imageString} width={150} height={150} />
+      <Image src={imagePath} alt={imageString} width={150} height={150} style={{ height: 'auto' }} />
     </div>
   )
 }
