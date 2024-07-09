@@ -83,7 +83,7 @@ export default function Leaderboard() {
                             </Link>
 
                             <Link
-                                href='/pages/coming-soon'
+                                href='/pages/poker-guide'
                                 className='px-4 py-1 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'
                             >
                                 <Image

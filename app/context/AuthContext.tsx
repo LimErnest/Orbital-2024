@@ -403,7 +403,7 @@ export const AuthContextProvider = ({
         updateBadge,
         checkChessGuide,
         updatePokerChapter,
-        checkPokerGuide
+        checkPokerGuide,
         updateAttempt,
         updateUserTries,
         updatePuzzle,

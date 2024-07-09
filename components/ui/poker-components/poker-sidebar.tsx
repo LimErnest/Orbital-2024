@@ -44,8 +44,9 @@ const PokerSidebar: React.FC<PokerSidebarProps> = ({ highlightedLink }) => {
               src='/img/home_icon.jpg'
               alt='Home'
               width={30}
-              height={10}
+              height={30}
               className='mr-2'
+              style={{ height: 'auto' }}
             />
             Home
           </Link>
@@ -64,8 +65,9 @@ const PokerSidebar: React.FC<PokerSidebarProps> = ({ highlightedLink }) => {
               src='/img/poker_icon.jpg'
               alt='Chess'
               width={30}
-              height={10}
+              height={30}
               className='mr-2'
+              style={{ height: 'auto' }}
             />
             Guide
           </Link>
@@ -84,30 +86,11 @@ const PokerSidebar: React.FC<PokerSidebarProps> = ({ highlightedLink }) => {
               src='/img/poker_icon.jpg'
               alt='Chess-DailyQuiz'
               width={30}
-              height={10}
+              height={30}
               className='mr-2'
+              style={{ height: 'auto' }}
             />
             Daily Quiz
-          </Link>
-
-          <Link
-            href='/pages/coming-soon'
-            className={cn(
-              buttonVariants({
-                variant: 'ghost',
-                className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'leaderboard' ? 'bg-blue-300' : ''
-                  }`
-              })
-            )}
-          >
-            <Image
-              src='/img/poker_icon.jpg'
-              alt='Poker'
-              width={30}
-              height={10}
-              className='mr-2'
-            />
-            Leaderboard
           </Link>
 
           {hasCompletedGuide || highlightedLink == 'final' ? (
@@ -125,8 +108,9 @@ const PokerSidebar: React.FC<PokerSidebarProps> = ({ highlightedLink }) => {
                 src='/img/poker_icon.jpg'
                 alt='Poker'
                 width={30}
-                height={10}
+                height={30}
                 className='mr-2'
+                style={{ height: 'auto' }}
               />
               Final Quest
             </Link>
@@ -146,8 +130,9 @@ const PokerSidebar: React.FC<PokerSidebarProps> = ({ highlightedLink }) => {
                     src='/img/poker_icon.jpg'
                     alt='Poker'
                     width={30}
-                    height={10}
+                    height={30}
                     className='mr-2'
+                    style={{ height: 'auto' }}
                   />
                   Final Quest
                 </div>
