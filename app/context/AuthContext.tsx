@@ -128,11 +128,15 @@ export const AuthContextProvider = ({
       const chessGuideDoc = setDoc(doc(db, 'chessguide', user.uid), {
         lastChapter: 1
       })
+
+      const pokerGuideDoc = setDoc(doc(db, 'pokerguide', user.uid), {
+        lastChapter: 1
+      })
       const finalQuestDoc = setDoc(doc(db, 'finalQuest', user.uid), {
         finalQuestPuzzleID: 1,
         isCompleted: false
       })
-      await Promise.all([badgesDoc, ratingDoc, xpDoc, chessGuideDoc, finalQuestDoc])
+      await Promise.all([badgesDoc, ratingDoc, xpDoc, chessGuideDoc, finalQuestDoc, pokerGuideDoc])
     }
   }
 
@@ -231,13 +235,42 @@ export const AuthContextProvider = ({
     }
   }
 
-  const checkGuide = async () => {
+  const checkChessGuide = async () => {
     if (currentUser) {
       const docRef = doc(db, 'badges', currentUser.uid)
       const docSnap = await getDoc(docRef)
       const data = docSnap.data()
       if (data) {
         return data.chess100Guide
+      }
+    }
+  }
+
+  const updatePokerChapter = async (chapter: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'pokerguide', currentUser.uid)
+      const docSnap = await getDoc(docRef)
+      const data = docSnap.data()
+      if (data) {
+        if (data.lastChapter > chapter) {
+          return data.lastChapter
+        } else {
+          await setDoc(docRef, { lastChapter: chapter })
+          return chapter
+        }
+      } else {
+        await setDoc(docRef, { lastChapter: chapter })
+      }
+    }
+  }
+
+  const checkPokerGuide = async () => {
+    if (currentUser) {
+      const docRef = doc(db, 'badges', currentUser.uid)
+      const docSnap = await getDoc(docRef)
+      const data = docSnap.data()
+      if (data) {
+        return data.poker50Guide
       }
     }
   }
@@ -355,7 +388,6 @@ export const AuthContextProvider = ({
     return arrayOfUsers
   }
 
-
   return (
     <AuthContext.Provider
       value={{
@@ -369,7 +401,9 @@ export const AuthContextProvider = ({
         addXp,
         updateChessChapter,
         updateBadge,
-        checkGuide,
+        checkChessGuide,
+        updatePokerChapter,
+        checkPokerGuide
         updateAttempt,
         updateUserTries,
         updatePuzzle,

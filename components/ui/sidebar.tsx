@@ -11,8 +11,8 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  DialogTrigger
+} from '@/components/ui/dialog'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { useAuth } from '../../app/context/AuthContext'
 import { Icons } from './icon'
@@ -21,7 +21,7 @@ import { Badges } from '@/components/ui/badges'
 import { Settings } from '@/components/ui/settings'
 import { XpBar } from './xpbar'
 
-interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> { }
+interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
   const { logOut, user } = useAuth()
@@ -70,6 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
         >
           Guidance
         </Link>
+        
         <div className='flex flex-row items-center px-4 pb-3'>
           <Avatar className='h-[3rem] w-[3rem]'>
             <AvatarImage src={profilePicture} alt='User' />
@@ -137,7 +138,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
 }
 
 export interface SidebarSectionProps
-  extends React.HTMLAttributes<HTMLDivElement> { }
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 const SidebarSection: React.FC<SidebarSectionProps> = ({
   children,
