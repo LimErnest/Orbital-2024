@@ -4,7 +4,7 @@ import { Sidebar, SidebarSection } from '@/components/ui/sidebar'
 import { Button, buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useAuth } from '../../app/context/AuthContext'
+import { useAuth } from '../../../app/context/AuthContext'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import {
@@ -12,18 +12,17 @@ import {
   HoverCardContent,
   HoverCardTrigger
 } from '@/components/ui/hover-card'
-import { userAgent } from 'next/server'
 
-interface ChessSidebarProps {
+interface PokerSidebarProps {
   highlightedLink: string;
 }
 
-const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
-  const { user, checkChessGuide } = useAuth()
+const PokerSidebar: React.FC<PokerSidebarProps> = ({ highlightedLink }) => {
+  const { user, checkPokerGuide } = useAuth()
   const [hasCompletedGuide, setHasCompletedGuide] = useState(false)
 
   useEffect(() => {
-    checkChessGuide().then((completed: boolean) => {
+    checkPokerGuide().then((completed: boolean) => {
       setHasCompletedGuide(completed)
     })
   }, [user])
@@ -45,15 +44,14 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
               src='/img/home_icon.jpg'
               alt='Home'
               width={30}
-              height={30}
+              height={10}
               className='mr-2'
-              style={{ height: 'auto' }}
             />
             Home
           </Link>
 
           <Link
-            href='/pages/chess-guide'
+            href='/pages/poker-guide'
             className={cn(
               buttonVariants({
                 variant: 'ghost',
@@ -63,18 +61,17 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
             )}
           >
             <Image
-              src='/img/pawn_icon.jpg'
+              src='/img/poker_icon.jpg'
               alt='Chess'
               width={30}
-              height={30}
+              height={10}
               className='mr-2'
-              style={{ height: 'auto' }}
             />
             Guide
           </Link>
 
           <Link
-            href='/pages/chess-daily'
+            href='/pages/poker-daily'
             className={cn(
               buttonVariants({
                 variant: 'ghost',
@@ -84,19 +81,38 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
             )}
           >
             <Image
-              src='/img/pawn_icon.jpg'
+              src='/img/poker_icon.jpg'
               alt='Chess-DailyQuiz'
               width={30}
-              height={30}
+              height={10}
               className='mr-2'
-              style={{ height: 'auto' }}
             />
             Daily Quiz
           </Link>
 
+          <Link
+            href='/pages/coming-soon'
+            className={cn(
+              buttonVariants({
+                variant: 'ghost',
+                className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'leaderboard' ? 'bg-blue-300' : ''
+                  }`
+              })
+            )}
+          >
+            <Image
+              src='/img/poker_icon.jpg'
+              alt='Poker'
+              width={30}
+              height={10}
+              className='mr-2'
+            />
+            Leaderboard
+          </Link>
+
           {hasCompletedGuide || highlightedLink == 'final' ? (
             <Link
-              href='/pages/chess-finalQuest'
+              href='/pages/poker-finalQuest'
               className={cn(
                 buttonVariants({
                   variant: 'ghost',
@@ -106,12 +122,11 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
               )}
             >
               <Image
-                src='/img/pawn_icon.jpg'
+                src='/img/poker_icon.jpg'
                 alt='Poker'
                 width={30}
-                height={30}
+                height={10}
                 className='mr-2'
-                style={{ height: 'auto' }}
               />
               Final Quest
             </Link>
@@ -128,12 +143,11 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
                   )}
                 >
                   <Image
-                    src='/img/pawn_icon.jpg'
+                    src='/img/poker_icon.jpg'
                     alt='Poker'
                     width={30}
-                    height={30}
+                    height={10}
                     className='mr-2'
-                    style={{ height: 'auto' }}
                   />
                   Final Quest
                 </div>
@@ -149,4 +163,4 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
   )
 }
 
-export { ChessSidebar }
+export { PokerSidebar }
