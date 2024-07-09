@@ -9,10 +9,21 @@ import {
   updateProfile,
   updatePassword,
   EmailAuthProvider,
-  reauthenticateWithCredential
+  reauthenticateWithCredential,
+  getAuth
 } from 'firebase/auth'
 import { auth, db } from '../../firebase/firebase'
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs
+} from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 interface UserType {
@@ -23,6 +34,13 @@ interface UserType {
   profilePicture: string | null
   xp: number | null
 }
+
+interface UserXP {
+  xp: number
+  username: string
+}
+
+type Rating = '400' | '500' | '600' | '700' | '800' | '900' | '1000' | '1100'
 
 const AuthContext = createContext({})
 
@@ -47,6 +65,10 @@ export const AuthContextProvider = ({
         const docRef = doc(db, 'xp', user.uid)
         const docSnap = await getDoc(docRef)
         const data = docSnap.data()
+        updateDoc(docRef, {
+          username: user.displayName
+        })
+
         setUser({
           email: user.email,
           uid: user.uid,
@@ -100,23 +122,32 @@ export const AuthContextProvider = ({
         threePuzzleCorrect: false
       })
       const xpDoc = setDoc(doc(db, 'xp', user.uid), {
-        xp: 0
+        xp: 0,
+        username: ""
       })
       const chessGuideDoc = setDoc(doc(db, 'chessguide', user.uid), {
         lastChapter: 1
       })
+
       const pokerGuideDoc = setDoc(doc(db, 'pokerguide', user.uid), {
         lastChapter: 1
       })
-      await Promise.all([badgesDoc, ratingDoc, xpDoc, chessGuideDoc, pokerGuideDoc])
+      const finalQuestDoc = setDoc(doc(db, 'finalQuest', user.uid), {
+        finalQuestPuzzleID: 1,
+        isCompleted: false
+      })
+      await Promise.all([badgesDoc, ratingDoc, xpDoc, chessGuideDoc, finalQuestDoc, pokerGuideDoc])
     }
   }
 
   const updateUsername = async (username: string) => {
+
     if (currentUser) {
       await updateProfile(currentUser, { displayName: username }).catch(err =>
         console.log(err)
       )
+      const docRef = doc(db, 'xp', currentUser.uid)
+      await updateDoc(docRef, { username: username })
       setUser({
         email: user.email,
         uid: user.uid,
@@ -167,7 +198,7 @@ export const AuthContextProvider = ({
       const docSnap = await getDoc(docRef)
       const data = docSnap.data()
       const newXP = data?.xp + xp
-      await setDoc(docRef, { xp: newXP })
+      await updateDoc(docRef, { xp: newXP })
       setUser({
         email: user.email,
         uid: user.uid,
@@ -200,9 +231,7 @@ export const AuthContextProvider = ({
   const updateBadge = async (updatedBadge: string) => {
     if (currentUser) {
       const docRef = doc(db, 'badges', currentUser.uid)
-      await updateDoc(docRef, {
-        [updatedBadge]: true
-      })
+      await updateDoc(docRef, { [updatedBadge]: true })
     }
   }
 
@@ -246,6 +275,119 @@ export const AuthContextProvider = ({
     }
   }
 
+  const updateAttempt = async (newAttempt: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      await updateDoc(docRef, { attempts: newAttempt })
+    }
+  }
+
+  const updateUserTries = async (date: string) => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      await updateDoc(docRef, { attempts: 3, threePuzzleCorrect: false, latestDate: date })
+    }
+  }
+
+  const updatePuzzle = async (newPuzzleID: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      await updateDoc(docRef, { puzzleID: newPuzzleID })
+    }
+  }
+
+  const updateRating = async (newRating: Rating) => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      await updateDoc(docRef, { chessRating: newRating })
+    }
+  }
+
+  const updateCorrectCount = async (newCorrectCount: number, completedThreePuzzle: boolean) => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      await updateDoc(docRef, { noOfCorrect: newCorrectCount, threePuzzleCorrect: completedThreePuzzle })
+    }
+  }
+
+  const fetchUserRating = async () => {
+    if (currentUser) {
+      const docRef = doc(db, 'rating', currentUser.uid)
+      const docSnap = await getDoc(docRef)
+      const data = docSnap.data()
+
+      if (data) {
+        return {
+          chessRating: data.chessRating,
+          attempts: data.attempts,
+          puzzleID: data.puzzleID,
+          noOfCorrect: data.noOfCorrect,
+          latestDate: data.latestDate,
+          threePuzzleCorrect: data.threePuzzleCorrect
+        }
+      } else {
+        console.log('No such document!')
+        return {
+          chessRating: '400',
+          attempts: 0,
+          puzzleID: 1,
+          noOfCorrect: 0,
+          lastestDate: new Date().toLocaleDateString(),
+          threePuzzleCorrect: false
+        }
+      }
+    }
+  }
+
+  const updateFinalPuzzle = async (newPuzzleID: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'finalQuest', currentUser.uid)
+      await updateDoc(docRef, { finalQuestPuzzleID: newPuzzleID })
+    }
+  }
+
+  const updateFinalQuestStatus = async () => {
+    if (currentUser) {
+      const docRef = doc(db, 'finalQuest', currentUser.uid)
+      await updateDoc(docRef, { isCompleted: true })
+    }
+  }
+
+  const fetchFinalQuest = async (uid: string) => {
+    const docRef = doc(db, 'finalQuest', uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+
+      const data = docSnap.data();
+      console.log('exists', data)
+      return {
+        finalQuestPuzzleID: data.finalQuestPuzzleID,
+        isCompleted: data.isCompleted
+      }
+    } else {
+      console.log("No such document!")
+      return {
+        finalQuestPuzzleID: 1,
+        isCompleted: false
+      }
+    }
+
+  }
+
+  const queryCollection = async () => {
+    const xpRef = collection(db, 'xp')
+    const q = await query(xpRef, orderBy("xp", "desc"), limit(20));
+    const users = await getDocs(q)
+    const arrayOfUsers: UserXP[] = []
+    users.forEach(user => {
+      const player = user.data()
+      arrayOfUsers.push({ xp: player.xp, username: player.username })
+      console.log(player.xp, player.username)
+    })
+    return arrayOfUsers
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -262,6 +404,16 @@ export const AuthContextProvider = ({
         checkChessGuide,
         updatePokerChapter,
         checkPokerGuide
+        updateAttempt,
+        updateUserTries,
+        updatePuzzle,
+        updateRating,
+        updateCorrectCount,
+        fetchUserRating,
+        updateFinalPuzzle,
+        updateFinalQuestStatus,
+        fetchFinalQuest,
+        queryCollection
       }}
     >
       {children}
