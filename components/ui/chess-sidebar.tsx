@@ -19,11 +19,11 @@ interface ChessSidebarProps {
 }
 
 const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
-  const { user, checkGuide } = useAuth()
+  const { user, checkChessGuide } = useAuth()
   const [hasCompletedGuide, setHasCompletedGuide] = useState(false)
 
   useEffect(() => {
-    checkGuide().then((completed: boolean) => {
+    checkChessGuide().then((completed: boolean) => {
       setHasCompletedGuide(completed)
     })
   }, [user])

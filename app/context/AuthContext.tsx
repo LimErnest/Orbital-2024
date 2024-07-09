@@ -206,7 +206,7 @@ export const AuthContextProvider = ({
     }
   }
 
-  const checkGuide = async () => {
+  const checkChessGuide = async () => {
     if (currentUser) {
       const docRef = doc(db, 'badges', currentUser.uid)
       const docSnap = await getDoc(docRef)
@@ -235,6 +235,17 @@ export const AuthContextProvider = ({
     }
   }
 
+  const checkPokerGuide = async () => {
+    if (currentUser) {
+      const docRef = doc(db, 'badges', currentUser.uid)
+      const docSnap = await getDoc(docRef)
+      const data = docSnap.data()
+      if (data) {
+        return data.poker50Guide
+      }
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -248,8 +259,9 @@ export const AuthContextProvider = ({
         addXp,
         updateChessChapter,
         updateBadge,
-        checkGuide,
-        updatePokerChapter
+        checkChessGuide,
+        updatePokerChapter,
+        checkPokerGuide
       }}
     >
       {children}

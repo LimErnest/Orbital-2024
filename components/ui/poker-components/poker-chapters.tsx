@@ -531,108 +531,107 @@ const Chapter8 = () => {
 const Chapter9 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>Castling</StyledH1>
+      <StyledH1>What is C-Betting?</StyledH1>
       <StyledLi>
-        If you haven't yet moved your king and rook, you have the option of
-        making a special move called castling. Because the king is such a
-        valuable piece, we often want to hide him away in the corner where the
-        opponent can't get at him. We also want to bring our rooks into play
-        from the corner. The beauty of castling is that it allows us to
-        accomplish both these goals in a single move, but it is only possible to
-        castle once per game.
-      </StyledLi>
-      <StyledH1>How to castle</StyledH1>
-      <StyledLi>
-        First, let's divide the board vertically into two halves. In chess, we
-        call the two halves of the board the Kingside, which is the half of the
-        board where the king starts, and the Queenside, which is the half of the
-        board where the queen starts. See the diagram below for an illustration
-        of this:
-      </StyledLi>
-      <Board>
-        <StyledH1>Queenside</StyledH1>
-        <Chessboard
-          position='3qk3/8/8/8/8/8/8/3QK3'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
-        <StyledH1>Kingside</StyledH1>
-      </Board>
-      <StyledLi>
-        You can castle on the kingside (also known as short castling) or the
-        queenside (also known as long castling), but the king and the rook on
-        the side you want to castle must both be on their starting square, and
-        the squares between them must all be empty. If you have moved your king,
-        you cannot castle, even if you move him back to his starting square. The
-        same goes for the rooks.
+        First of all, let's define what a continuation bet (C-bet) actually is:
+        an opening bet on the flop after having raised pre-flop. The
+        'continuation' in the name refers to the continued aggression being
+        displayed at every available opportunity.
       </StyledLi>
       <StyledLi>
-        To castle, you first move your king two squares towards the rook. Then
-        you jump the rook to the square on the other side of the king. It's the
-        only time in a game of chess that a piece other than the knight is
-        allowed to jump, and the only time that you are allowed to move two
-        pieces at once.
+        Whether or not to make a post-flop continuation bet after you have been
+        the pre-flop aggressor is one of the first multi-layered decisions poker
+        players are faced with. Several factors should come into play when
+        deciding whether to make a C-bet:
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='r3k3/8/8/8/8/8/8/4K2R'
-          boardWidth={300}
-          arePiecesDraggable={false}
-        />
-        <Chessboard
-          position='2kr4/8/8/8/8/8/8/5RK1'
-          boardWidth={300}
-          arePiecesDraggable={false}
-        />
-      </Board>
+      <ul className='list-disc pl-10'>
+        <StyledLi>the board texture</StyledLi>
+        <StyledLi>your position</StyledLi>
+        <StyledLi>how many players are in the hand</StyledLi>
+        <StyledLi>whether or not you hit the flop</StyledLi>
+        <StyledLi>your opponents' tendencies</StyledLi>
+      </ul>
       <StyledLi>
-        You cannot castle if there are pieces between the king and rook. On the
-        board below, white cannot castle to either side.
+        Ironically, perhaps the least important of these factors is whether or
+        not you hit the flop. A good C-bet can win you a hand when you miss the
+        board because you are capitalizing on the perception of strength created
+        with your pre-flop raise. A C-bet is generally intended to take down the
+        pot right then, although a secondary consideration is to build up a pot
+        when you have a really strong hand.
+      </StyledLi>
+      <StyledLi>
+        A good C-bet strategy is really predicated for a heads-up confrontation.
+        If there are three players in the pot, position becomes very important
+        when deciding whether to C-bet. If there are more than three players in
+        the pot, your C-bet frequency should be very low, and should be based
+        solely on whether or not you connected with the flop.
+      </StyledLi>
+      <StyledH1>Good Board, Bad Board</StyledH1>
+      <StyledLi>
+        Dry boards - those without obvious draws - are ideal for making C-bets.
+        Any rainbow board (i.e. three different suits represented) with no ace
+        and only one Broadway card means any opponent playing a speculative hand
+        (such as any two suited cards, or something like an 8-9 or J-T) likely
+        missed the flop and will need to hit runner-runner cards - two perfect
+        cards in a row - to make a strong hand. They will likely bail at the
+        first sign of pressure. Below is an example of a dry board:
       </StyledLi>
       <Board>
-        <Chessboard
-          position='8/8/8/8/8/8/8/Rb2K1NR'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
+        <Card community={true} cards={'JS 7D 4C'} />
       </Board>
       <StyledLi>
-        You cannot castle if your king is in check. If you are in check, you
-        cannot get out of check by castling. However, if you can get out of
-        check without moving your king (such as by blocking or by capturing the
-        checking piece), then you can still castle later. Some people think that
-        you have to forfeit castling rights if you have previously been in
-        check, but this is not true so long as your king remains unmoved on his
-        starting square. On the board below, black is currently in check so
-        cannot castle.
+        The same goes for rainbow boards with an ace. Since you raised pre-flop,
+        your opponents will be more inclined to believe you have an ace if you
+        follow up with a strong C-bet. Again, a C-bet here should eliminate
+        players with speculative hands, and it may also chase away timid players
+        with middle pair or pocket pairs.
       </StyledLi>
       <Board>
-        <Chessboard
-          position='4k2r/8/8/1Q6/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
+        <Card community={true} cards={'AD 7C 6S'} />
       </Board>
       <StyledLi>
-        You cannot castle if, at the end of castling, your king would be in
-        check. You also cannot castle if the square that you would need to move
-        your king across is threatened by an enemy piece - that is, if your king
-        would be in check if he stood on that square. In the diagram below, the
-        white king cannot castle queenside, because he would end up in check
-        from the black knight, and he cannot castle kingside because he would
-        have to cross a square threatened by the black rook.
+        Note that if your C- bet is called, it may be wise to slow down on the
+        turn. Opponents with strong, disguised hands (sets, two pair), are
+        likely to slow-play a dry flop, hoping to encourage you to make another
+        stab at the pot on the turn. Also be wary of check-raises, as they are
+        generally an indicator of a strong hand.
+      </StyledLi>
+      <StyledLi>
+        Conversely, wet flops (dangerous boards with lots of potential draws or
+        strong hands) are not ideal for C-betting, especially if you missed.
+        Boards with flush draws and straight draws, or two Broadway cards,
+        should be treated with caution when you fail to connect. A player with a
+        flush or straight draw, or who has hit top pair, is most likely not
+        going away.
       </StyledLi>
       <Board>
-        <Chessboard
-          position='8/8/8/5r2/8/1n6/8/R3K2R'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['b3', 'c1'],
-            ['f5', 'f1']
-          ]}
-        />
+        <Card community={true} cards={'QD 8D 2D'} />
       </Board>
+      <Board>
+        <Card community={true} cards={'9D 8C 7S'} />
+      </Board>
+      <Board>
+        <Card community={true} cards={'KS KH 8S'} />
+      </Board>
+      <StyledLi>
+        If you flop a set or two pair, making a C-bet is standard, especially if
+        you are in position. You want to extract maximum value from your strong
+        hand, and you don't want to make it cheap for a player to suck out on
+        you. Many players will tell you a C- bet should also be automatic if you
+        flop a flush or an open-ended straight draw, but this play is really
+        dependent on position. If you are first to act, it may be wiser to check
+        and see if you can get a turn card for free, especially if there are
+        more than two players in the pot. You don't want to put chips into a pot
+        when playing a speculative hand if you can avoid it, and you also open
+        yourself up to a raise.
+      </StyledLi>
+      <StyledLi>
+        If you have position, and your opponents have shown the tendency to fold
+        to C-bets, then betting may enable you to take the pot down right there.
+        If not, it will likely allow you to see the turn and river cards without
+        any more bets, especially if your opponents are passive. Again, this is
+        where you want to be wary of check-raises.
+      </StyledLi>
     </div>
   )
 }
@@ -640,88 +639,88 @@ const Chapter9 = () => {
 const Chapter10 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>En Passant</StyledH1>
+      <StyledH1>Continuation Bet Sizing</StyledH1>
       <StyledLi>
-        En Passant is a french expression that means 'in passing'. It is a
-        special type of capture that pawns can make under very specific
-        circumstances. It's not a very difficult rule to understand, but many
-        people never learn it and may accuse you of cheating when your pawn
-        suddenly makes a move they weren't expecting! However, if you want to
-        improve at chess, and especially if you want to play in leagues and
-        tournaments, then it's vital that you know all the rules of chess and
-        not just the easy ones!
+        The size of a C-bet is also an important consideration. In general, the
+        size of a continuation bet should be between half and full pot. Various
+        factors will decide where on the spectrum your bet should fall.
       </StyledLi>
-      <StyledH1>How the En Passant rule works</StyledH1>
-      <StyledLi>Take a look at the board below.</StyledLi>
+      <StyledLi>
+        If you have connected with the flop on a coordinated board, bet closer
+        to full pot for two reasons:
+      </StyledLi>
+      <ul className='list-disc pl-10'>
+        <StyledLi>
+          a coordinated board increases the likelihood you will get callers, and
+          you want callers because of your pot equity.
+        </StyledLi>
+        <StyledLi>
+          you want the people who are playing draws to pay through the nose to
+          hit them. Don't make it cheap or easy to chase a straight or flush,
+          and keep the pressure up on the turn.
+        </StyledLi>
+      </ul>
       <Board>
-        <Chessboard
-          position='8/3p4/8/4P3/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-        />
+        <Card community={true} cards={'QD 8D 2D'} />
+        <div className='mr-40 flex flex-row items-center gap-20'>
+          <StyledH1>Your hand</StyledH1>
+          <Card community={false} cards={'7D 6D'} />
+        </div>
       </Board>
       <StyledLi>
-        If the black pawn moves one square, then the white pawn can capture it
-        on the next move. So, black may decide to move it two squares instead,
-        to try and rush past white's pawn without being taken. Then the board
-        would look like this:
+        If you hit the flop on a dry board, you likely want to bet closer to
+        half the pot. Most players will likely fold, but if you get a caller, it
+        could be an indication they have connected in a big way. An overpair or
+        top pair with top kicker could get you in serious trouble in these
+        situations.
       </StyledLi>
       <Board>
-        <Chessboard
-          position='8/8/8/3pP3/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[['d7', 'd5']]}
-        />
+        <Card community={true} cards={'KS 8H 7C'} />
+        <div className='mr-40 flex flex-row items-center gap-20'>
+          <StyledH1>Your hand</StyledH1>
+          <Card community={false} cards={'6S 5S'} />
+        </div>
       </Board>
       <StyledLi>
-        However, en passant is a special rule designed to stop players from
-        being able to sneak their pawns past like this. White is able to capture
-        the pawn as if it had only moved one square. The white pawn moves
-        diagonally forward as if the enemy pawn had only moved one square, and
-        the black pawn is removed from the board. See the result below:
+        If you miss the flop on a coordinated board, it's probably not a good
+        idea to C-bet, even if you have position. However, if you miss the flop
+        on a dry board, C-betting is a good play.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/3P4/8/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[['e5', 'd6']]}
-        />
-      </Board>
+      <StyledH1>
+        Continuation Betting Based On Your Opponent's Tendencies
+      </StyledH1>
       <StyledLi>
-        In order to do an en passant capture, your pawn must be on the fifth
-        rank from your side of the board (we refer to horizontal rows as 'ranks'
-        in chess), the enemy pawn must be on an adjacent file (a 'file' is what
-        we call a vertical column), and it must move two squares in one go.
-        Then, on the very next move, you can capture the enemy pawn en passant,
-        but if you don't do it immediately, then you lose the right.
+        As always, it is important to get a feel for how your opponents play.
       </StyledLi>
       <StyledLi>
-        On the following board, en passant is not possible because the white
-        pawn is on the sixth rank. Your pawn must be on the fifth rank only in
-        order to capture en passant.
+        Passive players (those whose primary move is a check-call) are generally
+        not going to fold, so if you miss the flop, a C-bet will not serve its
+        intended purpose in getting them to fold. Therefore, you may want to see
+        as many cards as possible for free, hope that you eventually hit
+        something, and then bet. Remember, if a passive player comes out firing,
+        it is generally an indication they have hit something. Conversely, if
+        you have hit the flop, C-betting should help build the pot, as the
+        player has shown they are unlikely to fold.
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/4P3/3p4/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[['d7', 'd5']]}
-        />
-      </Board>
       <StyledLi>
-        On the board below, en passant is not possible either, because the black
-        pawn has only moved one square.
+        Aggressive players require a different strategy. One of the best ways to
+        counter aggression is with aggression. If an aggressive player takes
+        away your C-bet by leading out after the flop, don't be afraid to raise.
+        Again, the strength of your hand is often not important, as you are
+        betting against your opponent's tendencies (aggressive players have a
+        much greater bluff frequency).
       </StyledLi>
-      <Board>
-        <Chessboard
-          position='8/8/4P3/3p4/8/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[['d6', 'd5']]}
-        />
-      </Board>
+      <StyledLi>
+        If you are first to act against an aggressive player and hit the flop,
+        check-raising to take advantage of their proclivity to bet is also a
+        good play.
+      </StyledLi>
+      <StyledLi>
+        Developing a good C-betting strategy is critical. But like everything in
+        poker, you can't become predictable. Following the strategies outlined
+        above should improve your win-rate and add yet another arrow to your
+        quiver.
+      </StyledLi>
     </div>
   )
 }
@@ -729,93 +728,77 @@ const Chapter10 = () => {
 const Chapter11 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>Draws</StyledH1>
+      <StyledH1>Three Betting</StyledH1>
       <StyledLi>
-        Sometimes, it can become impossible for either player to win the game,
-        and in these situations, the game ends in a draw. At the very highest
-        levels of competitive chess, over half of all games end in a draw
-        because the players make so few mistakes. Don't worry, though - at lower
-        levels, draws are much less common, although they do still happen from
-        time to time. Here you will learn about the different ways a game can
-        end in a draw.
+        Three betting is the act of re-raising a raise. It is a powerful tool to
+        add to your poker arsenal, and can be used to win pots pre-flop,
+        post-flop, and on the turn. The key to three betting is to be aggressive
+        and to use it selectively. You don't want to three bet every time you
+        have a strong hand, as your opponents will quickly catch on and start
+        folding to your three bets. You also don't want to three bet every time
+        you have a weak hand, as your opponents will catch on to that as well
+        and start four betting you. The key is to three bet when you have a
+        strong hand, but also to mix in some bluffs to keep your opponents
+        guessing.
       </StyledLi>
-      <StyledH1>Draw by mutual agreement</StyledH1>
+      <StyledH1>Optimal 3-Bet Percentage</StyledH1>
       <StyledLi>
-        The two players can agree to end a game in a draw at any time,
-        regardless of the position on the board or how many moves have been
-        made. Usually this happens when neither player can see a way to make
-        progress, or both players realise that the game will eventually end in a
-        draw anyway so there is no point carrying on.
+        An optimal 3-bet percentage is roughly the same in position and out of
+        position. Some say you should 3-bet more in position than out of
+        position, and many would agree it's wise to skew your ranges slightly in
+        this direction. However, in today's games, as more players are aware of
+        the recommended 3-bet percentage from each position, if you 3-bet too
+        frequently from the button or cutoff positions, you will get exploited.
       </StyledLi>
-      <StyledH1>Insufficient material</StyledH1>
+      <StyledH1>3-Betting Against Good Players</StyledH1>
       <StyledLi>
-        In chess, 'material' refers to all the pieces a player has on the board.
-        If so many pieces get captured that neither player has enough left to
-        checkmate the enemy king, the game is drawn due to insufficient
-        material. How little material does there need to be, in order to draw a
-        game this way? The following four combinations of pieces all result in
-        an automatic draw:
-      </StyledLi>
-      <ul className='list-disc pl-5'>
-        <StyledLi>King vs king with no other pieces.</StyledLi>
-        <StyledLi>King and bishop vs king.</StyledLi>
-        <StyledLi>King and knight vs king.</StyledLi>
-        <StyledLi>
-          King and bishop vs king and bishop of the same coloured square.
-        </StyledLi>
-      </ul>
-      <StyledH1>Stalemate</StyledH1>
-      <StyledLi>
-        Perhaps the most famous type of draw, stalemate is in fact very rare in
-        practice. It occurs when the player whose turn it is to move is not in
-        check, but has no legal moves. You can't skip a turn in chess, so if you
-        have no moves and it isn't checkmate, then the game ends in a draw. When
-        you're winning a game and your opponent has few pieces left, it's best
-        to take care that you don't accidentally cause a stalemate. On the board
-        below, it is black's turn, but there are no legal moves available, so it
-        is stalemate.
-      </StyledLi>
-      <Board>
-        <Chessboard
-          position='7k/8/7K/8/6R1/8/8/8'
-          boardWidth={400}
-          arePiecesDraggable={false}
-          customArrows={[
-            ['h6', 'h7'],
-            ['g4', 'g8']
-          ]}
-        />
-      </Board>
-      <StyledH1>Threefold repetition</StyledH1>
-      <StyledLi>
-        If the exact same position occurs three times, with the same player to
-        move, then either player can claim a draw by threefold repetition. The
-        game doesn't end in a draw automatically, so you can carry on if you
-        want to, but if either player claims the draw, then the game ends
-        immediately even if the other player wants to carry on. A common type of
-        threefold repetition is known as 'perpetual check', in which one player
-        checks the other repeatedly. This is sometimes used to force a draw when
-        the player giving the checks would otherwise lose.
-      </StyledLi>
-      <StyledH1>The 50 move rule</StyledH1>
-      <StyledLi>
-        If 50 moves have passed since the last pawn move or capture, then either
-        player can claim a draw by the 50 move rule. Like threefold repetition,
-        it isn't an automatic draw, so if a player wants the draw then they have
-        to claim it. Of course, this means keeping count of moves, but in
-        tournament chess the players are normally required to record their moves
-        in case of disputes so this normally isn't a problem. This rule is
-        necessary to stop a game going on forever if neither side is making
-        progress. The players may be happy to shuffle their pieces around until
-        kingdom come, but tournament arbiters want to go home to bed at the end
-        of the day! Thanks to the 50 move rule, even if your opponent insists on
-        playing on in a position that neither of you can win, you can rest
-        assured the game will be drawn eventually.
+        Let's imagine a standard 6-Max player who's a regular in the game. It's
+        not uncommon for them to fold 65% of the time when 3-bet from the blinds
+        vs their raise from the cutoff. However, take the same player but you
+        are in the cutoff and they are UTG+1. In this position they are likely
+        to fold 75-85% of the time to your 3-bet. And the times when they do
+        play back, they are most likely 4-betting for value/bluff and flatting a
+        very small percentage of the time.
       </StyledLi>
       <StyledLi>
-        Now we've covered all the rules of chess! In the final part, we'll
-        summarise what you've just learned, and then you'll be ready to play
-        your first game of chess!
+        For that reason, you should be 3-betting a range consisting of hands you
+        want to get all-in preflop. In this spot it might be JJ+, for example.
+        And you should also 3-bet a range of hands that you cannot flat call
+        profitably so decide to re-raise.
+      </StyledLi>
+      <StyledH1>3-Bet Bluff Hands</StyledH1>
+      <StyledLi>
+        You should 3-bet bluff using the best hands for which you cannot flat
+        call profitably. For example, if you cannot flat hands as strong as QJo
+        and ATo in position, add those to your bluff 3-betting range. They will
+        have more post-flop equity than hands like off-suit connectors, even if
+        they are dominated a portion of the time.
+      </StyledLi>
+      <StyledLi>
+        Note that you are not looking to 3-bet JQo or ATo and automatically
+        stack off when you make a pair in position. Most likely your hand will
+        fall into the medium strength category and you will be looking to
+        control the size of the pot depending on the board and possibly get one
+        or two streets of value.
+      </StyledLi>
+      <StyledH1>3-Betting Against Bad Players</StyledH1>
+      <StyledLi>
+        All of the advice and strategy above applies to players of a decent
+        standard. Everything changes when it comes to weaker and less
+        experienced players.
+      </StyledLi>
+      <StyledLi>
+        The reason you should not polarize when playing these weaker players is
+        because, in general, they will call a lot more 3-bets, even out of
+        position. Against them you need to open up your value 3-betting range,
+        and never 3-bet with bluff hands.
+      </StyledLi>
+      <StyledLi>
+        Basically, what you are doing is getting to the weaker players before
+        anyone else can, i.e. isolating them with your AT, QJ, KJ, KQ, and AJ
+        hands (any two Broadway cards) instead of flatting and allowing another
+        player to do the same. You can also try 3-betting them to a smaller
+        amount to induce even more calls from weaker hands out of position.
       </StyledLi>
     </div>
   )
@@ -824,122 +807,158 @@ const Chapter11 = () => {
 const Chapter12 = () => {
   return (
     <div className='flex list-none flex-col justify-center font-medium'>
-      <StyledH1>Summary</StyledH1>
+      <StyledH1>Essential Tips for Betting on the River</StyledH1>
       <StyledLi>
-        We've covered all the rules of chess in this series, so you should be
-        ready to go out and start playing. Just in case you need reminding, on
-        this page is a quick summary of all the rules we've looked at in the
-        previous parts.
+        When it comes to poker, how to play on the river is both a complex topic
+        and a simple one.
       </StyledLi>
-      <StyledH1>The Pieces</StyledH1>
-      <ul className='list-disc pl-5'>
+      <StyledLi>
+        It's complex because developing a plan over multiple betting rounds
+        including flop, turn and river is tough to get right. It involves taking
+        into account bet sizing across those streets, relative to stack depth,
+        as well as considering how your opponents' actions across those streets
+        define their range.
+      </StyledLi>
+      <StyledLi>
+        That is to say: how can you narrow their possible range of holdings,
+        based on their actions across this specific runout, and also based on
+        any other information we have (such as their tendencies, their view of
+        us, our relative positions, stack depths, and the stage of the
+        tournament)?
+      </StyledLi>
+      <StyledLi>
+        In this sense, betting or checking river with the right frequency can be
+        considered one of the toughest things to get right in poker.
+      </StyledLi>
+      <StyledH1>It All Comes Down To This</StyledH1>
+      <StyledLi>
+        In another sense, river decisions can be simpler than decisions on
+        earlier streets.
+      </StyledLi>
+      <StyledLi>
+        This is because when betting on the river you don't need to consider
+        implied odds on future streets, as there are no future streets! You
+        don't have to consider what cards might come up, or your chances of
+        hitting one of your outs. It's all about this moment.
+      </StyledLi>
+      <StyledH1>Understand Your Strategy for How to Play the River</StyledH1>
+      <StyledLi>
+        As such, several reasons we might have for betting on earlier streets go
+        out of the window on the river.
+      </StyledLi>
+      <StyledLi>
+        We no longer care about charging equity, that is to say, we don't care
+        about folding out (or at least charging a high price to continue) those
+        hands in our opponents' range which might hit a card on later streets.
+        We only care about either getting value from worse hands or folding out
+        better hands, depending on whether we are betting for value or bluffing.
+        Semi-bluffing is no longer a part of the game on the river.
+      </StyledLi>
+      <StyledH1>Reasons for Betting on Flop & Turn:</StyledH1>
+      <ul className='list-disc pl-10'>
         <StyledLi>
-          Pawns - move one square forwards. Have the option of moving one or two
-          squares on their first move. Capture by moving one square diagonally
-          forwards. Promoted to another piece if they reach the far end of the
-          board.
+          Value & Protection - protecting your hand against bad cards which can
+          improve on future streets
         </StyledLi>
         <StyledLi>
-          Knights - move in an L-shape - one square vertically and two squares
-          horizontally, or one square horizontally and two squares vertically.
-          Can jump over any pieces in its path.
+          Airball Bluff - bluffing with no equity for future streets
         </StyledLi>
         <StyledLi>
-          Bishops - move any number of squares diagonally in a straight line.
-          May not jump over other pieces.
+          Semi-bluff - bluffing with a drawing hand which might hit on later
+          streets
         </StyledLi>
         <StyledLi>
-          Rooks - move any number of squares vertically or horizontally in a
-          straight line. May not jump over other pieces.
+          Charging Your Opponent - to realize their equity on future streets
         </StyledLi>
-        <StyledLi>
-          The Queen - moves any number of squares vertically, horizontally, or
-          diagonally in a straight line. May not jump over other pieces.
-        </StyledLi>
-        <StyledLi>
-          The King - moves one square in any direction. May not move onto a
-          square threatened by an enemy piece.
-        </StyledLi>
+        <StyledLi>Maintaining Initiative</StyledLi>
       </ul>
-      <StyledH1>Check and Checkmate</StyledH1>
-      <ul className='list-disc pl-5'>
-        <StyledLi>
-          Check - if the king is threatened by an enemy piece, he is in 'check',
-          and must escape from check. This can be done by moving the king,
-          capturing the checking piece, or blocking the checking piece (so long
-          as it isn't a knight).
-        </StyledLi>
-        <StyledLi>
-          Checkmate - if the king is in check and can't get out of check, he is
-          in checkmate and the game is lost.
-        </StyledLi>
+      <StyledH1>Reasons for Betting on the River:</StyledH1>
+      <ul className='list-disc pl-10'>
+        <StyledLi>Value (either fat or thin - see below)</StyledLi>
+        <StyledLi>As a bluff</StyledLi>
       </ul>
-      <StyledH1>Castling</StyledH1>
-      <ul className='list-disc pl-5'>
+      <StyledH1>
+        If Better Hands Will Call and Worse Ones Will Fold, Why Bet?
+      </StyledH1>
+      <StyledLi>Let's look at an example:</StyledLi>
+      <Board>
+        <Card community={true} cards={'AC TC 8C 6H 6C'} />
+        <div className='mr-40 flex flex-row items-center gap-20'>
+          <StyledH1>Your hand</StyledH1>
+          <Card community={false} cards={'6D 9D'} />
+        </div>
+      </Board>
+      <StyledLi>You're heads-up, it's checked to you. Do you bet?</StyledLi>
+      <StyledLi>
+        Against somewhat decent competition, the answer is “no”. A worse hand
+        will not call here, and a better hand will not fold. You also have
+        showdown value, meaning that it is still reasonably possible that you
+        can win at showdown once you check back.
+      </StyledLi>
+      <StyledLi>
+        Of course, it's possible that you might get called by some opponents
+        with something like Ax because they want to “keep you honest”, but don't
+        count on it. It's possible you could occasionally get called by a worse
+        6x hand, but it's unlikely.
+      </StyledLi>
+      <StyledH1>Fat and Thin Value</StyledH1>
+      <StyledLi>
+        Against so-called 'Calling Stations' (players who are very passive
+        post-flop and will call down with any piece of the board) you should be
+        much more inclined to bet the river with decent hands. The answer to the
+        question “will they call with worse hands?” so often comes up as “yes”
+        that it becomes worth it to bet for value with mediocre hands. This is
+        the concept of betting for thin value.
+      </StyledLi>
+      <StyledLi>
+        Betting for fat value is betting in any spot where it is easy to see
+        many worse hands calling you. Betting for thin value is betting for
+        value in a spot where you judge that your opponent will call with worse
+        holdings just often enough to make it an overall profitable value bet.
+      </StyledLi>
+      <Board>
+        <Card community={true} cards={'QC 5H 7S 2D 2H'} />
+        <div className='mr-40 flex flex-row items-center gap-20'>
+          <StyledH1>Your hand</StyledH1>
+          <Card community={false} cards={'QD JC'} />
+        </div>
+      </Board>
+      <StyledLi>
+        Your opponent is a competent regular and you started the hand UTG+3 vs.
+        BB, continuation-bet half pot on the flop and got called, before the
+        turn went check/check and your opponent checked to you on the river.
+      </StyledLi>
+      <StyledLi>
+        You decide that they will call with several worse combinations of Qx
+        including QTs and Q9s, probably Q8s. You think they will sometimes call
+        with a worse pair such as 99 or A7s, and that they likely would have led
+        out on the river with most of their two pair combos or better (those
+        which beat the 2s on the table), and with a better Qx, at least the
+        majority of the time.
+      </StyledLi>
+      <StyledLi>
+        For those reasons you feel that they will be calling with worse hands
+        more often than they call with better hands, and you will therefore not
+        be value owning yourself when betting for value.
+      </StyledLi>
+      <StyledH1>Remember, on the river:</StyledH1>
+      <ul className='list-disc pl-10'>
         <StyledLi>
-          Castling - move the king two squares towards the rook, and jump the
-          rook to the square on the other side of the king.
+          You're either betting for value (you want a call), or as a bluff (you
+          want a fold)
         </StyledLi>
-        <StyledLi>You cannot castle if...</StyledLi>
-        <ul className='ml-5 list-disc pl-5'>
-          <StyledLi>
-            The king or rook has moved previously in the game.
-          </StyledLi>
-          <StyledLi>There are pieces between your king and rook.</StyledLi>
-          <StyledLi>Your king in check.</StyledLi>
-          <StyledLi>
-            Your king would be in check at the end of the move.
-          </StyledLi>
-          <StyledLi>
-            Your king would cross a square that is threatened by an enemy piece.
-          </StyledLi>
-        </ul>
-      </ul>
-      <StyledH1>En Passant</StyledH1>
-      <ul className='list-disc pl-5'>
+        <StyledLi>If for value, which worse hands are calling you?</StyledLi>
         <StyledLi>
-          En Passant - if you have a pawn on the fifth rank, and your opponent
-          moves an adjacent pawn two squares, you can capture the pawn as if it
-          had only moved one square.
+          If as a bluff, which better hands are folding to the bet?
         </StyledLi>
-        <StyledLi>You cannot capture en passant if...</StyledLi>
-        <ul className='ml-5 list-disc pl-5'>
-          <StyledLi>Your pawn is not on the fifth rank.</StyledLi>
-          <StyledLi>
-            The enemy pawn did not move two squares on the previous move.
-          </StyledLi>
-        </ul>
-      </ul>
-      <StyledH1>Draws</StyledH1>
-      <ul className='list-disc pl-5'>
+        <StyledLi>Don't miss out on value by not going thin enough</StyledLi>
         <StyledLi>
-          Mutual agreement - the players can agree to a draw at any time.
+          How does the villain perceive your range? Are they even thinking in
+          ranges?
         </StyledLi>
         <StyledLi>
-          Insufficient material - the game is drawn if there aren't enough
-          pieces left on the board for checkmate to occur.
+          With what range of hands does the villain get to the river?
         </StyledLi>
-        <StyledLi>
-          Stalemate - if the player whose turn it is has no legal moves, but is
-          not in checkmate, then the game is drawn.
-        </StyledLi>
-        <StyledLi>
-          Threefold repetition - if the same position is repeated three times,
-          with the same player to move each time, either player may claim a
-          draw.
-        </StyledLi>
-        <StyledLi>
-          The 50 move rule - if 50 moves have passed without either side making
-          a pawn move or capture, either player may claim a draw.
-        </StyledLi>
-      </ul>
-      <StyledH1>Other rules</StyledH1>
-      <ul className='list-disc pl-5'>
-        <StyledLi>
-          The board - place it so that each player has a light square in their
-          bottom right hand corner
-        </StyledLi>
-        <StyledLi>The players - white always moves first.</StyledLi>
       </ul>
     </div>
   )
