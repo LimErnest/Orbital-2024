@@ -199,7 +199,34 @@ const PokerGuide = () => {
                   lastCompletedChapter < 9 ? 'text-gray-500' : 'text-gray-800'
                 }
               >
-                Chapter 9: Advanced Tactics
+                Chapter 9: Continuation Bet
+              </TabsTrigger>
+              <TabsTrigger
+                value='chapter10'
+                disabled={lastCompletedChapter < 10}
+                className={
+                  lastCompletedChapter < 10 ? 'text-gray-500' : 'text-gray-800'
+                }
+              >
+                Chapter 10: More on C-Bet
+              </TabsTrigger>
+              <TabsTrigger
+                value='chapter11'
+                disabled={lastCompletedChapter < 11}
+                className={
+                  lastCompletedChapter < 11 ? 'text-gray-500' : 'text-gray-800'
+                }
+              >
+                Chapter 11: Three Betting
+              </TabsTrigger>
+              <TabsTrigger
+                value='chapter12'
+                disabled={lastCompletedChapter < 12}
+                className={
+                  lastCompletedChapter < 12 ? 'text-gray-500' : 'text-gray-800'
+                }
+              >
+                Chapter 12: Betting on the River
               </TabsTrigger>
             </AccordionContent>
           </AccordionItem>
@@ -292,6 +319,62 @@ const PokerGuide = () => {
           </AlertDialog>
           <Chapter8 />
           <ChapterNavigation chapterNumber={8} />
+          <ScrollBar orientation='vertical' />
+        </ScrollArea>
+      </TabsContent>
+      
+      <TabsContent value='chapter9' className='w-5/6 flex-shrink flex-grow p-4'>
+        <ScrollArea className='h-full w-full border-0 shadow-none'>
+          <Chapter9 />
+          <ChapterNavigation chapterNumber={9} />
+          <ScrollBar orientation='vertical' />
+        </ScrollArea>
+      </TabsContent>
+
+      <TabsContent value='chapter10' className='w-5/6 flex-shrink flex-grow p-4'>
+        <ScrollArea className='h-full w-full border-0 shadow-none'>
+          <Chapter10 />
+          <ChapterNavigation chapterNumber={10} />
+          <ScrollBar orientation='vertical' />
+        </ScrollArea>
+      </TabsContent>
+
+      <TabsContent value='chapter11' className='w-5/6 flex-shrink flex-grow p-4'>
+        <ScrollArea className='h-full w-full border-0 shadow-none'>
+          <Chapter11 />
+          <ChapterNavigation chapterNumber={11} />
+          <ScrollBar orientation='vertical' />
+        </ScrollArea>
+      </TabsContent>
+
+      <TabsContent value='chapter12' className='w-5/6 flex-shrink flex-grow p-4'>
+        <ScrollArea className='h-full w-full border-0 shadow-none'>
+        <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  Congratulations on unlocking an achievement! 🎉
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  <div className='flex flex-col items-center'>
+                    <Avatar className='mt-2 h-48 w-48'>
+                      <AvatarImage src='/img/kingbadge.png' />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    <span className='text-rg mt-6 font-medium'>
+                      For completing the advanced poker tactics you have an
+                      additional 100xp.
+                    </span>
+                  </div>
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogAction>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          <Chapter12 />
+          <PrevChapterButton chapterNumber={11} />
           <ScrollBar orientation='vertical' />
         </ScrollArea>
       </TabsContent>

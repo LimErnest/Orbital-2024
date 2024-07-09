@@ -18,11 +18,11 @@ interface PokerSidebarProps {
 }
 
 const PokerSidebar: React.FC<PokerSidebarProps> = ({ highlightedLink }) => {
-  const { user, checkGuide } = useAuth()
+  const { user, checkPokerGuide } = useAuth()
   const [hasCompletedGuide, setHasCompletedGuide] = useState(false)
 
   useEffect(() => {
-    checkGuide().then((completed: boolean) => {
+    checkPokerGuide().then((completed: boolean) => {
       setHasCompletedGuide(completed)
     })
   }, [user])
