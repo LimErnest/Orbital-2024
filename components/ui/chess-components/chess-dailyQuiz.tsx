@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ChessPuzzle } from '@react-chess-tools/react-chess-puzzle'
 import React, { useState, useEffect, useMemo } from 'react'
-import { Sidebar, SidebarSection } from '@/components/ui/sidebar'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import {
@@ -16,10 +15,7 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import ArrayofPuzzle from '@/daily_puzzles.json'
-import { db } from '../../../firebase/firebase'
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
-import { useAuth } from '../../context/AuthContext'
-import { ChessSidebar } from '@/components/ui/chess-sidebar'
+import { useAuth } from '@/app/context/AuthContext'
 import { HowToPlay } from '@/components/ui/howToPlay'
 
 export interface Puzzle {
@@ -51,7 +47,7 @@ function isRating(value: any): value is Rating {
   )
 }
 
-export default function ChessDailyQuizPage() {
+const ChessDailyQuiz = () => {
   const {
     user,
     addXp,
@@ -159,16 +155,15 @@ export default function ChessDailyQuizPage() {
 
   return (
     <div className='flex'>
-      <ChessSidebar highlightedLink={'quiz'} />
       {threePuzzleCorrect ? (
         <div className='flex h-screen w-full items-center justify-center text-4xl'>
-          <h1 className='py-20'>
+          <h1>
             Congratulations! You have completed the daily quiz.
           </h1>
         </div>
       ) : attempt == 0 ? (
         <div className='flex h-screen w-full items-center justify-center text-4xl'>
-          <h1 className='py-20'>
+          <h1>
             You have no attempts left. Come back again tomorrow.
           </h1>
         </div>
@@ -282,3 +277,5 @@ export default function ChessDailyQuizPage() {
     </div>
   )
 }
+
+export { ChessDailyQuiz }
