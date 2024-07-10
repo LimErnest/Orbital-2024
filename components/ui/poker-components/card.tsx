@@ -127,13 +127,11 @@ const CompareHandsPuzzle = () => {
   const [buttonColor1, setButtonColor1] = useState('')
   const [buttonColor2, setButtonColor2] = useState('')
   const [buttonColor3, setButtonColor3] = useState('')
-  const [loading, setLoading] = useState(true)
 
   React.useEffect(() => {
     if (hands) {
       setHand1(hands[0])
       setHand2(hands[1])
-      setLoading(false)
     }
   }, [hands])
 
@@ -216,7 +214,7 @@ const CompareHandsPuzzle = () => {
 }
 
 const StyledH2 = ({ children }: { children: React.ReactNode }) => (
-  <h1 className='mb-2 text-2xl font-bold'>{children}</h1>
+  <h1 className='mb-2 text-4xl font-bold'>{children}</h1>
 )
 
 const StyledH1 = ({ children }: { children: React.ReactNode }) => (
