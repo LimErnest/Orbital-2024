@@ -17,12 +17,8 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import ArrayofPuzzle from '@/daily_puzzles.json'
-import { db } from '../../../firebase/firebase'
-import { doc, getDoc } from 'firebase/firestore'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '@/app/context/AuthContext'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import { ChessSidebar } from '@/components/ui/chess-sidebar'
-import { Arya } from 'next/font/google'
 import { HowToPlay } from '@/components/ui/howToPlay'
 
 export interface Puzzle {
@@ -36,7 +32,7 @@ interface UserFinalQuestData {
   isCompleted: boolean
 }
 
-export default function ChessFinalQuestPage() {
+const ChessFinalQuest = () => {
   const arrayOfPuzzle = ArrayofPuzzle['1100']
   const {
     user,
@@ -101,7 +97,6 @@ export default function ChessFinalQuestPage() {
 
   return (
     <div className='flex'>
-      <ChessSidebar highlightedLink='final' />
       {finalQuestStatus ? (
         <div className='mt-20 flex h-screen w-full flex-col items-center text-4xl'>
           <h1>CONGRAULATIONS YOU HAVE PASSED THE CHESS FINAL QUEST 🎉</h1>
@@ -215,3 +210,5 @@ export default function ChessFinalQuestPage() {
     </div>
   )
 }
+
+export { ChessFinalQuest }

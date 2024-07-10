@@ -207,7 +207,7 @@ export default function LandingPage() {
 
         <SnapPageSection>
           <div
-            className='flex h-full flex-col items-center justify-center p-4'
+            className='flex h-full flex-col text-center items-center p-4'
             style={{
               backgroundImage: 'url(/img/nicebackground1.gif)',
               backgroundSize: 'cover',
@@ -217,13 +217,117 @@ export default function LandingPage() {
               zIndex: -1
             }}
           >
-            <div>
-              <b className='text-8xl'>Features</b>
+            <div className='flex flex-col mt-40'>
+              <h1 className='mb-8 text-center text-6xl font-bold'>
+                Features
+              </h1>
+              <div className='flex flex-row ml-8 mr-8'>
+                <Card className='m-2 flex w-full flex-col'>
+                  <CardHeader className='ml-5 mt-2'>
+                    <CardTitle className='text-5xl font-bold'>Guides</CardTitle>
+                    <CardDescription className='text-3xl font-bold'>
+                      Learn and Play New Games
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Image
+                      src='/img/guide.jpg'
+                      alt='Chess'
+                      width={400}
+                      height={400}
+                      className='mx-auto mb-4 block rounded-md border-2 border-black'
+                      style={{ width: '300px', height: '250px' }}
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card className='m-2 flex w-full flex-col'>
+                  <CardHeader className='mt-2'>
+                    <CardTitle className='text-5xl font-bold'>
+                      Daily Quiz
+                    </CardTitle>
+                    <CardDescription className='text-3xl font-bold'>
+                      Daily Challenge for Everyone
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Image
+                      src='/img/quiz.jpg'
+                      alt='Chess'
+                      width={400}
+                      height={400}
+                      className='mx-auto mb-4 block rounded-md border-2 border-black'
+                      style={{ width: '300px', height: '250px' }}
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card className='m-2 flex w-full flex-col'>
+                  <CardHeader className='mt-2'>
+                    <CardTitle className='text-5xl font-bold'>
+                      Final Quest
+                    </CardTitle>
+                    <CardDescription className='text-3xl font-bold'>
+                      The Ultimate Challenge
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Image
+                      src='/img/final_quest.jpg'
+                      alt='Chess'
+                      width={400}
+                      height={400}
+                      className='mx-auto mb-4 block rounded-md border-2 border-black'
+                      style={{ width: '300px', height: '250px' }}
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card className='m-2 flex w-full flex-col'>
+                  <CardHeader className='mt-2'>
+                    <CardTitle className='text-5xl font-bold'>
+                      Leaderboard
+                    </CardTitle>
+                    <CardDescription className='text-3xl font-bold'>
+                      Ranking of Top Performers
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Image
+                      src='/img/leaderboard.jpg'
+                      alt='Chess'
+                      width={400}
+                      height={400}
+                      className='mb-4 mx-auto block rounded-md border-2 border-black'
+                      style={{ width: '300px', height: '250px' }}
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card className='m-2 flex w-full flex-col'>
+                  <CardHeader className='mt-2'>
+                    <CardTitle className='text-5xl font-bold'>
+                      Badges
+                    </CardTitle>
+                    <CardDescription className='text-3xl font-bold'>
+                      Earn Through Milestones
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Image
+                      src='/img/badges.jpg'
+                      alt='Chess'
+                      width={400}
+                      height={400}
+                      className='mx-auto mb-4 block rounded-md border-2 border-black'
+                      style={{ width: '300px', height: '250px' }}
+                    />
+                  </CardContent>
+                </Card>
+              </div>
             </div>
 
-            <div>
-              <b className='text-8xl'>Coming Soon...</b>
-            </div>
+
           </div>
         </SnapPageSection>
       </SnapPage>
