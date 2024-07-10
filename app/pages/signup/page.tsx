@@ -15,16 +15,15 @@ export const metadata: Metadata = {
 export default function AuthenticationPage() {
   return (
     <>
-      <div className='container relative hidden h-screen flex flex-col items-center justify-center rounded-md border border-gray-300 md:grid lg:max-w-none lg:px-0'>
+      <div className='container relative flex hidden h-screen flex-col items-center justify-center rounded-md border border-gray-300 md:grid lg:max-w-none lg:px-0'>
         <div
           className='absolute inset-0 bg-cover bg-center'
           style={{
-            backgroundImage:
-              'url(/img/nicebackground1.gif)',
+            backgroundImage: 'url(/img/nicebackground1.gif)',
             zIndex: -1
           }}
         />
-        <Navbar/>
+        <Navbar />
         <div className='flex items-center justify-center lg:p-8'>
           <div className='border- mx-auto flex h-[500px] w-full flex-col justify-center space-y-6 rounded-md border border-gray-300 bg-white p-4 sm:w-[450px]'>
             <div className='flex flex-col space-y-2 text-center'>

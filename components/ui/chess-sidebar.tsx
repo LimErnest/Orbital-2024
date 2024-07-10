@@ -15,7 +15,7 @@ import {
 import { userAgent } from 'next/server'
 
 interface ChessSidebarProps {
-  highlightedLink: string;
+  highlightedLink: string
 }
 
 const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
@@ -57,8 +57,9 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
             className={cn(
               buttonVariants({
                 variant: 'ghost',
-                className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'guide' ? 'bg-blue-300' : ''
-                  }`
+                className: `flex justify-start rounded-sm hover:bg-blue-300 ${
+                  highlightedLink === 'guide' ? 'bg-blue-300' : ''
+                }`
               })
             )}
           >
@@ -78,8 +79,9 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
             className={cn(
               buttonVariants({
                 variant: 'ghost',
-                className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'quiz' ? 'bg-blue-300' : ''
-                  }`
+                className: `flex justify-start rounded-sm hover:bg-blue-300 ${
+                  highlightedLink === 'quiz' ? 'bg-blue-300' : ''
+                }`
               })
             )}
           >
@@ -100,8 +102,9 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
               className={cn(
                 buttonVariants({
                   variant: 'ghost',
-                  className: `flex justify-start rounded-sm hover:bg-blue-300 ${highlightedLink === 'final' ? 'bg-blue-300' : ''
-                    }`
+                  className: `flex justify-start rounded-sm hover:bg-blue-300 ${
+                    highlightedLink === 'final' ? 'bg-blue-300' : ''
+                  }`
                 })
               )}
             >
@@ -138,7 +141,10 @@ const ChessSidebar: React.FC<ChessSidebarProps> = ({ highlightedLink }) => {
                   Final Quest
                 </div>
               </HoverCardTrigger>
-              <HoverCardContent className='ml-4 w-24 p-2 text-nowrap text-sm' style={{ width: 'max-content', maxWidth: '100%' }}>
+              <HoverCardContent
+                className='ml-4 w-24 text-nowrap p-2 text-sm'
+                style={{ width: 'max-content', maxWidth: '100%' }}
+              >
                 Please complete the guide first
               </HoverCardContent>
             </HoverCard>

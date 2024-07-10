@@ -322,7 +322,7 @@ const PokerGuide = () => {
           <ScrollBar orientation='vertical' />
         </ScrollArea>
       </TabsContent>
-      
+
       <TabsContent value='chapter9' className='w-5/6 flex-shrink flex-grow p-4'>
         <ScrollArea className='h-full w-full border-0 shadow-none'>
           <Chapter9 />
@@ -331,7 +331,10 @@ const PokerGuide = () => {
         </ScrollArea>
       </TabsContent>
 
-      <TabsContent value='chapter10' className='w-5/6 flex-shrink flex-grow p-4'>
+      <TabsContent
+        value='chapter10'
+        className='w-5/6 flex-shrink flex-grow p-4'
+      >
         <ScrollArea className='h-full w-full border-0 shadow-none'>
           <Chapter10 />
           <ChapterNavigation chapterNumber={10} />
@@ -339,7 +342,10 @@ const PokerGuide = () => {
         </ScrollArea>
       </TabsContent>
 
-      <TabsContent value='chapter11' className='w-5/6 flex-shrink flex-grow p-4'>
+      <TabsContent
+        value='chapter11'
+        className='w-5/6 flex-shrink flex-grow p-4'
+      >
         <ScrollArea className='h-full w-full border-0 shadow-none'>
           <Chapter11 />
           <ChapterNavigation chapterNumber={11} />
@@ -347,9 +353,12 @@ const PokerGuide = () => {
         </ScrollArea>
       </TabsContent>
 
-      <TabsContent value='chapter12' className='w-5/6 flex-shrink flex-grow p-4'>
+      <TabsContent
+        value='chapter12'
+        className='w-5/6 flex-shrink flex-grow p-4'
+      >
         <ScrollArea className='h-full w-full border-0 shadow-none'>
-        <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>
