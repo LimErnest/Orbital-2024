@@ -70,7 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
         >
           Guidance
         </Link>
-        
+
         <div className='flex flex-row items-center px-4 pb-3'>
           <Avatar className='h-[3rem] w-[3rem]'>
             <AvatarImage src={profilePicture} alt='User' />
@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
         <div>
           <Dialog>
             <DialogTrigger className='w-full'>
-              <div className='px-4 py-2 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'>
+              <div className='flex items-center justify-start whitespace-nowrap rounded-sm px-4 py-2 text-sm font-medium hover:bg-blue-300'>
                 <Image
                   src='/img/badgeinventory.png'
                   alt='Badge'
@@ -99,7 +99,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
                 Badge Inventory
               </div>
             </DialogTrigger>
-            <DialogContent className='max-w-screen-md w-full h-auto md:h-4/5 p-6 overflow-y-auto'>
+            <DialogContent className='h-auto w-full max-w-screen-md overflow-y-auto p-6 md:h-4/5'>
               <DialogHeader>
                 <DialogTitle className='text-3xl'>Badge Inventory</DialogTitle>
                 <DialogDescription>

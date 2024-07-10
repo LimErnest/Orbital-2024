@@ -34,7 +34,8 @@ export function Settings() {
   const [isInvalidDialogOpen, setIsInvalidDialogOpen] =
     React.useState<boolean>(false)
   const [errorType, setErrorType] = React.useState<string>('')
-  const { updateUsername, changePassword, upload, logOut, user, logIn } = useAuth()
+  const { updateUsername, changePassword, upload, logOut, user, logIn } =
+    useAuth()
   const [currPassword, setCurrPassword] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [confirmPassword, setConfirmPassword] = React.useState<string>('')
@@ -83,7 +84,6 @@ export function Settings() {
         setErrorType('wrong credentials')
         setIsInvalidDialogOpen(true)
       }
-
     } finally {
       setIsLoading(false)
     }
@@ -92,7 +92,6 @@ export function Settings() {
   function checkPassword() {
     let error = ''
     const specialCharRegex = /[!@#$%^&*(),.?":{}|<>_\-+=\[\]\\\/]/
-
 
     if (password !== confirmPassword) {
       error = 'mismatch'
@@ -299,7 +298,7 @@ export function Settings() {
                   Choose File
                 </label>
               </div>
-              <div className='flex flex-row col-span-3 items-center'>
+              <div className='col-span-3 flex flex-row items-center'>
                 <Label>{fileName}</Label>
                 <Button
                   onClick={clearFile}
@@ -307,7 +306,7 @@ export function Settings() {
                     buttonVariants({
                       variant: 'ghost',
                       className:
-                        'flex items-center justify-center rounded-full bg-white text-black shadow-none hover:text-red-500 ml-2'
+                        'ml-2 flex items-center justify-center rounded-full bg-white text-black shadow-none hover:text-red-500'
                     })
                   )}
                 >

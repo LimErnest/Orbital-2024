@@ -31,11 +31,11 @@ export interface Puzzle {
 type Rating = '400' | '500' | '600' | '700' | '800' | '900' | '1000' | '1100'
 
 interface UserRatingData {
-  chessRating: Rating,
-  attempts: number,
-  puzzleID: number,
-  noOfCorrect: number,
-  latestDate: string,
+  chessRating: Rating
+  attempts: number
+  puzzleID: number
+  noOfCorrect: number
+  latestDate: string
   threePuzzleCorrect: boolean
 }
 
@@ -52,7 +52,8 @@ function isRating(value: any): value is Rating {
 }
 
 export default function ChessDailyQuizPage() {
-  const { user,
+  const {
+    user,
     addXp,
     updateAttempt,
     updateUserTries,
@@ -71,11 +72,10 @@ export default function ChessDailyQuizPage() {
 
   useEffect(() => {
     if (user) {
-      fetchUserRating()
-        .then((data: UserRatingData) => {
-          updateUserRating(data)
-          console.log('user is changed', puzzle)
-        })
+      fetchUserRating().then((data: UserRatingData) => {
+        updateUserRating(data)
+        console.log('user is changed', puzzle)
+      })
     }
   }, [user])
 
@@ -87,8 +87,8 @@ export default function ChessDailyQuizPage() {
 
   const updateUserRating = async (data: UserRatingData) => {
     if (!data) {
-      console.error("Data is undefined or null");
-      return;
+      console.error('Data is undefined or null')
+      return
     }
 
     console.log('Fetched badge data:', data)
@@ -103,7 +103,6 @@ export default function ChessDailyQuizPage() {
       setPuzzleID(data.puzzleID)
       setCorrectCount(data.noOfCorrect)
       setPuzzle(RatingPuzzle[data.chessRating][data.puzzleID - 1])
-
     } else {
       setAttempt(data.attempts)
       setThreePuzzleCorrect(data.threePuzzleCorrect)
@@ -195,7 +194,6 @@ export default function ChessDailyQuizPage() {
                 </CardHeader>
                 <CardContent>
                   <div className='flex flex-row justify-center'>
-                    
                     <HowToPlay />
 
                     <div className=''>

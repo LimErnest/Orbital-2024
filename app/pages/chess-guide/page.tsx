@@ -11,7 +11,7 @@ export default function GuidePage() {
   return (
     <>
       <div className='flex'>
-        <ChessSidebar highlightedLink = {'guide'} />
+        <ChessSidebar highlightedLink={'guide'} />
         <div className='h-screen w-full overflow-hidden p-20'>
           <ChessGuide />
         </div>

@@ -15,26 +15,48 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <div className='container relative hidden h-screen flex flex-col items-center justify-center rounded-md border border-gray-300 md:grid lg:max-w-none lg:px-0'>
+      <div className='container relative flex hidden h-screen flex-col items-center justify-center rounded-md border border-gray-300 md:grid lg:max-w-none lg:px-0'>
         <div
           className='absolute inset-0 bg-cover bg-center'
           style={{
-            backgroundImage:
-              'url(/img/nicebackground1.gif)',
+            backgroundImage: 'url(/img/nicebackground1.gif)',
             zIndex: -1
           }}
         />
-        <Navbar/>
+        <Navbar />
         <ScrollArea className='h-[600px] w-[600px] rounded-md border bg-white p-6'>
-          <h1 className='mb-4 text-4xl font-bold text-center'>Privacy Policy</h1>
+          <h1 className='mb-4 text-center text-4xl font-bold'>
+            Privacy Policy
+          </h1>
           <ul className='list-decimal space-y-2 pl-5'>
-            <li>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</li>
-            <li>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</li>
-            <li>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</li>
-            <li>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</li>
-            <li>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</li>
-            <li>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</li>
-            <li>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</li>
+            <li>
+              Blah blah blah blah blah blah blah blah blah blah blah blah blah
+              blah blah blah blah.
+            </li>
+            <li>
+              Blah blah blah blah blah blah blah blah blah blah blah blah blah
+              blah blah blah blah.
+            </li>
+            <li>
+              Blah blah blah blah blah blah blah blah blah blah blah blah blah
+              blah blah blah blah.
+            </li>
+            <li>
+              Blah blah blah blah blah blah blah blah blah blah blah blah blah
+              blah blah blah blah.
+            </li>
+            <li>
+              Blah blah blah blah blah blah blah blah blah blah blah blah blah
+              blah blah blah blah.
+            </li>
+            <li>
+              Blah blah blah blah blah blah blah blah blah blah blah blah blah
+              blah blah blah blah.
+            </li>
+            <li>
+              Blah blah blah blah blah blah blah blah blah blah blah blah blah
+              blah blah blah blah.
+            </li>
           </ul>
         </ScrollArea>
       </div>
