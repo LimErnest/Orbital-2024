@@ -3,7 +3,11 @@ import { cn } from '@/lib/utils'
 
 export interface SnapPageProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const SnapPage: React.FC<SnapPageProps> = ({ children, className, ...props }) => {
+const SnapPage: React.FC<SnapPageProps> = ({
+  children,
+  className,
+  ...props
+}) => {
   return (
     <div
       className={cn('snap-page', className)}
@@ -13,7 +17,7 @@ const SnapPage: React.FC<SnapPageProps> = ({ children, className, ...props }) =>
         overflowY: 'scroll',
         overflowX: 'hidden',
         height: '100vh',
-        width: '100vw',
+        width: '100vw'
       }}
       {...props}
     >
@@ -22,9 +26,15 @@ const SnapPage: React.FC<SnapPageProps> = ({ children, className, ...props }) =>
   )
 }
 
-export interface SnapPageSectionProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface SnapPageSectionProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
-const SnapPageSection: React.FC<SnapPageSectionProps> = ({ children, className, style, ...props }) => {
+const SnapPageSection: React.FC<SnapPageSectionProps> = ({
+  children,
+  className,
+  style,
+  ...props
+}) => {
   return (
     <div
       className={cn('snap-page-section', className)}

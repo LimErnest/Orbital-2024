@@ -60,7 +60,7 @@ export default function LandingPage() {
                 </Button>
               </Link>
             </div>
-            <div className='flex-shrink-0 lg:translate-y-5 lg:translate-x-5'>
+            <div className='flex-shrink-0 lg:translate-x-5 lg:translate-y-5'>
               <Image
                 src='/img/icon.jpg'
                 alt='Knight'
@@ -165,7 +165,7 @@ export default function LandingPage() {
 
         <SnapPageSection>
           <div
-            className='flex items-center justify-center flex-col lg:flex-row h-full p-4'
+            className='flex h-full flex-col items-center justify-center p-4 lg:flex-row'
             style={{
               backgroundImage: 'url(/img/nicebackground1.gif)',
               backgroundSize: 'cover',
@@ -175,14 +175,14 @@ export default function LandingPage() {
               zIndex: -1
             }}
           >
-            <div className='transform -translate-y-20 lg:translate-y-0 relative flex pl-3 md:pl-5 lg:pl-6 xl:pl-14'>
-              <b className="text-7xl md:text-9xl lg:text-8xl xl:text-9xl">
-                What is <br/> Guidance?
+            <div className='relative flex -translate-y-20 transform pl-3 md:pl-5 lg:translate-y-0 lg:pl-6 xl:pl-14'>
+              <b className='text-7xl md:text-9xl lg:text-8xl xl:text-9xl'>
+                What is <br /> Guidance?
               </b>
             </div>
 
-            <div className='transform -translate-y-20 lg:translate-y-0 relative flex flex-col p-3 md:p-5 lg:p-6 xl:p-14'>
-              <p className="text-base md:text-lg lg:text-xl xl:text-2xl">
+            <div className='relative flex -translate-y-20 transform flex-col p-3 md:p-5 lg:translate-y-0 lg:p-6 xl:p-14'>
+              <p className='text-base md:text-lg lg:text-xl xl:text-2xl'>
                 Guidance is a games-learning platform for people to explore
                 different games and have concise guides on those games that they
                 wish to learn. Our platform will provide all the information
@@ -191,11 +191,7 @@ export default function LandingPage() {
                 and a test to allow users to test their knowledge about the
                 things they had learned and collect badges.
               </p>
-              <Link 
-                href='/img/poster.jpg'
-                target='_blank'
-                className='py-4'
-              >
+              <Link href='/img/poster.jpg' target='_blank' className='py-4'>
                 <Button
                   className={cn(
                     buttonVariants({ size: 'xl' }),
@@ -204,14 +200,14 @@ export default function LandingPage() {
                 >
                   Learn More
                 </Button>
-              </Link>  
+              </Link>
             </div>
           </div>
         </SnapPageSection>
 
         <SnapPageSection>
-          <div 
-            className='flex items-center flex-col justify-center h-full p-4'
+          <div
+            className='flex h-full flex-col items-center justify-center p-4'
             style={{
               backgroundImage: 'url(/img/nicebackground1.gif)',
               backgroundSize: 'cover',
@@ -222,15 +218,11 @@ export default function LandingPage() {
             }}
           >
             <div>
-              <b className ='text-8xl'>
-                Features
-              </b>
+              <b className='text-8xl'>Features</b>
             </div>
 
             <div>
-              <b className='text-8xl'>
-                Coming Soon...
-              </b>
+              <b className='text-8xl'>Coming Soon...</b>
             </div>
           </div>
         </SnapPageSection>

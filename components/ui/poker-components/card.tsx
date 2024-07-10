@@ -14,14 +14,15 @@ const Card: React.FC<CardProps> = ({
   cards,
   ...props
 }) => {
-  const cardArray = cards.split(" ")
+  const cardArray = cards.split(' ')
   const frontCards = cardArray.map((cardChar, index) => (
     <CardSection key={index} imageString={cardChar} />
-  ));
+  ))
   if (community) {
-    const backCards = Array.from({ length: 5 - cardArray.length }, (_, index) => (
-      <CardSection key={index} imageString='back' />
-    ))
+    const backCards = Array.from(
+      { length: 5 - cardArray.length },
+      (_, index) => <CardSection key={index} imageString='back' />
+    )
     return (
       <div className='flex flex-row justify-center gap-10'>
         {frontCards}
@@ -46,7 +47,13 @@ const CardSection: React.FC<CardSectionProps> = ({
   const imagePath = `/cards/${imageString}.png`
   return (
     <div className={cn('h-full', className)} style={style} {...props}>
-      <Image src={imagePath} alt={imageString} width={150} height={150} style={{ height: 'auto' }} />
+      <Image
+        src={imagePath}
+        alt={imageString}
+        width={150}
+        height={150}
+        style={{ height: 'auto' }}
+      />
     </div>
   )
 }

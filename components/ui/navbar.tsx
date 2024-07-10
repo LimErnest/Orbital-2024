@@ -10,11 +10,14 @@ interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {}
 export function Navbar({ className, ...props }: NavbarProps) {
   return (
     <div
-      className={cn('fixed top-0 w-full bg-white py-2 shadow-xl rounded-b-lg', className)}
+      className={cn(
+        'fixed top-0 w-full rounded-b-lg bg-white py-2 shadow-xl',
+        className
+      )}
       {...props}
     >
       <div className='flex h-[4vh] items-center justify-between px-10'>
-        <div className='text-lg px-0 text-center font-medium text-black'>
+        <div className='px-0 text-center text-lg font-medium text-black'>
           <Link href='/'>Guidance</Link>
         </div>
         <div className='flex space-x-4'>
@@ -32,7 +35,12 @@ export function Navbar({ className, ...props }: NavbarProps) {
           </Link>
           <Link
             href='/pages/signup'
-            className={cn(buttonVariants({ variant: 'outline', className: 'bg-blue-300 hover:bg-blue-300' }))}
+            className={cn(
+              buttonVariants({
+                variant: 'outline',
+                className: 'bg-blue-300 hover:bg-blue-300'
+              })
+            )}
           >
             Sign Up
           </Link>

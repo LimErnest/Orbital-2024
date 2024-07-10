@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils'
 import { Sidebar, SidebarSection } from '@/components/ui/sidebar'
 import { buttonVariants } from '@/components/ui/button'
 
-
 export const metadata: Metadata = {
   title: 'Guidance',
   description: 'Authentication forms built using the components.'
@@ -16,11 +15,10 @@ export default function LandingPage() {
     <>
       <div className='flex flex-col'>
         <Sidebar className='flex flex-col bg-gray-100'>
-          <SidebarSection className='py-2 px-2'>
-
+          <SidebarSection className='px-2 py-2'>
             <Link
               href='/pages/dashboard'
-              className='px-4 py-1 flex justify-start items-center rounded-sm bg-blue-300 whitespace-nowrap text-sm font-medium'
+              className='flex items-center justify-start whitespace-nowrap rounded-sm bg-blue-300 px-4 py-1 text-sm font-medium'
             >
               <Image
                 src='/img/home_icon.jpg'
@@ -33,10 +31,9 @@ export default function LandingPage() {
               Home
             </Link>
 
-
             <Link
               href='/pages/chess-guide'
-              className='px-4 py-1 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'
+              className='flex items-center justify-start whitespace-nowrap rounded-sm px-4 py-1 text-sm font-medium hover:bg-blue-300'
             >
               <Image
                 src='/img/pawn_icon.jpg'
@@ -49,11 +46,9 @@ export default function LandingPage() {
               Chess
             </Link>
 
-
-
             <Link
               href='/pages/coming-soon'
-              className='px-4 py-1 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'
+              className='flex items-center justify-start whitespace-nowrap rounded-sm px-4 py-1 text-sm font-medium hover:bg-blue-300'
             >
               <Image
                 src='/img/mahjong_icon.jpg'
@@ -66,11 +61,9 @@ export default function LandingPage() {
               Mahjong
             </Link>
 
-
-
             <Link
               href='/pages/poker-guide'
-              className='px-4 py-1 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'
+              className='flex items-center justify-start whitespace-nowrap rounded-sm px-4 py-1 text-sm font-medium hover:bg-blue-300'
             >
               <Image
                 src='/img/poker_icon.jpg'
@@ -83,11 +76,9 @@ export default function LandingPage() {
               Poker
             </Link>
 
-
-
             <Link
               href='/pages/leaderboard'
-              className='px-4 py-1 flex justify-start items-center rounded-sm hover:bg-blue-300 whitespace-nowrap text-sm font-medium'
+              className='flex items-center justify-start whitespace-nowrap rounded-sm px-4 py-1 text-sm font-medium hover:bg-blue-300'
             >
               <Image
                 src='/img/leaderboard.png'
