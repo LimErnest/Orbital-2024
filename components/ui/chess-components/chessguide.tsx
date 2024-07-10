@@ -15,7 +15,7 @@ import {
   Chapter10,
   Chapter11,
   Chapter12
-} from '@/components/ui/chess-chapters'
+} from '@/components/ui/chess-components/chess-chapters'
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
