@@ -23,16 +23,15 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <div className='container relative hidden h-screen h-screen flex flex-col items-center justify-center rounded-md border border-gray-300 md:grid lg:max-w-none lg:px-0'>
+      <div className='container relative flex hidden h-screen h-screen flex-col items-center justify-center rounded-md border border-gray-300 md:grid lg:max-w-none lg:px-0'>
         <div
           className='absolute inset-0 bg-cover bg-center'
           style={{
-            backgroundImage:
-              'url(/img/nicebackground1.gif)',
+            backgroundImage: 'url(/img/nicebackground1.gif)',
             zIndex: -1
           }}
         />
-        <Navbar/>
+        <Navbar />
         <div className='flex flex-wrap justify-between'>
           <Card className='m-2 flex w-[350px]'>
             <div>
@@ -55,7 +54,7 @@ export default function ContactPage() {
                 </div>
               </CardContent>
             </div>
-            <div className='flex flex-1 items-center justify-center ml-[-10px]'>
+            <div className='ml-[-10px] flex flex-1 items-center justify-center'>
               <Avatar className='h-20 w-20'>
                 <AvatarImage
                   src='https://github.com/shadcn.png'
@@ -86,7 +85,7 @@ export default function ContactPage() {
                 </div>
               </CardContent>
             </div>
-            <div className='flex flex-1 items-center justify-center ml-[-10px]'>
+            <div className='ml-[-10px] flex flex-1 items-center justify-center'>
               <Avatar className='h-20 w-20'>
                 <AvatarImage
                   src='https://github.com/shadcn.png'

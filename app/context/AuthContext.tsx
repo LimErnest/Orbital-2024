@@ -123,7 +123,7 @@ export const AuthContextProvider = ({
       })
       const xpDoc = setDoc(doc(db, 'xp', user.uid), {
         xp: 0,
-        username: ""
+        username: ''
       })
       const chessGuideDoc = setDoc(doc(db, 'chessguide', user.uid), {
         lastChapter: 1
@@ -136,12 +136,18 @@ export const AuthContextProvider = ({
         finalQuestPuzzleID: 1,
         isCompleted: false
       })
-      await Promise.all([badgesDoc, ratingDoc, xpDoc, chessGuideDoc, finalQuestDoc, pokerGuideDoc])
+      await Promise.all([
+        badgesDoc,
+        ratingDoc,
+        xpDoc,
+        chessGuideDoc,
+        finalQuestDoc,
+        pokerGuideDoc
+      ])
     }
   }
 
   const updateUsername = async (username: string) => {
-
     if (currentUser) {
       await updateProfile(currentUser, { displayName: username }).catch(err =>
         console.log(err)
@@ -285,7 +291,11 @@ export const AuthContextProvider = ({
   const updateUserTries = async (date: string) => {
     if (currentUser) {
       const docRef = doc(db, 'rating', currentUser.uid)
-      await updateDoc(docRef, { attempts: 3, threePuzzleCorrect: false, latestDate: date })
+      await updateDoc(docRef, {
+        attempts: 3,
+        threePuzzleCorrect: false,
+        latestDate: date
+      })
     }
   }
 
@@ -303,10 +313,16 @@ export const AuthContextProvider = ({
     }
   }
 
-  const updateCorrectCount = async (newCorrectCount: number, completedThreePuzzle: boolean) => {
+  const updateCorrectCount = async (
+    newCorrectCount: number,
+    completedThreePuzzle: boolean
+  ) => {
     if (currentUser) {
       const docRef = doc(db, 'rating', currentUser.uid)
-      await updateDoc(docRef, { noOfCorrect: newCorrectCount, threePuzzleCorrect: completedThreePuzzle })
+      await updateDoc(docRef, {
+        noOfCorrect: newCorrectCount,
+        threePuzzleCorrect: completedThreePuzzle
+      })
     }
   }
 
@@ -354,30 +370,28 @@ export const AuthContextProvider = ({
   }
 
   const fetchFinalQuest = async (uid: string) => {
-    const docRef = doc(db, 'finalQuest', uid);
-    const docSnap = await getDoc(docRef);
+    const docRef = doc(db, 'finalQuest', uid)
+    const docSnap = await getDoc(docRef)
 
     if (docSnap.exists()) {
-
-      const data = docSnap.data();
+      const data = docSnap.data()
       console.log('exists', data)
       return {
         finalQuestPuzzleID: data.finalQuestPuzzleID,
         isCompleted: data.isCompleted
       }
     } else {
-      console.log("No such document!")
+      console.log('No such document!')
       return {
         finalQuestPuzzleID: 1,
         isCompleted: false
       }
     }
-
   }
 
   const queryCollection = async () => {
     const xpRef = collection(db, 'xp')
-    const q = await query(xpRef, orderBy("xp", "desc"), limit(20));
+    const q = await query(xpRef, orderBy('xp', 'desc'), limit(20))
     const users = await getDocs(q)
     const arrayOfUsers: UserXP[] = []
     users.forEach(user => {

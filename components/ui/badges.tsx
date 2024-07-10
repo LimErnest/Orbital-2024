@@ -18,10 +18,9 @@ import { Icons } from './icon'
 import {
   HoverCard,
   HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card"
+  HoverCardTrigger
+} from '@/components/ui/hover-card'
 import { cn } from '@/lib/utils'
-
 
 async function fetchUserBadge(uid: string) {
   const docRef = doc(db, 'badges', uid)
@@ -93,7 +92,7 @@ export function Badges() {
 
   if (loading) {
     return (
-      <div className='flex mt-40 items-center justify-center'>
+      <div className='mt-40 flex items-center justify-center'>
         <Icons.spinner className='h-20 w-20 animate-spin' />
       </div>
     )
@@ -121,9 +120,7 @@ export function Badges() {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </HoverCardTrigger>
-                <HoverCardContent className='p-2 w-17'>
-                  Locked
-                </HoverCardContent>
+                <HoverCardContent className='w-17 p-2'>Locked</HoverCardContent>
               </HoverCard>
             )}
           </CardContent>
@@ -148,9 +145,7 @@ export function Badges() {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </HoverCardTrigger>
-                <HoverCardContent className='p-2 w-17'>
-                  Locked
-                </HoverCardContent>
+                <HoverCardContent className='w-17 p-2'>Locked</HoverCardContent>
               </HoverCard>
             )}
           </CardContent>
@@ -175,9 +170,7 @@ export function Badges() {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </HoverCardTrigger>
-                <HoverCardContent className='p-2 w-17'>
-                  Locked
-                </HoverCardContent>
+                <HoverCardContent className='w-17 p-2'>Locked</HoverCardContent>
               </HoverCard>
             )}
           </CardContent>
@@ -204,9 +197,7 @@ export function Badges() {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </HoverCardTrigger>
-                <HoverCardContent className='p-2 w-17'>
-                  Locked
-                </HoverCardContent>
+                <HoverCardContent className='w-17 p-2'>Locked</HoverCardContent>
               </HoverCard>
             )}
           </CardContent>
@@ -231,9 +222,7 @@ export function Badges() {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </HoverCardTrigger>
-                <HoverCardContent className='p-2 w-17'>
-                  Locked
-                </HoverCardContent>
+                <HoverCardContent className='w-17 p-2'>Locked</HoverCardContent>
               </HoverCard>
             )}
           </CardContent>
@@ -258,9 +247,7 @@ export function Badges() {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </HoverCardTrigger>
-                <HoverCardContent className='p-2 w-17'>
-                  Locked
-                </HoverCardContent>
+                <HoverCardContent className='w-17 p-2'>Locked</HoverCardContent>
               </HoverCard>
             )}
           </CardContent>
@@ -287,9 +274,7 @@ export function Badges() {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </HoverCardTrigger>
-                <HoverCardContent className='p-2 w-17'>
-                  Locked
-                </HoverCardContent>
+                <HoverCardContent className='w-17 p-2'>Locked</HoverCardContent>
               </HoverCard>
             )}
           </CardContent>
@@ -314,9 +299,7 @@ export function Badges() {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </HoverCardTrigger>
-                <HoverCardContent className='p-2 w-17'>
-                  Locked
-                </HoverCardContent>
+                <HoverCardContent className='w-17 p-2'>Locked</HoverCardContent>
               </HoverCard>
             )}
           </CardContent>
@@ -341,9 +324,7 @@ export function Badges() {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </HoverCardTrigger>
-                <HoverCardContent className='p-2 w-17'>
-                  Locked
-                </HoverCardContent>
+                <HoverCardContent className='w-17 p-2'>Locked</HoverCardContent>
               </HoverCard>
             )}
           </CardContent>
