@@ -12,16 +12,24 @@ import {
   updateHand,
   compareTo
 } from 'poker-hand-utils'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { useState } from 'react'
-import { set } from 'react-hook-form'
+import { Button } from '@/components/ui/button'
+import { useState, useEffect } from 'react'
+import { useAuth } from '@/app/context/AuthContext'
+import {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription
+} from '@/components/ui/card'
+import { HowToPlay } from './howToPlayPoker'
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CardsProps extends React.HTMLAttributes<HTMLDivElement> {
   community?: boolean
   cards: string
 }
 
-const Card: React.FC<CardProps> = ({
+const Cards: React.FC<CardsProps> = ({
   children,
   className,
   community,
@@ -30,12 +38,12 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const cardArray = cards.split(' ')
   const frontCards = cardArray.map((cardChar, index) => (
-    <CardSection key={index} imageString={cardChar} />
+    <CardsSection key={index} imageString={cardChar} />
   ))
   if (community) {
     const backCards = Array.from(
       { length: 5 - cardArray.length },
-      (_, index) => <CardSection key={index} imageString='back' />
+      (_, index) => <CardsSection key={index} imageString='back' />
     )
     return (
       <div className='flex flex-row justify-center gap-10'>
@@ -48,11 +56,12 @@ const Card: React.FC<CardProps> = ({
   return <div className='flex flex-row justify-center gap-10'>{frontCards}</div>
 }
 
-export interface CardSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardsSectionProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   imageString: string
 }
 
-const CardSection: React.FC<CardSectionProps> = ({
+const CardsSection: React.FC<CardsSectionProps> = ({
   className,
   style,
   imageString,
@@ -120,15 +129,19 @@ const randomHand = (numberOfCards: number, numberOfHands: number) => {
 }
 
 const CompareHandsPuzzle = () => {
-  const [hands, setHands] = useState(() => randomHand(5, 2))
+  const { addXp, pokerQuiz } = useAuth()
+  const [hands, setHands] = useState(randomHand(5, 2))
   const [hand1, setHand1] = useState<string>('')
   const [hand2, setHand2] = useState<string>('')
   const [buttonState, setButtonState] = useState(false)
   const [buttonColor1, setButtonColor1] = useState('')
   const [buttonColor2, setButtonColor2] = useState('')
   const [buttonColor3, setButtonColor3] = useState('')
+  const [attempts, setAttempts] = useState<number>(
+    pokerQuiz(new Date().toLocaleDateString())
+  )
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (hands) {
       setHand1(hands[0])
       setHand2(hands[1])
@@ -155,6 +168,7 @@ const CompareHandsPuzzle = () => {
         default:
           console.log('Invalid value')
       }
+      addXp(20)
     } else {
       switch (value) {
         case 1:
@@ -170,46 +184,75 @@ const CompareHandsPuzzle = () => {
           console.log('Invalid value')
       }
     }
+    setAttempts(pokerQuiz(new Date().toLocaleDateString(), true))
   }
 
   return (
-    <Board>
-      <StyledH2>Which hand is bigger?</StyledH2>
-      <div className='flex flex-row items-center gap-20'>
-        <StyledH1>Hand 1</StyledH1>
-        <Card cards={hand1} />
-      </div>
-      <div className='flex flex-row items-center gap-20'>
-        <StyledH1>Hand 2</StyledH1>
-        <Card cards={hand2} />
-      </div>
-      <div className='flex flex-row items-center gap-20 pt-10'>
-        <Button
-          variant={'ghost'}
-          size={'xl'}
-          className={`border border-2 ${buttonColor1} border-gray-300 text-lg font-semibold ${!buttonState ? 'hover:bg-blue-300' : ''}`}
-          onClick={() => handleButtonClick(1)}
-        >
-          Hand 1 is larger
-        </Button>
-        <Button
-          variant={'ghost'}
-          size={'xl'}
-          className={`border border-2 ${buttonColor2} border-gray-300 text-lg font-semibold ${!buttonState ? 'hover:bg-blue-300' : ''}`}
-          onClick={() => handleButtonClick(2)}
-        >
-          Hand 2 is larger
-        </Button>
-        <Button
-          variant={'ghost'}
-          size={'xl'}
-          className={`border border-2 ${buttonColor3} border-gray-300 text-lg font-semibold ${!buttonState ? 'hover:bg-blue-300' : ''}`}
-          onClick={() => handleButtonClick(3)}
-        >
-          They are equal
-        </Button>
-      </div>
-    </Board>
+    <div className='flex h-screen w-full flex-row p-20'>
+      <Board>
+        <StyledH2>Which hand is bigger?</StyledH2>
+        <div className='flex flex-row items-center gap-20'>
+          <StyledH1>Hand 1</StyledH1>
+          <Cards cards={hand1} />
+        </div>
+        <div className='flex flex-row items-center gap-20'>
+          <StyledH1>Hand 2</StyledH1>
+          <Cards cards={hand2} />
+        </div>
+        <div className='flex flex-row items-center gap-20 pt-10'>
+          <Button
+            variant={'ghost'}
+            size={'xl'}
+            className={`border border-2 ${buttonColor1} border-gray-300 text-lg font-semibold ${!buttonState ? 'hover:bg-blue-300' : ''}`}
+            onClick={() => handleButtonClick(1)}
+          >
+            Hand 1 is larger
+          </Button>
+          <Button
+            variant={'ghost'}
+            size={'xl'}
+            className={`border border-2 ${buttonColor2} border-gray-300 text-lg font-semibold ${!buttonState ? 'hover:bg-blue-300' : ''}`}
+            onClick={() => handleButtonClick(2)}
+          >
+            Hand 2 is larger
+          </Button>
+          <Button
+            variant={'ghost'}
+            size={'xl'}
+            className={`border border-2 ${buttonColor3} border-gray-300 text-lg font-semibold ${!buttonState ? 'hover:bg-blue-300' : ''}`}
+            onClick={() => handleButtonClick(3)}
+          >
+            They are equal
+          </Button>
+        </div>
+      </Board>
+      <Card className='flex flex-col justify-center border-0 shadow-none'>
+        <CardHeader>
+          <CardTitle className='text-4xl'>Poker Daily Quiz</CardTitle>
+          <CardDescription className='text-lg'>
+            You have {attempts} attempts left. Good luck!
+          </CardDescription>
+        </CardHeader>
+        <CardFooter className='flex justify-between'>
+          <HowToPlay />
+          <Button
+            variant={'ghost'}
+            size={'lg'}
+            className='border border-2 border-gray-300 py-0 text-lg font-semibold hover:bg-blue-300'
+            disabled={!buttonState}
+            onClick={() => {
+              setHands(randomHand(5, 2))
+              setButtonState(false)
+              setButtonColor1('')
+              setButtonColor2('')
+              setButtonColor3('')
+            }}
+          >
+            Next
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
   )
 }
 
@@ -227,4 +270,4 @@ const Board = ({ children }: { children: React.ReactNode }) => (
   </div>
 )
 
-export { Card, CardSection, Deck, randomHand, CompareHandsPuzzle }
+export { Cards, CardsSection, Deck, randomHand, CompareHandsPuzzle }
