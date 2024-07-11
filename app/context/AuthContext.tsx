@@ -136,13 +136,19 @@ export const AuthContextProvider = ({
         finalQuestPuzzleID: 1,
         isCompleted: false
       })
+      const pokerQuizDoc = setDoc(doc(db, 'pokerquiz', user.uid), {
+        attempts: 5,
+        latestDate: new Date().toLocaleDateString()
+      })
+
       await Promise.all([
         badgesDoc,
         ratingDoc,
         xpDoc,
         chessGuideDoc,
         finalQuestDoc,
-        pokerGuideDoc
+        pokerGuideDoc,
+        pokerQuizDoc
       ])
     }
   }
@@ -402,6 +408,36 @@ export const AuthContextProvider = ({
     return arrayOfUsers
   }
 
+  const pokerQuiz = async (date?: string, decrement?: boolean) => {
+    if (currentUser) {
+      const docRef = doc(db, 'pokerquiz', currentUser.uid)
+      const docSnap = await getDoc(docRef)
+      if (docSnap.exists()) {
+        const data = docSnap.data()
+        if (decrement) {
+          const attempts = data.attempts - 1
+          updateDoc(docRef, {
+            attempts: attempts,
+            latestDate: data.latestDate
+          })
+          return attempts
+        }
+
+        if (date) {
+          if (date !== data.latestDate) {
+            updateDoc(docRef, {
+              attempts: 5,
+              latestDate: date
+            })
+            return 5
+          } else {
+            return data.attempts
+          }
+        }
+      }
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -427,7 +463,8 @@ export const AuthContextProvider = ({
         updateFinalPuzzle,
         updateFinalQuestStatus,
         fetchFinalQuest,
-        queryCollection
+        queryCollection,
+        pokerQuiz
       }}
     >
       {children}
