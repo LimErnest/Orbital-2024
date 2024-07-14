@@ -16,10 +16,6 @@ import { PokerGuide } from '@/components/ui/poker-components/pokerguide'
 import { PokerDailyQuiz } from '@/components/ui/poker-components/poker-dailyQuiz'
 import { PokerFinalQuest } from '@/components/ui/poker-components/poker-finalQuest'
 
-interface PokerSidebarProps {
-  highlightedLink: string
-}
-
 export default function PokerPage() {
   const { user, checkPokerGuide } = useAuth()
   const [hasCompletedGuide, setHasCompletedGuide] = useState(false)
@@ -34,7 +30,6 @@ export default function PokerPage() {
   return (
     <>
       <div className='flex'>
-
         <div className='h-full w-full max-w-[13rem] shrink-0'>
           <Sidebar className='bg-gray-100'>
             <SidebarSection className='px-2 py-2'>
@@ -43,7 +38,8 @@ export default function PokerPage() {
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
-                    className: 'flex justify-start w-full rounded-sm hover:bg-blue-300 '
+                    className:
+                      'flex w-full justify-start rounded-sm hover:bg-blue-300 '
                   })
                 )}
               >
@@ -63,8 +59,11 @@ export default function PokerPage() {
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
-                    className: `flex justify-start w-full shadow-none rounded-sm hover:bg-blue-300 ${page === 'guide' ? 'bg-blue-300 text-black' : 'bg-gray-100 text-black'
-                      }`
+                    className: `flex w-full justify-start rounded-sm shadow-none hover:bg-blue-300 ${
+                      page === 'guide'
+                        ? 'bg-blue-300 text-black'
+                        : 'bg-gray-100 text-black'
+                    }`
                   })
                 )}
               >
@@ -84,8 +83,11 @@ export default function PokerPage() {
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
-                    className: `flex justify-start w-full shadow-none rounded-sm hover:bg-blue-300 ${page === 'quiz' ? 'bg-blue-300 text-black' : 'bg-gray-100 text-black'
-                      }`
+                    className: `flex w-full justify-start rounded-sm shadow-none hover:bg-blue-300 ${
+                      page === 'dailyQuiz'
+                        ? 'bg-blue-300 text-black'
+                        : 'bg-gray-100 text-black'
+                    }`
                   })
                 )}
               >
@@ -106,8 +108,11 @@ export default function PokerPage() {
                   className={cn(
                     buttonVariants({
                       variant: 'ghost',
-                      className: `flex w-full justify-start shadow-none rounded-sm hover:bg-blue-300 ${page === 'final' ? 'bg-blue-300 text-black' : 'bg-gray-100 text-black'
-                        }`
+                      className: `flex w-full justify-start rounded-sm shadow-none hover:bg-blue-300 ${
+                        page === 'finalQuest'
+                          ? 'bg-blue-300 text-black'
+                          : 'bg-gray-100 text-black'
+                      }`
                     })
                   )}
                 >
@@ -156,10 +161,10 @@ export default function PokerPage() {
           </Sidebar>
         </div>
 
-        <div className='h-screen w-full overflow-hidden p-20'>
+        <div className='h-screen w-full overflow-hidden'>
           {page == 'dailyQuiz' ? (
             <PokerDailyQuiz />
-          ) : (page == 'finalQuest') ? (
+          ) : page == 'finalQuest' ? (
             <PokerFinalQuest />
           ) : (
             <PokerGuide />
@@ -169,5 +174,3 @@ export default function PokerPage() {
     </>
   )
 }
-
-
