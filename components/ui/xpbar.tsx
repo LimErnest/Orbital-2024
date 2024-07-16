@@ -40,7 +40,7 @@ export function XpBar() {
           />
         </div>
       </HoverCardTrigger>
-      <HoverCardContent className='w-24 text-nowrap p-2'>
+      <HoverCardContent className='flex w-24 justify-center text-nowrap p-2'>
         {progress.xp} / 100
       </HoverCardContent>
     </HoverCard>

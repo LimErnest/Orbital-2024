@@ -52,7 +52,7 @@
     "embla-carousel-react": "^8.0.4",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.378.0",
-    "next": "14.2.3",
+    "next": "^14.2.5",
     "next-themes": "^0.3.0",
     "poker-hand-utils": "^1.0.8",
     "react": "^18.3.1",

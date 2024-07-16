@@ -12,7 +12,7 @@ import {
   updateHand,
   compareTo
 } from 'poker-hand-utils'
-import { Card, CardSection } from '@/components/ui/poker-components/card'
+import { Cards } from '@/components/ui/poker-components/card'
 
 const Chapter1 = () => {
   return (
@@ -33,14 +33,14 @@ const Chapter1 = () => {
         but not beaten by the royal flush of another suit.
       </StyledLi>
       <Board>
-        <Card community={false} cards={'AS KS QS JS TS'} />
+        <Cards community={false} cards={'AS KS QS JS TS'} />
       </Board>
       <StyledH1>Straight Flush</StyledH1>
       <StyledLi>
         A straight flush is made up of 5 consecutive cards of the same suit.
       </StyledLi>
       <Board>
-        <Card community={false} cards={'9D 8D 7D 6D 5D'} />
+        <Cards community={false} cards={'9D 8D 7D 6D 5D'} />
       </Board>
       <StyledH1>Four of a kind</StyledH1>
       <StyledLi>
@@ -50,7 +50,7 @@ const Chapter1 = () => {
         royal flush is available.
       </StyledLi>
       <Board>
-        <Card community={false} cards={'8D 8H 8C 8S JD'} />
+        <Cards community={false} cards={'8D 8H 8C 8S JD'} />
       </Board>
       <StyledH1>Full house</StyledH1>
       <StyledLi>
@@ -58,7 +58,7 @@ const Chapter1 = () => {
         another rank.
       </StyledLi>
       <Board>
-        <Card community={false} cards={'7D 7H 7C 3H 3D'} />
+        <Cards community={false} cards={'7D 7H 7C 3H 3D'} />
       </Board>
       <StyledH1>Flush</StyledH1>
       <StyledLi>
@@ -66,7 +66,7 @@ const Chapter1 = () => {
         or sequence, but are from the same suit.
       </StyledLi>
       <Board>
-        <Card community={false} cards={'AH JH 7H 6H 2H'} />
+        <Cards community={false} cards={'AH JH 7H 6H 2H'} />
       </Board>
       <StyledH1>Straight</StyledH1>
       <StyledLi>
@@ -74,7 +74,7 @@ const Chapter1 = () => {
         suit.
       </StyledLi>
       <Board>
-        <Card community={false} cards={'TC 9C 8C 7C 6C'} />
+        <Cards community={false} cards={'TC 9C 8C 7C 6C'} />
       </Board>
       <StyledH1>Three of a kind</StyledH1>
       <StyledLi>
@@ -82,7 +82,7 @@ const Chapter1 = () => {
         unmatched cards.
       </StyledLi>
       <Board>
-        <Card community={false} cards={'7D 7C 7S AS JS'} />
+        <Cards community={false} cards={'7D 7C 7S AS JS'} />
       </Board>
       <StyledH1>Two pairs</StyledH1>
       <StyledLi>
@@ -90,7 +90,7 @@ const Chapter1 = () => {
         rank (different from the first pair), plus one unmatched card.
       </StyledLi>
       <Board>
-        <Card community={false} cards={'JH JD 5S 5S 2S'} />
+        <Cards community={false} cards={'JH JD 5S 5S 2S'} />
       </Board>
       <StyledH1>Pair</StyledH1>
       <StyledLi>
@@ -98,7 +98,7 @@ const Chapter1 = () => {
         cards.
       </StyledLi>
       <Board>
-        <Card community={false} cards={'AS AD 8S 4D 3H'} />
+        <Cards community={false} cards={'AS AD 8S 4D 3H'} />
       </Board>
       <StyledH1>High card</StyledH1>
       <StyledLi>
@@ -107,7 +107,7 @@ const Chapter1 = () => {
         are not all from the same suit.
       </StyledLi>
       <Board>
-        <Card community={false} cards={'KD QC 7H 5S 2H'} />
+        <Cards community={false} cards={'KD QC 7H 5S 2H'} />
       </Board>
       <StyledH1>Conclusion</StyledH1>
       <StyledLi>
@@ -300,7 +300,7 @@ const Chapter4 = () => {
       </StyledLi>
       <StyledH1>Pre-flop</StyledH1>
       <Board>
-        <Card community={false} cards={'back back'} />
+        <Cards community={false} cards={'back back'} />
       </Board>
       <StyledLi>
         When everyone has their two hole cards, the preflop betting round begins
@@ -381,7 +381,7 @@ const Chapter5 = () => {
         up for the flop:
       </StyledLi>
       <Board>
-        <Card community={true} cards={'AH 7S TH'} />
+        <Cards community={true} cards={'AH 7S TH'} />
       </Board>
       <StyledLi>
         The small blind is first to act in all betting rounds after the flop. If
@@ -421,7 +421,7 @@ const Chapter6 = () => {
         deals the turn. The board now looks like this:
       </StyledLi>
       <Board>
-        <Card community={true} cards={'AH 7S TH 3S'} />
+        <Cards community={true} cards={'AH 7S TH 3S'} />
       </Board>
       <StyledLi>
         The big blind checks, and the button bets $20 into the $37 pot. The big
@@ -450,7 +450,7 @@ const Chapter7 = () => {
         this:
       </StyledLi>
       <Board>
-        <Card community={true} cards={'AH 7S TH 3S JH'} />
+        <Cards community={true} cards={'AH 7S TH 3S JH'} />
       </Board>
       <StyledLi>
         The big blind checks, and the button checks back, keeping the pot at
@@ -462,7 +462,7 @@ const Chapter7 = () => {
         The big blind turns over his/her hole cars, revealing:
       </StyledLi>
       <Board>
-        <Card community={false} cards={'AC 3C'} />
+        <Cards community={false} cards={'AC 3C'} />
       </Board>
       <StyledLi>
         This hand makes two pair, aces and threes, for the big blind. Using hole
@@ -475,7 +475,7 @@ const Chapter7 = () => {
         opponent. In this case though the button shows this hand:
       </StyledLi>
       <Board>
-        <Card community={false} cards={'TS 9S'} />
+        <Cards community={false} cards={'TS 9S'} />
       </Board>
       <StyledLi>
         The best possible five-card hand with these hole cards is T♠ T♥ A♥
@@ -579,7 +579,7 @@ const Chapter9 = () => {
         first sign of pressure. Below is an example of a dry board:
       </StyledLi>
       <Board>
-        <Card community={true} cards={'JS 7D 4C'} />
+        <Cards community={true} cards={'JS 7D 4C'} />
       </Board>
       <StyledLi>
         The same goes for rainbow boards with an ace. Since you raised pre-flop,
@@ -589,7 +589,7 @@ const Chapter9 = () => {
         with middle pair or pocket pairs.
       </StyledLi>
       <Board>
-        <Card community={true} cards={'AD 7C 6S'} />
+        <Cards community={true} cards={'AD 7C 6S'} />
       </Board>
       <StyledLi>
         Note that if your C- bet is called, it may be wise to slow down on the
@@ -607,13 +607,13 @@ const Chapter9 = () => {
         going away.
       </StyledLi>
       <Board>
-        <Card community={true} cards={'QD 8D 2D'} />
+        <Cards community={true} cards={'QD 8D 2D'} />
       </Board>
       <Board>
-        <Card community={true} cards={'9D 8C 7S'} />
+        <Cards community={true} cards={'9D 8C 7S'} />
       </Board>
       <Board>
-        <Card community={true} cards={'KS KH 8S'} />
+        <Cards community={true} cards={'KS KH 8S'} />
       </Board>
       <StyledLi>
         If you flop a set or two pair, making a C-bet is standard, especially if
@@ -663,10 +663,10 @@ const Chapter10 = () => {
         </StyledLi>
       </ul>
       <Board>
-        <Card community={true} cards={'QD 8D 2D'} />
+        <Cards community={true} cards={'QD 8D 2D'} />
         <div className='mr-40 flex flex-row items-center gap-20'>
           <StyledH1>Your hand</StyledH1>
-          <Card community={false} cards={'7D 6D'} />
+          <Cards community={false} cards={'7D 6D'} />
         </div>
       </Board>
       <StyledLi>
@@ -677,10 +677,10 @@ const Chapter10 = () => {
         situations.
       </StyledLi>
       <Board>
-        <Card community={true} cards={'KS 8H 7C'} />
+        <Cards community={true} cards={'KS 8H 7C'} />
         <div className='mr-40 flex flex-row items-center gap-20'>
           <StyledH1>Your hand</StyledH1>
-          <Card community={false} cards={'6S 5S'} />
+          <Cards community={false} cards={'6S 5S'} />
         </div>
       </Board>
       <StyledLi>
@@ -884,10 +884,10 @@ const Chapter12 = () => {
       </StyledH1>
       <StyledLi>Let's look at an example:</StyledLi>
       <Board>
-        <Card community={true} cards={'AC TC 8C 6H 6C'} />
+        <Cards community={true} cards={'AC TC 8C 6H 6C'} />
         <div className='mr-40 flex flex-row items-center gap-20'>
           <StyledH1>Your hand</StyledH1>
-          <Card community={false} cards={'6D 9D'} />
+          <Cards community={false} cards={'6D 9D'} />
         </div>
       </Board>
       <StyledLi>You're heads-up, it's checked to you. Do you bet?</StyledLi>
@@ -919,10 +919,10 @@ const Chapter12 = () => {
         holdings just often enough to make it an overall profitable value bet.
       </StyledLi>
       <Board>
-        <Card community={true} cards={'QC 5H 7S 2D 2H'} />
+        <Cards community={true} cards={'QC 5H 7S 2D 2H'} />
         <div className='mr-40 flex flex-row items-center gap-20'>
           <StyledH1>Your hand</StyledH1>
-          <Card community={false} cards={'QD JC'} />
+          <Cards community={false} cards={'QD JC'} />
         </div>
       </Board>
       <StyledLi>

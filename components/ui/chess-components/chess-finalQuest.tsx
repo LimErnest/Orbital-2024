@@ -43,28 +43,19 @@ const ChessFinalQuest = () => {
     fetchFinalQuest
   } = useAuth()
   const [puzzleID, setPuzzleID] = useState(1)
-  const [puzzle, setPuzzle] = useState<Puzzle>(arrayOfPuzzle[puzzleID + 94])
+  const [puzzle, setPuzzle] = useState<Puzzle | null>(null)
   const [finalQuestStatus, setfinalQuestStatus] = useState(false)
 
-  const effectRan = useRef(false)
-
   useEffect(() => {
-    console.log('effect is called')
-    if (effectRan.current === true) {
-      if (user) {
-        console.log(user.uid, user)
-        fetchFinalQuest(user.uid).then((data: UserFinalQuestData) => {
-          console.log(data)
-          updateUserFinalQuest(data)
-        })
-        console.log('user is changed')
-      }
+    if (user) {
+      console.log(user.uid, user)
+      fetchFinalQuest(user.uid).then((data: UserFinalQuestData) => {
+        console.log(data)
+        updateUserFinalQuest(data)
+      })
+      console.log('user is changed')
     }
-    return () => {
-      console.log('unmounted')
-      effectRan.current = true
-    }
-  }, [])
+  }, [user])
 
   const updateUserFinalQuest = async (data: UserFinalQuestData) => {
     if (!data) {
@@ -72,9 +63,11 @@ const ChessFinalQuest = () => {
       return
     } else {
       console.log('Fetched finalQuest:', data)
+      setPuzzle(arrayOfPuzzle[data.finalQuestPuzzleID + 94])
       setPuzzleID(data.finalQuestPuzzleID)
       setfinalQuestStatus(data.isCompleted)
-      setPuzzle(arrayOfPuzzle[data.finalQuestPuzzleID + 94])
+
+      console.log(puzzle)
     }
   }
 
@@ -93,6 +86,10 @@ const ChessFinalQuest = () => {
 
     setPuzzleID(currentFinalPuzzleID)
     updateFinalPuzzle(currentFinalPuzzleID)
+  }
+
+  if (puzzle == null) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -131,7 +128,7 @@ const ChessFinalQuest = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className='flex flex-row justify-center'>
+                  <div className='flex flex-wrap justify-center'>
                     <HowToPlay />
 
                     <div className=''>
@@ -144,14 +141,14 @@ const ChessFinalQuest = () => {
                         }}
                         showOn={['in-progress']}
                       >
-                        <Button
+                        <div
                           className={cn(
                             buttonVariants({ size: 'xl' }),
                             'px-8 py-4 text-xl'
                           )}
                         >
                           Restart
-                        </Button>
+                        </div>
                       </ChessPuzzle.Reset>
                     </div>
 
@@ -165,14 +162,14 @@ const ChessFinalQuest = () => {
                         }}
                         showOn={['failed']}
                       >
-                        <Button
+                        <div
                           className={cn(
                             buttonVariants({ size: 'xl' }),
                             'px-8 py-4 text-xl'
                           )}
                         >
                           Try Again
-                        </Button>
+                        </div>
                       </ChessPuzzle.Reset>
                     </div>
 
@@ -190,14 +187,14 @@ const ChessFinalQuest = () => {
                         }}
                         showOn={['solved']}
                       >
-                        <Button
+                        <div
                           className={cn(
                             buttonVariants({ size: 'xl' }),
                             'px-8 py-4 text-xl'
                           )}
                         >
                           Next
-                        </Button>
+                        </div>
                       </ChessPuzzle.Reset>
                     </div>
                   </div>

@@ -154,128 +154,129 @@ const ChessDailyQuiz = () => {
   }
 
   return (
-    <div className='flex'>
-      {threePuzzleCorrect ? (
-        <div className='flex h-screen w-full items-center justify-center text-4xl'>
-          <h1>
-            Congratulations! You have completed the daily quiz.
-          </h1>
-        </div>
-      ) : attempt == 0 ? (
-        <div className='flex h-screen w-full items-center justify-center text-4xl'>
-          <h1>
-            You have no attempts left. Come back again tomorrow.
-          </h1>
-        </div>
-      ) : (
-        <ChessPuzzle.Root
-          puzzle={{
-            fen: puzzle.FEN,
-            moves: puzzle.Moves,
-            makeFirstMove: true
-          }}
-        >
-          <div className='flex h-screen w-full flex-row overflow-hidden p-10'>
-            <div className='w-1/2'>
-              <ChessPuzzle.Board />
-            </div>
-
-            <div className='flex h-1/2 w-full justify-center p-4 sm:w-2/5 sm:p-10'>
-              <Card className='w-full'>
-                <CardHeader>
-                  <CardTitle className='flex justify-center text-4xl'>
-                    Daily Quiz #{puzzleID} {rating} Rating
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className='flex flex-row justify-center'>
-                    <HowToPlay />
-
-                    <div className=''>
-                      <ChessPuzzle.Reset
-                        asChild
-                        puzzle={{
-                          fen: puzzle.FEN,
-                          moves: puzzle.Moves,
-                          makeFirstMove: true
-                        }}
-                        showOn={['in-progress']}
-                      >
-                        <Button
-                          className={cn(
-                            buttonVariants({ size: 'xl' }),
-                            'px-8 py-4 text-xl'
-                          )}
-                        >
-                          Restart
-                        </Button>
-                      </ChessPuzzle.Reset>
-                    </div>
-
-                    <div className=''>
-                      <ChessPuzzle.Reset
-                        asChild
-                        puzzle={{
-                          fen: puzzle.FEN,
-                          moves: puzzle.Moves,
-                          makeFirstMove: true
-                        }}
-                        onReset={() => {
-                          decreaseAttempt()
-                        }}
-                        showOn={['failed']}
-                      >
-                        <Button
-                          className={cn(
-                            buttonVariants({ size: 'xl' }),
-                            'px-8 py-4 text-xl'
-                          )}
-                        >
-                          Try Again
-                        </Button>
-                      </ChessPuzzle.Reset>
-                    </div>
-
-                    <div className=''>
-                      <ChessPuzzle.Reset
-                        asChild
-                        onReset={() => {
-                          setPuzzle(nextPuzzle)
-                          setNewPuzzle()
-                        }}
-                        puzzle={{
-                          fen: nextPuzzle.FEN,
-                          moves: nextPuzzle.Moves,
-                          makeFirstMove: true
-                        }}
-                        showOn={['solved']}
-                      >
-                        <Button
-                          className={cn(
-                            buttonVariants({ size: 'xl' }),
-                            'px-8 py-4 text-xl'
-                          )}
-                        >
-                          Next
-                        </Button>
-                      </ChessPuzzle.Reset>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter className='flex justify-center'>
-                  You have {attempt} attempts left
-                  <br />
-                </CardFooter>
-                <CardFooter className='flex justify-center'>
-                  If the first move is not played, please refresh the page
-                </CardFooter>
-              </Card>
-            </div>
+    <>
+      <div className=''>
+        {threePuzzleCorrect ? (
+          <div className='flex h-full items-center justify-center'>
+            <h1 className='mb-2 text-4xl font-bold'>
+              Congratulations! You have completed the daily quiz. Come back tomorrow!
+            </h1>
           </div>
-        </ChessPuzzle.Root>
-      )}
-    </div>
+        ) : attempt == 0 ? (
+          <div className='flex h-full items-center justify-center'>
+            <h1 className='mb-2 text-4xl font-bold'>
+              You have no more attempts today. Come back tommorrow!
+            </h1>
+          </div>
+        ) : (
+          <ChessPuzzle.Root
+            puzzle={{
+              fen: puzzle.FEN,
+              moves: puzzle.Moves,
+              makeFirstMove: true
+            }}
+          >
+            <div className='flex h-screen w-full flex-row overflow-hidden p-10'>
+              <div className='w-1/2'>
+                <ChessPuzzle.Board />
+              </div>
+
+              <div className='flex h-1/2 w-full justify-center p-4 sm:w-2/5 sm:p-10'>
+                <Card className='w-full'>
+                  <CardHeader>
+                    <CardTitle className='flex flex-col items-center text-2xl sm:text-4xl'>
+                      <span>Chess Daily Quiz #{puzzleID} </span>
+                      <span>{rating} Rating</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className='flex flex-wrap justify-center'>
+                      <HowToPlay />
+
+                      <div>
+                        <ChessPuzzle.Reset
+                          asChild
+                          puzzle={{
+                            fen: puzzle.FEN,
+                            moves: puzzle.Moves,
+                            makeFirstMove: true
+                          }}
+                          showOn={['in-progress']}
+                        >
+                          <Button
+                            className={cn(
+                              buttonVariants({ size: 'xl' }),
+                              'px-8 py-4 text-xl'
+                            )}
+                          >
+                            Restart
+                          </Button>
+                        </ChessPuzzle.Reset>
+                      </div>
+
+                      <div>
+                        <ChessPuzzle.Reset
+                          asChild
+                          puzzle={{
+                            fen: puzzle.FEN,
+                            moves: puzzle.Moves,
+                            makeFirstMove: true
+                          }}
+                          onReset={() => {
+                            decreaseAttempt()
+                          }}
+                          showOn={['failed']}
+                        >
+                          <Button
+                            className={cn(
+                              buttonVariants({ size: 'xl' }),
+                              'px-8 py-4 text-xl'
+                            )}
+                          >
+                            Try Again
+                          </Button>
+                        </ChessPuzzle.Reset>
+                      </div>
+
+                      <div>
+                        <ChessPuzzle.Reset
+                          asChild
+                          onReset={() => {
+                            setPuzzle(nextPuzzle)
+                            setNewPuzzle()
+                          }}
+                          puzzle={{
+                            fen: nextPuzzle.FEN,
+                            moves: nextPuzzle.Moves,
+                            makeFirstMove: true
+                          }}
+                          showOn={['solved']}
+                        >
+                          <Button
+                            className={cn(
+                              buttonVariants({ size: 'xl' }),
+                              'px-8 py-4 text-xl'
+                            )}
+                          >
+                            Next
+                          </Button>
+                        </ChessPuzzle.Reset>
+                      </div>
+                    </div>
+                  </CardContent>
+                  <CardFooter className='flex flex-col items-center'>
+                    <span>You have {attempt} attempts left</span>
+                    <span>If the first move is not played, please refresh the page</span>
+                  </CardFooter>
+                </Card>
+              </div>
+            </div>
+          </ChessPuzzle.Root>
+        )}
+      </div>
+    </>
   )
+
 }
 
 export { ChessDailyQuiz }
