@@ -1,10 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import {
-  createPokerHand,
-  compareTo
-} from 'poker-hand-utils'
+import { createPokerHand, compareTo } from 'poker-hand-utils'
 import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/app/context/AuthContext'
@@ -28,19 +25,12 @@ export default function PokerDailyQuiz() {
   const [buttonColor1, setButtonColor1] = useState('')
   const [buttonColor2, setButtonColor2] = useState('')
   const [buttonColor3, setButtonColor3] = useState('')
-  const [attempts, setAttempts] = useState<number>(6)
+  const [attempts, setAttempts] = useState<number>(10)
   const [isLoading, setIsLoading] = useState(true)
   const [lessAttempts, setLessAttempts] = useState(false)
 
   useEffect(() => {
-    const numberOfAttempts = pokerQuiz(new Date().toLocaleDateString())
-    setAttempts(numberOfAttempts)
-    setTimeout(() => {
-      if (attempts < 1) {
-        setLessAttempts(true)
-      }
-      setIsLoading(false)
-    }, 500)
+    handleInitialState()
   }, [])
 
   useEffect(() => {
@@ -49,6 +39,17 @@ export default function PokerDailyQuiz() {
       setHand2(hands[1])
     }
   }, [hands])
+
+  const handleInitialState = async () => {
+    const numberOfAttempts = await pokerQuiz(new Date().toLocaleDateString())
+    setAttempts(numberOfAttempts)
+    setTimeout(() => {
+      if (numberOfAttempts <= 0) {
+        setLessAttempts(true)
+      }
+      setIsLoading(false)
+    }, 250)
+  }
 
   const handleButtonClick = (value: number) => {
     if (buttonState) return
@@ -160,15 +161,15 @@ export default function PokerDailyQuiz() {
             size={'lg'}
             className='border border-2 border-gray-300 py-0 text-lg font-semibold hover:bg-blue-300'
             disabled={!buttonState}
-            onClick={() => {
-              if (attempts > 0) {
+            onClick={async () => {
+              if ((await pokerQuiz(new Date().toLocaleDateString())) <= 0) {
+                setLessAttempts(true)
+              } else {
                 setHands(randomHand(5, 2))
                 setButtonState(false)
                 setButtonColor1('')
                 setButtonColor2('')
                 setButtonColor3('')
-              } else {
-                setLessAttempts(true)
               }
             }}
           >
