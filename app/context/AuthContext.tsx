@@ -282,7 +282,7 @@ export const AuthContextProvider = ({
       const docSnap = await getDoc(docRef)
       const data = docSnap.data()
       if (data) {
-        return data.poker50Guide
+        return data.poker100Guide
       }
     }
   }
