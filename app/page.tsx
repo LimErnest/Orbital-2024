@@ -99,11 +99,11 @@ export default function LandingPage() {
                   flex: 'auto',
                   display: 'flex',
                   flexDirection: 'row',
-                  justifyContent: 'space-around',
+                  justifyContent: 'center',
                   padding: '2vh 10vw'
                 }}
               >
-                <Card className='m-2 flex w-full flex-col'>
+                <Card className='m-2 flex w-100 flex-col'>
                   <CardHeader className='ml-5 mt-2'>
                     <CardTitle className='text-5xl font-bold'>Chess</CardTitle>
                     <CardDescription className='text-3xl font-bold'>
@@ -121,27 +121,7 @@ export default function LandingPage() {
                   </CardContent>
                 </Card>
 
-                <Card className='m-2 flex w-full flex-col'>
-                  <CardHeader className='ml-5 mt-2'>
-                    <CardTitle className='text-5xl font-bold'>
-                      Mahjong
-                    </CardTitle>
-                    <CardDescription className='text-3xl font-bold'>
-                      Great game for celebrations
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Image
-                      src='/img/mahjongs.jpg'
-                      alt='Chess'
-                      width={400}
-                      height={400}
-                      className='mx-auto mb-4 block rounded-md border-2 border-black'
-                    />
-                  </CardContent>
-                </Card>
-
-                <Card className='m-2 flex w-full flex-col'>
+                <Card className='m-2 flex w-100 flex-col'>
                   <CardHeader className='ml-5 mt-2'>
                     <CardTitle className='text-5xl font-bold'>Poker</CardTitle>
                     <CardDescription className='text-3xl font-bold'>
