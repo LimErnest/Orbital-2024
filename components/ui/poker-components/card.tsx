@@ -1,13 +1,35 @@
+'use client'
+
 import * as React from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import {
+  createPokerHand,
+  getDescription,
+  handToString,
+  getEvaluatedScore,
+  getRank,
+  updateHand,
+  compareTo
+} from 'poker-hand-utils'
+import { Button } from '@/components/ui/button'
+import { useState, useEffect } from 'react'
+import { useAuth } from '@/app/context/AuthContext'
+import {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription
+} from '@/components/ui/card'
+import { HowToPlay } from './howToPlayPoker'
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CardsProps extends React.HTMLAttributes<HTMLDivElement> {
   community?: boolean
   cards: string
 }
 
-const Card: React.FC<CardProps> = ({
+const Cards: React.FC<CardsProps> = ({
   children,
   className,
   community,
@@ -16,12 +38,12 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const cardArray = cards.split(' ')
   const frontCards = cardArray.map((cardChar, index) => (
-    <CardSection key={index} imageString={cardChar} />
+    <CardsSection key={index} imageString={cardChar} />
   ))
   if (community) {
     const backCards = Array.from(
       { length: 5 - cardArray.length },
-      (_, index) => <CardSection key={index} imageString='back' />
+      (_, index) => <CardsSection key={index} imageString='back' />
     )
     return (
       <div className='flex flex-row justify-center gap-10'>
@@ -34,11 +56,12 @@ const Card: React.FC<CardProps> = ({
   return <div className='flex flex-row justify-center gap-10'>{frontCards}</div>
 }
 
-export interface CardSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardsSectionProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   imageString: string
 }
 
-const CardSection: React.FC<CardSectionProps> = ({
+const CardsSection: React.FC<CardsSectionProps> = ({
   className,
   style,
   imageString,
@@ -83,7 +106,7 @@ const randomHand = (numberOfCards: number, numberOfHands: number) => {
   let totalCards = numberOfCards * numberOfHands
   if (totalCards > 52) {
     console.error('Too many cards requested')
-    return
+    return []
   }
   const shuffledDeck = shuffleDeck(Deck)
   const hands = []
@@ -105,4 +128,4 @@ const randomHand = (numberOfCards: number, numberOfHands: number) => {
   return hands
 }
 
-export { Card, CardSection, Deck, randomHand }
+export { Cards, CardsSection, Deck, randomHand }

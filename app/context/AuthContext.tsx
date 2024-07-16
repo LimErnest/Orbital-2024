@@ -106,9 +106,6 @@ export const AuthContextProvider = ({
         chess50Guide: false,
         chess100Guide: false,
         chessFinalQuest: false,
-        mahjong50Guide: false,
-        mahjong100Guide: false,
-        mahjongFinalQuest: false,
         poker50Guide: false,
         poker100Guide: false,
         pokerFinalQuest: false
@@ -136,13 +133,19 @@ export const AuthContextProvider = ({
         finalQuestPuzzleID: 1,
         isCompleted: false
       })
+      const pokerQuizDoc = setDoc(doc(db, 'pokerquiz', user.uid), {
+        attempts: 5,
+        latestDate: new Date().toLocaleDateString()
+      })
+
       await Promise.all([
         badgesDoc,
         ratingDoc,
         xpDoc,
         chessGuideDoc,
         finalQuestDoc,
-        pokerGuideDoc
+        pokerGuideDoc,
+        pokerQuizDoc
       ])
     }
   }
@@ -276,7 +279,7 @@ export const AuthContextProvider = ({
       const docSnap = await getDoc(docRef)
       const data = docSnap.data()
       if (data) {
-        return data.poker50Guide
+        return data.poker100Guide
       }
     }
   }
@@ -402,6 +405,36 @@ export const AuthContextProvider = ({
     return arrayOfUsers
   }
 
+  const pokerQuiz = async (date?: string, decrement?: boolean) => {
+    if (currentUser) {
+      const docRef = doc(db, 'pokerquiz', currentUser.uid)
+      const docSnap = await getDoc(docRef)
+      if (docSnap.exists()) {
+        const data = docSnap.data()
+        if (decrement) {
+          const attempts = data.attempts - 1
+          updateDoc(docRef, {
+            attempts: attempts,
+            latestDate: data.latestDate
+          })
+          return attempts
+        }
+
+        if (date) {
+          if (date !== data.latestDate) {
+            updateDoc(docRef, {
+              attempts: 5,
+              latestDate: date
+            })
+            return 5
+          } else {
+            return data.attempts
+          }
+        }
+      }
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -427,7 +460,8 @@ export const AuthContextProvider = ({
         updateFinalPuzzle,
         updateFinalQuestStatus,
         fetchFinalQuest,
-        queryCollection
+        queryCollection,
+        pokerQuiz
       }}
     >
       {children}

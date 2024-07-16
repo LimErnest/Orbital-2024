@@ -27,23 +27,6 @@ const Dashboard = () => {
 
                     <div className='px-4'>
                         <Link
-                            href='/pages/coming-soon'
-                            className='flex items-center justify-start whitespace-nowrap border-2 rounded-sm px-4 py-1 text-2xl font-medium border-black hover:bg-blue-300'
-                        >
-                            <Image
-                                src='/img/mahjong_icon.jpg'
-                                alt='Mahjong'
-                                width={30}
-                                height={30}
-                                className='mr-2'
-                                style={{ height: 'auto' }}
-                            />
-                            Mahjong
-                        </Link>
-                    </div>
-
-                    <div className='px-4'>
-                        <Link
                             href='/pages/poker-guide'
                             className='flex items-center justify-start whitespace-nowrap border-2 rounded-sm px-4 py-1 text-2xl font-medium border-black hover:bg-blue-300'
                         >
