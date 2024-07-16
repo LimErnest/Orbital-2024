@@ -106,9 +106,6 @@ export const AuthContextProvider = ({
         chess50Guide: false,
         chess100Guide: false,
         chessFinalQuest: false,
-        mahjong50Guide: false,
-        mahjong100Guide: false,
-        mahjongFinalQuest: false,
         poker50Guide: false,
         poker100Guide: false,
         pokerFinalQuest: false
