@@ -128,7 +128,7 @@ const ChessFinalQuest = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className='flex flex-row justify-center'>
+                  <div className='flex flex-wrap justify-center'>
                     <HowToPlay />
 
                     <div className=''>

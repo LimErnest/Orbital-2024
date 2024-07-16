@@ -155,17 +155,17 @@ const ChessDailyQuiz = () => {
 
   return (
     <>
-      <div className='flex'>
+      <div className=''>
         {threePuzzleCorrect ? (
-          <div className='flex h-screen w-full items-center justify-center text-4xl'>
-            <h1>
-              Congratulations! You have completed the daily quiz.
+          <div className='flex h-full items-center justify-center'>
+            <h1 className='mb-2 text-4xl font-bold'>
+              Congratulations! You have completed the daily quiz. Come back tomorrow!
             </h1>
           </div>
         ) : attempt == 0 ? (
-          <div className='flex h-screen w-full items-center justify-center text-4xl'>
-            <h1>
-              You have no attempts left. Come back again tomorrow.
+          <div className='flex h-full items-center justify-center'>
+            <h1 className='mb-2 text-4xl font-bold'>
+              You have no more attempts today. Come back tommorrow!
             </h1>
           </div>
         ) : (
@@ -184,15 +184,16 @@ const ChessDailyQuiz = () => {
               <div className='flex h-1/2 w-full justify-center p-4 sm:w-2/5 sm:p-10'>
                 <Card className='w-full'>
                   <CardHeader>
-                    <CardTitle className='flex justify-center text-4xl'>
-                      Daily Quiz #{puzzleID} {rating} Rating
+                    <CardTitle className='flex flex-col items-center text-2xl sm:text-4xl'>
+                      <span>Chess Daily Quiz #{puzzleID} </span>
+                      <span>{rating} Rating</span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className='flex flex-row justify-center'>
+                    <div className='flex flex-wrap justify-center'>
                       <HowToPlay />
 
-                      <div className=''>
+                      <div>
                         <ChessPuzzle.Reset
                           asChild
                           puzzle={{
@@ -213,7 +214,7 @@ const ChessDailyQuiz = () => {
                         </ChessPuzzle.Reset>
                       </div>
 
-                      <div className=''>
+                      <div>
                         <ChessPuzzle.Reset
                           asChild
                           puzzle={{
@@ -237,7 +238,7 @@ const ChessDailyQuiz = () => {
                         </ChessPuzzle.Reset>
                       </div>
 
-                      <div className=''>
+                      <div>
                         <ChessPuzzle.Reset
                           asChild
                           onReset={() => {
@@ -263,12 +264,9 @@ const ChessDailyQuiz = () => {
                       </div>
                     </div>
                   </CardContent>
-                  <CardFooter className='flex justify-center'>
-                    You have {attempt} attempts left
-                    <br />
-                  </CardFooter>
-                  <CardFooter className='flex justify-center'>
-                    If the first move is not played, please refresh the page
+                  <CardFooter className='flex flex-col items-center'>
+                    <span>You have {attempt} attempts left</span>
+                    <span>If the first move is not played, please refresh the page</span>
                   </CardFooter>
                 </Card>
               </div>
