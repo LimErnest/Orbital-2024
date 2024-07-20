@@ -129,7 +129,11 @@ export const AuthContextProvider = ({
       const pokerGuideDoc = setDoc(doc(db, 'pokerguide', user.uid), {
         lastChapter: 1
       })
-      const finalQuestDoc = setDoc(doc(db, 'finalQuest', user.uid), {
+      const chessFinalQuestDoc = setDoc(doc(db, 'finalQuest', user.uid), {
+        finalQuestPuzzleID: 1,
+        isCompleted: false
+      })
+      const pokerFinalQuestDoc = setDoc(doc(db, 'pokerFinalQuest', user.uid), {
         finalQuestPuzzleID: 1,
         isCompleted: false
       })
@@ -143,9 +147,10 @@ export const AuthContextProvider = ({
         ratingDoc,
         xpDoc,
         chessGuideDoc,
-        finalQuestDoc,
+        chessFinalQuestDoc,
         pokerGuideDoc,
-        pokerQuizDoc
+        pokerQuizDoc,
+        pokerFinalQuestDoc
       ])
     }
   }
