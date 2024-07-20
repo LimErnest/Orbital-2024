@@ -11,7 +11,7 @@ const Dashboard = () => {
                     <div className='px-4'>
                         <Link
                             href='/pages/chess-guide'
-                            className='flex items-center justify-start whitespace-nowrap border-2 rounded-sm px-4 py-1 text-2xl font-medium border-black hover:bg-blue-300'
+                            className='flex items-center justify-start whitespace-nowrap border-2 rounded-sm px-4 py-1 text-2xl font-medium border-black hover:bg-blue-300 bg-gray-50'
                         >
                             <Image
                                 src='/img/pawn_icon.jpg'
@@ -28,7 +28,7 @@ const Dashboard = () => {
                     <div className='px-4'>
                         <Link
                             href='/pages/poker-guide'
-                            className='flex items-center justify-start whitespace-nowrap border-2 rounded-sm px-4 py-1 text-2xl font-medium border-black hover:bg-blue-300'
+                            className='flex items-center justify-start whitespace-nowrap border-2 rounded-sm px-4 py-1 text-2xl font-medium border-black hover:bg-blue-300 bg-gray-50'
                         >
                             <Image
                                 src='/img/poker_icon.jpg'

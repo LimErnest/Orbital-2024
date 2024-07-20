@@ -110,7 +110,7 @@ export default function PokerDailyQuiz() {
 
   return (
     <div className='flex h-screen w-full flex-row p-20'>
-      <div className='flex h-full w-3/4 flex-col items-center gap-10 rounded-lg border border-2 border-gray-300 pt-10 shadow-lg'>
+      <div className='flex h-full w-3/4 flex-col items-center gap-10 rounded-lg border border-2 border-gray-300 pt-10 shadow-lg bg-slate-50'>
         <h1 className='mb-2 text-4xl font-bold'>Which hand is bigger?</h1>
         <div className='flex flex-row items-center gap-20'>
           <h1 className='mb-2 text-xl font-bold'>Hand 1</h1>

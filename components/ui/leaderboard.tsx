@@ -36,19 +36,19 @@ const Leaderboard = () => {
             <div className='h-screen flex-1 flex-col'>
                 <div className='mb-9 ml-4 mt-4 text-4xl'>LeaderBoard</div>
 
-                <div className='mr-4'>
+                <div className='mr-4 ml-4'>
                     <Table className='mb-8'>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className='w-[100px]'>Rank</TableHead>
-                                <TableHead>Username</TableHead>
-                                <TableHead>Experience</TableHead>
-                                <TableHead className='text-right'>Level</TableHead>
+                        <TableHeader className='border-b-2 border-black'>
+                            <TableRow className='hover:bg-slate-50 text-xl text-black'>
+                                <TableHead className='w-[100px] text-black'>Rank</TableHead>
+                                <TableHead className='text-black'>Username</TableHead>
+                                <TableHead className='text-black'>Experience</TableHead>
+                                <TableHead className='text-right text-black'>Level</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody className='ml-2'>
                             {arrayOfUsers.map((user, index) => (
-                                <TableRow key={index}>
+                                <TableRow key={index} className='hover:bg-slate-50 text-xl border-b-2 border-black'>
                                     <TableCell className='font-medium'>
                                         {index + 1 === 1 ? (
                                             <span>🏆</span>

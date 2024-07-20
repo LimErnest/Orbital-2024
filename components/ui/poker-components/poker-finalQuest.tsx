@@ -485,7 +485,7 @@ const PokerFinalQuest = () => {
                         className={cn('h-12 rounded-md px-10 text-xl border-black')}
                         onClick={() => displayCongrats()}
                       >
-                        Next Quest
+                        The End
                       </AlertDialogCancel>
                       <AlertDialogCancel
                         className={cn('h-12 rounded-md px-10 text-xl border-black')}>
@@ -515,8 +515,8 @@ const PokerFinalQuest = () => {
   return (
     <div className='flex'>
       {finalQuestStatus ? (
-        <div className='mt-20 flex h-screen w-full flex-col items-center text-4xl'>
-          <h1>CONGRAULATIONS YOU HAVE PASSED THE POKER FINAL QUEST 🎉</h1>
+        <div className='mt-40 flex h-screen w-full flex-col items-center text-4xl text-white'>
+          <b>CONGRATULATIONS YOU HAVE PASSED THE POKER FINAL QUEST 🎉</b>
           <div className='flex flex-col items-center'>
             <Avatar className='mt-5 h-48 w-48'>
               <AvatarImage src='/img/acebadge.png' />
