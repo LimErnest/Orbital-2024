@@ -121,10 +121,10 @@ const ChessFinalQuest = () => {
               <Card className='w-full'>
                 <CardHeader>
                   <CardTitle className='flex justify-center text-4xl'>
-                    Final Quest #{puzzleID}
+                    Chess Final Quest #{puzzleID}
                   </CardTitle>
                   <CardDescription className='flex justify-center'>
-                    Complete all 5 puzzles to earn your final quest badge!
+                    Complete all 5 quest to earn your final quest badge!
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
