@@ -96,7 +96,7 @@ const ChessFinalQuest = () => {
     <div className='flex'>
       {finalQuestStatus ? (
         <div className='mt-20 flex h-screen w-full flex-col items-center text-4xl'>
-          <h1>CONGRAULATIONS YOU HAVE PASSED THE CHESS FINAL QUEST 🎉</h1>
+          <b>CONGRATULATIONS YOU HAVE PASSED THE CHESS FINAL QUEST 🎉</b>
           <div className='flex flex-col items-center'>
             <Avatar className='mt-5 h-48 w-48'>
               <AvatarImage src='/img/queenbadge.png' />

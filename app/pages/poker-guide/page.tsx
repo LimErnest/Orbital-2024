@@ -30,6 +30,13 @@ export default function PokerPage() {
   return (
     <>
       <div className='flex'>
+        <div
+          className='absolute inset-0 bg-cover bg-center'
+          style={{
+            backgroundImage: 'url(/img/nicePokerBackground.jpg)',
+            zIndex: -1
+          }}
+        />
         <div className='h-full w-full max-w-[13rem] shrink-0'>
           <Sidebar className='bg-gray-100'>
             <SidebarSection className='px-2 py-2'>
@@ -59,11 +66,10 @@ export default function PokerPage() {
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
-                    className: `flex w-full justify-start rounded-sm shadow-none hover:bg-blue-300 ${
-                      page === 'guide'
-                        ? 'bg-blue-300 text-black'
-                        : 'bg-gray-100 text-black'
-                    }`
+                    className: `flex w-full justify-start rounded-sm shadow-none hover:bg-blue-300 ${page === 'guide'
+                      ? 'bg-blue-300 text-black'
+                      : 'bg-gray-100 text-black'
+                      }`
                   })
                 )}
               >
@@ -83,11 +89,10 @@ export default function PokerPage() {
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
-                    className: `flex w-full justify-start rounded-sm shadow-none hover:bg-blue-300 ${
-                      page === 'dailyQuiz'
-                        ? 'bg-blue-300 text-black'
-                        : 'bg-gray-100 text-black'
-                    }`
+                    className: `flex w-full justify-start rounded-sm shadow-none hover:bg-blue-300 ${page === 'dailyQuiz'
+                      ? 'bg-blue-300 text-black'
+                      : 'bg-gray-100 text-black'
+                      }`
                   })
                 )}
               >
@@ -108,11 +113,10 @@ export default function PokerPage() {
                   className={cn(
                     buttonVariants({
                       variant: 'ghost',
-                      className: `flex w-full justify-start rounded-sm shadow-none hover:bg-blue-300 ${
-                        page === 'finalQuest'
-                          ? 'bg-blue-300 text-black'
-                          : 'bg-gray-100 text-black'
-                      }`
+                      className: `flex w-full justify-start rounded-sm shadow-none hover:bg-blue-300 ${page === 'finalQuest'
+                        ? 'bg-blue-300 text-black'
+                        : 'bg-gray-100 text-black'
+                        }`
                     })
                   )}
                 >

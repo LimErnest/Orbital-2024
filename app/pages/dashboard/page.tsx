@@ -17,6 +17,13 @@ export default function LandingPage() {
   return (
     <>
       <div className='flex'>
+        <div
+          className='absolute inset-0 bg-cover bg-center'
+          style={{
+            backgroundImage: 'url(/img/nicebackground1.gif)',
+            zIndex: -1
+          }}
+        />
         <div className='h-full w-full max-w-[13rem] shrink-0'>
           <Sidebar className='flex flex-col bg-gray-100'>
             <SidebarSection className='px-2 py-2'>
