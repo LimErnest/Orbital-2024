@@ -158,6 +158,10 @@ const PokerFinalQuest = () => {
                       >
                         Next Quest
                       </AlertDialogCancel>
+                      <AlertDialogCancel
+                        className={cn('h-12 rounded-md px-10 text-xl border-black')}>
+                        Cancel
+                      </AlertDialogCancel>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
@@ -242,6 +246,10 @@ const PokerFinalQuest = () => {
                       >
                         Next Quest
                       </AlertDialogCancel>
+                      <AlertDialogCancel
+                        className={cn('h-12 rounded-md px-10 text-xl border-black')}>
+                        Cancel
+                      </AlertDialogCancel>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
@@ -315,6 +323,10 @@ const PokerFinalQuest = () => {
                         onClick={() => setNextQuest()}
                       >
                         Next Quest
+                      </AlertDialogCancel>
+                      <AlertDialogCancel
+                        className={cn('h-12 rounded-md px-10 text-xl border-black')}>
+                        Cancel
                       </AlertDialogCancel>
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -390,6 +402,10 @@ const PokerFinalQuest = () => {
                         onClick={() => setNextQuest()}
                       >
                         Next Quest
+                      </AlertDialogCancel>
+                      <AlertDialogCancel
+                        className={cn('h-12 rounded-md px-10 text-xl border-black')}>
+                        Cancel
                       </AlertDialogCancel>
                     </AlertDialogFooter>
                   </AlertDialogContent>
