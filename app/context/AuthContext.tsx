@@ -365,9 +365,23 @@ export const AuthContextProvider = ({
     }
   }
 
+  const updatePokerFinalQuestID = async (newQuestID: number) => {
+    if (currentUser) {
+      const docRef = doc(db, 'pokerFinalQuest', currentUser.uid)
+      await updateDoc(docRef, { finalQuestPuzzleID: newQuestID })
+    }
+  }
+
   const updateFinalQuestStatus = async () => {
     if (currentUser) {
       const docRef = doc(db, 'finalQuest', currentUser.uid)
+      await updateDoc(docRef, { isCompleted: true })
+    }
+  }
+
+  const updatePokerFinalQuestStatus = async () => {
+    if (currentUser) {
+      const docRef = doc(db, 'pokerFinalQuest', currentUser.uid)
       await updateDoc(docRef, { isCompleted: true })
     }
   }
@@ -435,6 +449,26 @@ export const AuthContextProvider = ({
     }
   }
 
+  const fetchPokerFinalQuest = async (uid: string) => {
+    const docRef = doc(db, 'pokerFinalQuest', uid)
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      const data = docSnap.data()
+      console.log('exists', data)
+      return {
+        finalQuestPuzzleID: data.finalQuestPuzzleID,
+        isCompleted: data.isCompleted
+      }
+    } else {
+      console.log('No such document!')
+      return {
+        finalQuestPuzzleID: 1,
+        isCompleted: false
+      }
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -461,7 +495,10 @@ export const AuthContextProvider = ({
         updateFinalQuestStatus,
         fetchFinalQuest,
         queryCollection,
-        pokerQuiz
+        pokerQuiz,
+        fetchPokerFinalQuest,
+        updatePokerFinalQuestStatus,
+        updatePokerFinalQuestID
       }}
     >
       {children}
