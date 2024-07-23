@@ -27,9 +27,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useAuth } from '@/app/context/AuthContext'
 import { cn } from '@/lib/utils'
-
-
-
+import { Cards } from '@/components/ui/poker-components/card'
 
 export const metadata: Metadata = {
   title: 'Guidance',
@@ -40,7 +38,6 @@ interface UserFinalQuestData {
   finalQuestPuzzleID: number
   isCompleted: boolean
 }
-
 
 const PokerFinalQuest = () => {
 
@@ -199,10 +196,11 @@ const PokerFinalQuest = () => {
         <Card className='h-fit w-full'>
           <CardHeader>
             <CardTitle className='flex justify-center text-4xl'>
-              Which of the following is the highest ranking poker combination / hand?
+              Which of the following is this poker hand?
             </CardTitle>
+            <Cards community={false} cards={'TS KS QS AS JS'} />
           </CardHeader>
-          <CardContent className='flex flex-col items-center mb-4'>
+          <CardContent className='flex flex-row items-center mb-4 gap-4'>
             {options.map((option, index) => (
               option == correctAnswer ? (
                 <AlertDialog key={`alert-${option}`}>
@@ -445,8 +443,10 @@ const PokerFinalQuest = () => {
             <CardTitle className='flex justify-center text-4xl'>
               What is the probability of flopping a flush when you are dealt two suited cards?
             </CardTitle>
+            <Cards community={true} cards={''} />
+            <Cards community={false} cards={'AD KD'} />
           </CardHeader>
-          <CardContent className='flex flex-col items-center mb-4'>
+          <CardContent className='flex flex-row items-center mb-4 gap-4'>
             {options.map((option, index) => (
               option == correctAnswer ? (
                 <AlertDialog key={`alert-${option}`}>
