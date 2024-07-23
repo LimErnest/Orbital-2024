@@ -20,6 +20,7 @@ import ArrayofPuzzle from '@/daily_puzzles.json'
 import { useAuth } from '@/app/context/AuthContext'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { HowToPlay } from '@/components/ui/howToPlay'
+import { Icons } from '.././icon'
 
 export interface Puzzle {
   PuzzleId: number
@@ -45,6 +46,7 @@ const ChessFinalQuest = () => {
   const [puzzleID, setPuzzleID] = useState(1)
   const [puzzle, setPuzzle] = useState<Puzzle | null>(null)
   const [finalQuestStatus, setfinalQuestStatus] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     if (user) {
@@ -54,6 +56,9 @@ const ChessFinalQuest = () => {
         updateUserFinalQuest(data)
       })
       console.log('user is changed')
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 250)
     }
   }, [user])
 
@@ -89,7 +94,19 @@ const ChessFinalQuest = () => {
   }
 
   if (puzzle == null) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex h-full items-center justify-center'>
+        <Icons.spinner className='h-20 w-20 animate-spin' />
+      </div>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center'>
+        <Icons.spinner className='h-20 w-20 animate-spin' />
+      </div>
+    )
   }
 
   return (

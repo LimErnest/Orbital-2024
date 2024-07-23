@@ -1,8 +1,5 @@
 'use client'
 
-import { Metadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
 import { ChessPuzzle } from '@react-chess-tools/react-chess-puzzle'
 import React, { useState, useEffect, useMemo } from 'react'
 import { Button, buttonVariants } from '@/components/ui/button'
@@ -17,6 +14,8 @@ import {
 import ArrayofPuzzle from '@/daily_puzzles.json'
 import { useAuth } from '@/app/context/AuthContext'
 import { HowToPlay } from '@/components/ui/howToPlay'
+import { Icons } from '.././icon'
+import { set } from 'react-hook-form'
 
 export interface Puzzle {
   PuzzleId: number
@@ -65,6 +64,7 @@ const ChessDailyQuiz = () => {
   const [arrayOfPuzzle, setArrayOfPuzzle] = useState<Puzzle[]>([])
   const [puzzle, setPuzzle] = useState<Puzzle>(ArrayofPuzzle[rating][puzzleID])
   const [threePuzzleCorrect, setThreePuzzleCorrect] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     if (user) {
@@ -72,6 +72,9 @@ const ChessDailyQuiz = () => {
         updateUserRating(data)
         console.log('user is changed', puzzle)
       })
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 250)
     }
   }, [user])
 
@@ -151,6 +154,14 @@ const ChessDailyQuiz = () => {
   if (correctCount == 2 && rating != '1100') {
     const puzzles = RatingPuzzle[String(Number(rating) + 100)]
     nextPuzzle = puzzles[0]
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center'>
+        <Icons.spinner className='h-20 w-20 animate-spin' />
+      </div>
+    )
   }
 
   return (

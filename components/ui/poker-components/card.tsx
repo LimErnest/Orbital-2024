@@ -3,26 +3,6 @@
 import * as React from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import {
-  createPokerHand,
-  getDescription,
-  handToString,
-  getEvaluatedScore,
-  getRank,
-  updateHand,
-  compareTo
-} from 'poker-hand-utils'
-import { Button } from '@/components/ui/button'
-import { useState, useEffect } from 'react'
-import { useAuth } from '@/app/context/AuthContext'
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription
-} from '@/components/ui/card'
-import { HowToPlay } from './howToPlayPoker'
 
 interface CardsProps extends React.HTMLAttributes<HTMLDivElement> {
   community?: boolean
