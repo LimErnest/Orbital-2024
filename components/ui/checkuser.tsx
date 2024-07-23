@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { useAuth } from '../../app/context/AuthContext'
 import { Button } from './button'
-import { Deck, randomHand, Card } from './poker-components/card'
+import { Deck, randomHand, Cards } from './poker-components/card'
 import {
   createPokerHand,
   getDescription,
@@ -24,7 +24,7 @@ export function CheckUser() {
         const pokerHand = createPokerHand(randomCard[0])
         console.log(pokerHand)
         return (
-          <Card cards={randomCard[0]} />
+          <Cards cards={randomCard[0]} />
         )
       }}
     >
