@@ -16,6 +16,18 @@ const Cards: React.FC<CardsProps> = ({
   cards,
   ...props
 }) => {
+  if (cards === '' && community) {
+    const backCards = Array.from(
+      { length: 5 },
+      (_, index) => <CardsSection key={index} imageString='back' />
+    )
+    return (
+      <div className='flex flex-row justify-center gap-10'>
+        {backCards}
+      </div>
+    )
+  }
+
   const cardArray = cards.split(' ')
   const frontCards = cardArray.map((cardChar, index) => (
     <CardsSection key={index} imageString={cardChar} />
