@@ -106,7 +106,6 @@ const PokerGuide = () => {
   }
 
   return (
-    <div className='p-20 overflow-hidden h-screen w-full'>
       <Tabs
         value={currentTab}
         onValueChange={value => setCurrentTab(value)}
@@ -422,7 +421,6 @@ const PokerGuide = () => {
           </ScrollArea>
         </TabsContent>
       </Tabs>
-    </div>
   )
 }
 

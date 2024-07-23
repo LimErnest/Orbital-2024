@@ -525,7 +525,7 @@ const PokerFinalQuest = () => {
           </div>
         </div>
       ) : (
-        <div className='p-14 h-5/6 mb-14 w-full'>
+        <div className='h-full w-full'>
           <Card className='w-full'>
             <CardHeader>
               <CardTitle className='flex justify-center text-4xl'>
