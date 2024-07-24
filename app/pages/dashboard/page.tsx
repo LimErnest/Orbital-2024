@@ -21,9 +21,10 @@ import { ChessFinalQuest } from '@/components/ui/chess-components/chess-finalQue
 import { PokerGuide } from '@/components/ui/poker-components/pokerguide'
 import { PokerDailyQuiz } from '@/components/ui/poker-components/poker-dailyQuiz'
 import { PokerFinalQuest } from '@/components/ui/poker-components/poker-finalQuest'
+import { set } from 'react-hook-form'
 
 export default function LandingPage() {
-  const [page, setPage] = useState('home')
+  const [page, setPage] = useState('')
   const { user, checkChessGuide, checkPokerGuide } = useAuth()
   const [hasCompletedChessGuide, setHasCompletedChessGuide] = useState(false)
   const [hasCompletedPokerGuide, setHasCompletedPokerGuide] = useState(false)
@@ -37,13 +38,27 @@ export default function LandingPage() {
     })
   }, [user])
 
+  useEffect(() => {
+    const localPage = window.localStorage.getItem('page')
+    if (localPage !== null) {
+      setPage(localPage)
+    } else {
+      setPage('home')
+    }
+  }, [])
+
+  function persistPage(page: string) {
+    window.localStorage.setItem('page', page)
+    setPage(page)
+  }
+
   function getBackgroundImage(page: string) {
     if (page === 'home' || page === 'leaderboard') {
-      return 'url(/img/nicebackground1.gif)';
+      return 'url(/img/nicebackground1.gif)'
     } else if (page.includes('chess')) {
-      return 'url(/img/niceChessBackground.jpg)';
+      return 'url(/img/niceChessBackground.jpg)'
     } else {
-      return 'url(/img/nicePokerBackground.jpg)';
+      return 'url(/img/nicePokerBackground.jpg)'
     }
   }
 
@@ -61,7 +76,7 @@ export default function LandingPage() {
           <Sidebar className='flex flex-col bg-gray-100'>
             <SidebarSection className='px-2 py-2'>
               <Button
-                onClick={() => setPage('home')}
+                onClick={() => persistPage('home')}
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
@@ -87,7 +102,7 @@ export default function LandingPage() {
               {(page === 'home' || page === 'leaderboard') && (
                 <div>
                   <Button
-                    onClick={() => setPage('chessguide')}
+                    onClick={() => persistPage('chessguide')}
                     className={cn(
                       buttonVariants({
                         variant: 'ghost',
@@ -108,7 +123,7 @@ export default function LandingPage() {
                   </Button>
 
                   <Button
-                    onClick={() => setPage('pokerguide')}
+                    onClick={() => persistPage('pokerguide')}
                     className={cn(
                       buttonVariants({
                         variant: 'ghost',
@@ -129,7 +144,7 @@ export default function LandingPage() {
                   </Button>
 
                   <Button
-                    onClick={() => setPage('leaderboard')}
+                    onClick={() => persistPage('leaderboard')}
                     className={cn(
                       buttonVariants({
                         variant: 'ghost',
@@ -157,7 +172,7 @@ export default function LandingPage() {
               {page.includes('chess') && (
                 <div>
                   <Button
-                    onClick={() => setPage('chessguide')}
+                    onClick={() => persistPage('chessguide')}
                     className={cn(
                       buttonVariants({
                         variant: 'ghost',
@@ -181,7 +196,7 @@ export default function LandingPage() {
                   </Button>
 
                   <Button
-                    onClick={() => setPage('chessDailyQuiz')}
+                    onClick={() => persistPage('chessDailyQuiz')}
                     className={cn(
                       buttonVariants({
                         variant: 'ghost',
@@ -206,7 +221,7 @@ export default function LandingPage() {
 
                   {hasCompletedChessGuide || page == 'chessFinalQuest' ? (
                     <Button
-                      onClick={() => setPage('chessFinalQuest')}
+                      onClick={() => persistPage('chessFinalQuest')}
                       className={cn(
                         buttonVariants({
                           variant: 'ghost',
@@ -265,7 +280,7 @@ export default function LandingPage() {
               {page.includes('poker') && (
                 <div>
                   <Button
-                    onClick={() => setPage('pokerguide')}
+                    onClick={() => persistPage('pokerguide')}
                     className={cn(
                       buttonVariants({
                         variant: 'ghost',
@@ -289,7 +304,7 @@ export default function LandingPage() {
                   </Button>
 
                   <Button
-                    onClick={() => setPage('pokerDailyQuiz')}
+                    onClick={() => persistPage('pokerDailyQuiz')}
                     className={cn(
                       buttonVariants({
                         variant: 'ghost',
@@ -314,7 +329,7 @@ export default function LandingPage() {
 
                   {hasCompletedPokerGuide || page == 'pokerFinalQuest' ? (
                     <Button
-                      onClick={() => setPage('pokerFinalQuest')}
+                      onClick={() => persistPage('pokerFinalQuest')}
                       className={cn(
                         buttonVariants({
                           variant: 'ghost',
@@ -375,7 +390,7 @@ export default function LandingPage() {
 
         <div className='h-screen w-full overflow-hidden p-20'>
           {page == 'leaderboard' && <Leaderboard />}
-          {page == 'home' && <Dashboard setState={setPage} />}
+          {page == 'home' && <Dashboard setState={persistPage} />}
           {page == 'chessguide' && <ChessGuide />}
           {page == 'chessDailyQuiz' && <ChessDailyQuiz />}
           {page == 'chessFinalQuest' && <ChessFinalQuest />}
