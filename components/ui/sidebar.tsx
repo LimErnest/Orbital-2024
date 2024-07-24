@@ -30,8 +30,9 @@ const Sidebar: React.FC<SidebarProps> = ({ children, className, ...props }) => {
 
   const handleLogout = async (event: React.MouseEvent) => {
     event.preventDefault()
-    await logOut()
     window.location.href = '/pages/login'
+    window.localStorage.clear()
+    await logOut()
   }
 
   useEffect(() => {
