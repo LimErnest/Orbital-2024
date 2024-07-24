@@ -375,7 +375,7 @@ export default function LandingPage() {
 
         <div className='h-screen w-full overflow-hidden p-20'>
           {page == 'leaderboard' && <Leaderboard />}
-          {page == 'home' && <Dashboard />}
+          {page == 'home' && <Dashboard setState={setPage} />}
           {page == 'chessguide' && <ChessGuide />}
           {page == 'chessDailyQuiz' && <ChessDailyQuiz />}
           {page == 'chessFinalQuest' && <ChessFinalQuest />}

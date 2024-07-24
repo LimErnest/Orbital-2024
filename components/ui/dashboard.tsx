@@ -1,7 +1,15 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
-const Dashboard = () => {
+interface DashboardProps extends React.HTMLAttributes<HTMLDivElement> {
+  setState: Function
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ setState, ...props }) => {
   return (
     <>
       <div className='flex h-full flex-col items-center justify-center'>
@@ -11,9 +19,16 @@ const Dashboard = () => {
 
         <div className='flex flex-row p-8'>
           <div className='px-4'>
-            <Link
-              href='/pages/chess-guide'
-              className='flex items-center justify-start whitespace-nowrap rounded-sm border-2 border-black bg-gray-50 px-4 py-1 text-2xl font-medium hover:bg-blue-300'
+            <Button
+              onClick={() => setState('chessguide')}
+              className={cn(
+                buttonVariants({
+                  variant: 'ghost',
+                  size: 'xl',
+                  className:
+                    'flex w-full justify-center rounded-lg bg-gray-100 text-black shadow-lg hover:bg-blue-300 border-grey-300 text-xl'
+                })
+              )}
             >
               <Image
                 src='/img/pawn_icon.jpg'
@@ -24,13 +39,20 @@ const Dashboard = () => {
                 style={{ height: 'auto' }}
               />
               Chess
-            </Link>
+            </Button>
           </div>
 
           <div className='px-4'>
-            <Link
-              href='/pages/poker-guide'
-              className='flex items-center justify-start whitespace-nowrap rounded-sm border-2 border-black bg-gray-50 px-4 py-1 text-2xl font-medium hover:bg-blue-300'
+            <Button
+              onClick={() => setState('pokerguide')}
+              className={cn(
+                buttonVariants({
+                  variant: 'ghost',
+                  size: 'xl',
+                  className:
+                    'flex w-full justify-center rounded-lg bg-gray-100 text-black shadow-lg hover:bg-blue-300 border-grey-300 text-xl'
+                })
+              )}
             >
               <Image
                 src='/img/poker_icon.jpg'
@@ -41,7 +63,7 @@ const Dashboard = () => {
                 style={{ height: 'auto' }}
               />
               Poker
-            </Link>
+            </Button>
           </div>
         </div>
       </div>
