@@ -253,7 +253,6 @@ export function Badges() {
           </CardContent>
         </Card>
       </div>
-
     </div>
   )
 }

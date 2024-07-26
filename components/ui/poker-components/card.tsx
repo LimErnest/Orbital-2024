@@ -17,14 +17,11 @@ const Cards: React.FC<CardsProps> = ({
   ...props
 }) => {
   if (cards === '' && community) {
-    const backCards = Array.from(
-      { length: 5 },
-      (_, index) => <CardsSection key={index} imageString='back' />
-    )
+    const backCards = Array.from({ length: 5 }, (_, index) => (
+      <CardsSection key={index} imageString='back' />
+    ))
     return (
-      <div className='flex flex-row justify-center gap-10'>
-        {backCards}
-      </div>
+      <div className='flex flex-row justify-center gap-10'>{backCards}</div>
     )
   }
 

@@ -170,7 +170,8 @@ const ChessDailyQuiz = () => {
         {threePuzzleCorrect ? (
           <div className='flex h-full items-center justify-center'>
             <h1 className='mb-2 text-4xl font-bold'>
-              Congratulations! You have completed the daily quiz. Come back tomorrow!
+              Congratulations! You have completed the daily quiz. Come back
+              tomorrow!
             </h1>
           </div>
         ) : attempt == 0 ? (
@@ -277,7 +278,9 @@ const ChessDailyQuiz = () => {
                   </CardContent>
                   <CardFooter className='flex flex-col items-center'>
                     <span>You have {attempt} attempts left</span>
-                    <span>If the first move is not played, please refresh the page</span>
+                    <span>
+                      If the first move is not played, please refresh the page
+                    </span>
                   </CardFooter>
                 </Card>
               </div>
@@ -287,7 +290,6 @@ const ChessDailyQuiz = () => {
       </div>
     </>
   )
-
 }
 
 export { ChessDailyQuiz }
