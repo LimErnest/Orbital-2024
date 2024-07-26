@@ -1,52 +1,74 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
-const Dashboard = () => {
-    return (
-        <>
-            <div className='h-screen flex justify-center flex-col items-center'>
-                <div className='text-6xl'>Lets get started, pick a game!</div>
+interface DashboardProps extends React.HTMLAttributes<HTMLDivElement> {
+  setState: Function
+}
 
-                <div className='flex flex-row p-8'>
-                    <div className='px-4'>
-                        <Link
-                            href='/pages/chess-guide'
-                            className='flex items-center justify-start whitespace-nowrap border-2 rounded-sm px-4 py-1 text-2xl font-medium border-black hover:bg-blue-300 bg-gray-50'
-                        >
-                            <Image
-                                src='/img/pawn_icon.jpg'
-                                alt='Chess'
-                                width={30}
-                                height={30}
-                                className='mr-2'
-                                style={{ height: 'auto' }}
-                            />
-                            Chess
-                        </Link>
-                    </div>
+const Dashboard: React.FC<DashboardProps> = ({ setState, ...props }) => {
+  return (
+    <>
+      <div className='flex h-full flex-col items-center justify-center'>
+        <div className='text-6xl font-semibold'>
+          Lets get started, pick a game!
+        </div>
 
-                    <div className='px-4'>
-                        <Link
-                            href='/pages/poker-guide'
-                            className='flex items-center justify-start whitespace-nowrap border-2 rounded-sm px-4 py-1 text-2xl font-medium border-black hover:bg-blue-300 bg-gray-50'
-                        >
-                            <Image
-                                src='/img/poker_icon.jpg'
-                                alt='Poker'
-                                width={30}
-                                height={30}
-                                className='mr-2'
-                                style={{ height: 'auto' }}
-                            />
-                            Poker
-                        </Link>
-                    </div>
-                </div>
+        <div className='flex flex-row p-8'>
+          <div className='px-4'>
+            <Button
+              onClick={() => setState('chessguide')}
+              className={cn(
+                buttonVariants({
+                  variant: 'ghost',
+                  size: 'xl',
+                  className:
+                    'border-grey-300 flex w-full justify-center rounded-lg bg-gray-100 text-xl text-black shadow-lg hover:bg-blue-300'
+                })
+              )}
+            >
+              <Image
+                src='/img/pawn_icon.jpg'
+                alt='Chess'
+                width={30}
+                height={30}
+                className='mr-2'
+                style={{ height: 'auto' }}
+              />
+              Chess
+            </Button>
+          </div>
 
-            </div>
-
-        </>
-    )
+          <div className='px-4'>
+            <Button
+              onClick={() => setState('pokerguide')}
+              className={cn(
+                buttonVariants({
+                  variant: 'ghost',
+                  size: 'xl',
+                  className:
+                    'border-grey-300 flex w-full justify-center rounded-lg bg-gray-100 text-xl text-black shadow-lg hover:bg-blue-300'
+                })
+              )}
+            >
+              <Image
+                src='/img/poker_icon.jpg'
+                alt='Poker'
+                width={30}
+                height={30}
+                className='mr-2'
+                style={{ height: 'auto' }}
+              />
+              Poker
+            </Button>
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }
 
 export { Dashboard }
