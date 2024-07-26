@@ -103,7 +103,7 @@ export default function LandingPage() {
                   padding: '2vh 10vw'
                 }}
               >
-                <Card className='m-2 flex w-100 flex-col'>
+                <Card className='w-100 m-2 flex flex-col'>
                   <CardHeader className='ml-5 mt-2'>
                     <CardTitle className='text-5xl font-bold'>Chess</CardTitle>
                     <CardDescription className='text-3xl font-bold'>
@@ -121,7 +121,7 @@ export default function LandingPage() {
                   </CardContent>
                 </Card>
 
-                <Card className='m-2 flex w-100 flex-col'>
+                <Card className='w-100 m-2 flex flex-col'>
                   <CardHeader className='ml-5 mt-2'>
                     <CardTitle className='text-5xl font-bold'>Poker</CardTitle>
                     <CardDescription className='text-3xl font-bold'>
@@ -187,7 +187,7 @@ export default function LandingPage() {
 
         <SnapPageSection>
           <div
-            className='flex h-full flex-col text-center items-center p-4'
+            className='flex h-full flex-col items-center p-4 text-center'
             style={{
               backgroundImage: 'url(/img/nicebackground1.gif)',
               backgroundSize: 'cover',
@@ -197,11 +197,9 @@ export default function LandingPage() {
               zIndex: -1
             }}
           >
-            <div className='flex flex-col mt-40'>
-              <h1 className='mb-8 text-center text-6xl font-bold'>
-                Features
-              </h1>
-              <div className='flex flex-row ml-8 mr-8'>
+            <div className='mt-40 flex flex-col'>
+              <h1 className='mb-8 text-center text-6xl font-bold'>Features</h1>
+              <div className='ml-8 mr-8 flex flex-row'>
                 <Card className='m-2 flex w-full flex-col'>
                   <CardHeader className='ml-5 mt-2'>
                     <CardTitle className='text-5xl font-bold'>Guides</CardTitle>
@@ -278,7 +276,7 @@ export default function LandingPage() {
                       alt='Chess'
                       width={400}
                       height={400}
-                      className='mb-4 mx-auto block rounded-md border-2 border-black'
+                      className='mx-auto mb-4 block rounded-md border-2 border-black'
                       style={{ width: '300px', height: '250px' }}
                     />
                   </CardContent>
@@ -286,9 +284,7 @@ export default function LandingPage() {
 
                 <Card className='m-2 flex w-full flex-col'>
                   <CardHeader className='mt-2'>
-                    <CardTitle className='text-5xl font-bold'>
-                      Badges
-                    </CardTitle>
+                    <CardTitle className='text-5xl font-bold'>Badges</CardTitle>
                     <CardDescription className='text-3xl font-bold'>
                       Earn Through Milestones
                     </CardDescription>
@@ -306,8 +302,6 @@ export default function LandingPage() {
                 </Card>
               </div>
             </div>
-
-
           </div>
         </SnapPageSection>
       </SnapPage>
