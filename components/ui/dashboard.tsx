@@ -26,7 +26,7 @@ const Dashboard: React.FC<DashboardProps> = ({ setState, ...props }) => {
                   variant: 'ghost',
                   size: 'xl',
                   className:
-                    'flex w-full justify-center rounded-lg bg-gray-100 text-black shadow-lg hover:bg-blue-300 border-grey-300 text-xl'
+                    'border-grey-300 flex w-full justify-center rounded-lg bg-gray-100 text-xl text-black shadow-lg hover:bg-blue-300'
                 })
               )}
             >
@@ -50,7 +50,7 @@ const Dashboard: React.FC<DashboardProps> = ({ setState, ...props }) => {
                   variant: 'ghost',
                   size: 'xl',
                   className:
-                    'flex w-full justify-center rounded-lg bg-gray-100 text-black shadow-lg hover:bg-blue-300 border-grey-300 text-xl'
+                    'border-grey-300 flex w-full justify-center rounded-lg bg-gray-100 text-xl text-black shadow-lg hover:bg-blue-300'
                 })
               )}
             >

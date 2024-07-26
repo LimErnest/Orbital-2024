@@ -26,7 +26,9 @@ import {
 } from '@/components/ui/alert-dialog'
 import { useAuth } from '@/app/context/AuthContext'
 import { cn } from '@/lib/utils'
+import { Icons } from '.././icon'
 import { Cards } from '@/components/ui/poker-components/card'
+import { set } from 'react-hook-form'
 
 export const metadata: Metadata = {
   title: 'Guidance',
@@ -48,6 +50,7 @@ const PokerFinalQuest = () => {
     addXp
   } = useAuth()
   const [questID, setQuestID] = useState(1)
+  const [isLoading, setIsLoading] = useState(true)
   const [finalQuestStatus, setfinalQuestStatus] = useState(false)
 
   useEffect(() => {
@@ -55,6 +58,9 @@ const PokerFinalQuest = () => {
       fetchPokerFinalQuest(user.uid).then((data: UserFinalQuestData) => {
         updateUserFinalQuest(data)
       })
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 250)
     }
   }, [user])
 
@@ -207,8 +213,8 @@ const PokerFinalQuest = () => {
               Which of the following is this poker hand?
             </CardTitle>
             <Cards community={false} cards={'TD KS 7C AS TS'} />
-            <div className='mr-40 flex flex-row justify-center items-center gap-20'>
-              <span className='text-xl mb-2 font-bold'>Your hand</span>
+            <div className='mr-40 flex flex-row items-center justify-center gap-20'>
+              <span className='mb-2 text-xl font-bold'>Your hand</span>
               <Cards community={false} cards={'JS QS'} />
             </div>
           </CardHeader>
@@ -475,8 +481,8 @@ const PokerFinalQuest = () => {
               suited cards?
             </CardTitle>
             <Cards community={true} cards={''} />
-            <div className='mr-40 flex flex-row justify-center items-center gap-20'>
-              <span className='text-xl mb-2 font-bold'>Your hand</span>
+            <div className='mr-40 flex flex-row items-center justify-center gap-20'>
+              <span className='mb-2 text-xl font-bold'>Your hand</span>
               <Cards community={false} cards={'AD KD'} />
             </div>
           </CardHeader>
@@ -557,6 +563,14 @@ const PokerFinalQuest = () => {
             )}
           </CardContent>
         </Card>
+      </div>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center'>
+        <Icons.spinner className='h-20 w-20 animate-spin' />
       </div>
     )
   }

@@ -23,9 +23,7 @@ export function CheckUser() {
         const randomCard = randomHand(5, 1)
         const pokerHand = createPokerHand(randomCard[0])
         console.log(pokerHand)
-        return (
-          <Cards cards={randomCard[0]} />
-        )
+        return <Cards cards={randomCard[0]} />
       }}
     >
       <h1>Check deck</h1>
