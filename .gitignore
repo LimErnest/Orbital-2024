@@ -14,7 +14,7 @@
 /out/
 
 # production
-./.firebase
+/.firebase
 /build
 
 # misc
